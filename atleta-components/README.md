@@ -6,7 +6,7 @@ Para caso de teste a App.js incluida ja tem tudo o necessário para pôr a corre
 De notar que serão necessários os seguintes componentes:
 * react-big-calendar
 * moment
-* chartjs
+* chart.js@^2.3
 * react-chartjs-2
 
 
