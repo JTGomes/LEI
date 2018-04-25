@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/Photos.css';
+import './Photos.css';
 
 //implementado como idealizado nos mockups
 //alteraçao talvez necessaria para acomodar as diferentes provas e assim

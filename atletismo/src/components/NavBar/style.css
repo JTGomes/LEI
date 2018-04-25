@@ -1,0 +1,106 @@
+#mainNav .navbar-collapse .navbar-sidenav > .nav-item:hover{
+  background-color: #d14450;
+}
+
+#mainNav .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
+  padding: 1em;
+  color: black;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+
+}
+
+.active{
+  border-left: 3px solid white;
+  background-color: #ebe5e5;
+}
+
+.navbar {
+  background-color: #d14444;
+}
+
+.icon{
+  margin-right: 10px;
+  font-size: 23px;
+}
+
+/* .nav-item .nav-link{
+  height: 50px;
+} */
+
+#hide{
+  display: none;
+}
+
+/* #mainNav{
+  border-bottom: 1px solid #CD4526;
+} */
+
+
+@media (min-width: 992px) {
+
+  #mainNav .navbar-collapse .navbar-sidenav > .nav-item {
+    width: 249px;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  #mainNav .navbar-collapse .navbar-sidenav.mini > .nav-item{
+    width: 54px;
+    overflow: hidden;
+  }
+
+  .content-wrapper{
+    margin-left: 250px;
+
+  }
+
+  body.sidebar-minimized .content-wrapper{
+    margin-left: 55px;
+
+  }
+
+  .navbar-sidenav.mini{
+    width: 55px!important;
+  }
+  .navbar-brand {
+    width: 250px;
+  }
+  .navbar-collapse {
+    overflow: visible;
+    max-height: none;
+  }
+  .navbar-collapse .navbar-sidenav{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-top: 56px;
+    background-color: #d14444;
+  
+
+  }
+  .navbar-sidenav {
+    height: calc(100vh - 56px);
+    /* tirar a altura da navBar */
+  }
+
+  #hide{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    cursor: pointer;
+  }
+
+  .arrow{
+    position: relative;
+    top: calc(50% - 10px);
+  }
+
+}

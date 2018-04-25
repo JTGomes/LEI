@@ -1,6 +1,6 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
-import '../css/Performance.css';
+import './Performance.css';
 
 class Performance extends React.Component {
   //exemplo de dados. A serem passados de outro componente
@@ -31,10 +31,10 @@ class Performance extends React.Component {
       <a>Distância total percorrida: 60Km</a>
       <Line
         data={this.state.chartData}
-        width={30}
-        height={200}
+        width={"90%"}
+        height={"30%"}
         options={{
-          maintainAspectRatio: false,
+          maintainAspectRatio: true,
           title:{
             display: 'Tempos',
             text: 'Registo dos Tempos de Provas',
