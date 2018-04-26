@@ -20,10 +20,10 @@ class TPlayersFrame extends React.Component {
             page: "Atleta/USAWFB7"
           }
       ],
-      aConfirmar: {
+      aConfirmar: [{
         id: 235,
         nome: "Patricia Mbengani Bravo Mamona"
-      }
+      }]
     }
   }
 
@@ -46,8 +46,14 @@ class TPlayersFrame extends React.Component {
       </div>
           <div>
                 <h1>Confirmação pendente</h1>
-
-
+                <ul id="listAconfirmar">
+                    {this.state.aConfirmar.map(
+                        atleta => (
+                            <div className="list-confirmacao-element">
+                                <li className="celement"> {atleta.nome}</li>
+                            </div>
+                        ) ) }
+                </ul>
           </div>
 
       </div>
