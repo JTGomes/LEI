@@ -1,9 +1,11 @@
-.resultsTable {
+.results {
 	font-family: Raleway, sans-serif;
 	text-align: left;
+	padding-left: 10px;
 }
 
-.resultsTable th {
-	font-family: Raleway, sans-serif;
-	font-size: 20px;
+.results button {
+	background-color: #C1543DFF;
+	display: flex;
+	justify-content: space-between;
 }

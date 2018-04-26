@@ -10,6 +10,9 @@ class Performance extends React.Component {
       datasets:[
         {
           label:'Segundos',
+          borderColor: 'rgba(75,192,192,1)',
+          backgroundColor: 'rgba(75,192,192,0.4)',
+          borderJoinStyle: 'miter',
           data:[
             10.5,
             11.1,
@@ -31,15 +34,19 @@ class Performance extends React.Component {
       <a>Distância total percorrida: 60Km</a>
       <Line
         data={this.state.chartData}
-        width={"90%"}
-        height={"30%"}
         options={{
           maintainAspectRatio: true,
+          position: 'relative',
+          elements: {
+            line: {
+                tension: 0, // disables bezier curves
+            }
+          },
           title:{
             display: 'Tempos',
             text: 'Registo dos Tempos de Provas',
             fontSize:25
-          }
+          },
         }}
       />
       <a>Desde: </a>

@@ -11,11 +11,11 @@ import './Calendar.css';
 //define as datas para as nomenclaturas portuguesas
 moment.locale('pt');
 //necessário para que o calendario funcione
-BigCalendar.momentLocalizer(moment);
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 //evento passado pode ser por props...
 function Calendar(props) {
-  //console.log(moment);
+  console.log(moment);
   return(
     <div className="calendar">
       <BigCalendar
@@ -26,8 +26,9 @@ function Calendar(props) {
           title: "Competição Europeia"
         }
       ]}
+      defaultDate={new Date()}
       defaultView="month"
-      style={{ height: "80vh" }}
+      style={{ height: "90vh" }}
     />
     </div>
   );
