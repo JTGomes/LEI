@@ -9,3 +9,5 @@ export const  RESULTADOS= ATLETA + '/results';
 export const  FOTO= ATLETA + '/photos';
 export const  VIDEOS= ATLETA + '/videos';
 export const  CALENDAR= ATLETA + '/calendar';
+export const  HOMEDIRETOR= DIRETOR + '/home';
+export const  REGISTOS= DIRETOR + '/registo';

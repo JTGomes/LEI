@@ -20,8 +20,8 @@ class App extends Component {
     return (
       <BrowserRouter>
             <Switch>
-              <Route exact path={routes.AppAtleta} component={AppAtleta} />
-
+              <Route  path={routes.DIRETOR} component={AppDiretor} />
+              <Route  path={routes.ATLETA} component={AppAtleta} />
             </Switch>
       </BrowserRouter>
     );
