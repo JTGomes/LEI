@@ -11,3 +11,9 @@ export const  VIDEOS= ATLETA + '/videos';
 export const  CALENDAR= ATLETA + '/calendar';
 export const  HOMEDIRETOR= DIRETOR + '/home';
 export const  REGISTOS= DIRETOR + '/registo';
+export const TDADOS = TREINADOR + '/DadosPessoais';
+export const TATLETA = TREINADOR + '/Atletas';
+export const TRESULTADOS = TREINADOR + '/Resultados';
+export const TCALENDARIO = TREINADOR + '/Calendario';
+export const TOTHERS = TREINADOR + '/Outros';
+

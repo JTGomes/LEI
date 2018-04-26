@@ -1,4 +1,6 @@
 import React from 'react';
+import { Table } from 'reactstrap';
+import Selection from '../../../components/Selection'
 import './Results.css';
 
 //possibilidade das opções serem dinamicas
@@ -6,31 +8,7 @@ import './Results.css';
 function Results(props) {
   return(
     <div className="results">
-      <a>Provas: </a>
-      <select>
-        <option>Nacionais</option>
-        <option>Regionais</option>
-        <option>Internacionais</option>
-      </select>
-      <a>Modalidade: </a>
-      <select>
-        <option>4x100m</option>
-        <option>100m</option>
-        <option>200m</option>
-      </select>
-      <a>Local: </a>
-      <select>
-        <option>Rio de Janeiro</option>
-        <option>Berlim</option>
-      </select>
-      <a>Classificação: </a>
-      <select>
-        <option>1º</option>
-        <option>2º</option>
-        <option>3º</option>
-        <option>4º</option>
-      </select>
-      <table className="resultsTable">
+      <Table size="sm" hover responsive>
         <thead>
           <tr>
             <th>Provas</th>
@@ -62,7 +40,23 @@ function Results(props) {
             <td>1º Lugar</td>
           </tr>
         </tbody>
-      </table>
+      </Table>
+      <Selection
+        name="Provas"
+        items={["Nacionais","Regionais","Internacionais"]}
+      />
+      <Selection
+        name="Modalidade"
+        items={["4x100m","100m","200m"]}
+      />
+      <Selection
+        name="Local"
+        items={["Rio de Janeiro","Berlim"]}
+      />
+      <Selection
+        name="Classificação"
+        items={["1º","2º","3º","4º"]}
+      />
     </div>
   );
 }

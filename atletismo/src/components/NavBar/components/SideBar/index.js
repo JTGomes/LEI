@@ -25,7 +25,7 @@ class SideBar extends Component{
 
       return <li key={elem} className="nav-item" data-toggle="collapse" >
         <TooltipItem placement="right"  target={'tooltip'+elem} text={text}  toggle={this.state.toggle} />
-        <NavLink to={link} id={'tooltip'+elem} activeClassName="active" className="nav-link" >
+        <NavLink to={link} exact id={'tooltip'+elem} activeClassName="active" className="nav-link" >
           {icon}
           <span className="nav-link-text">{text}</span>
         </NavLink>

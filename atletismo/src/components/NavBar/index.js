@@ -28,7 +28,7 @@ class NavBar extends Component{
     return(
       <div>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <Link to={routes.HOME} className="navbar-brand"><img src={logo} alt='logo braga' with="30px" height="27px" style={{margin:"0 5px 0 0"}}/>S.C. Braga</Link>
+        <Link to={this.props.home ? this.props.home : routes.HOME } className="navbar-brand"><img src={logo} alt='logo braga' with="30px" height="27px" style={{margin:"0 5px 0 0"}}/>S.C. Braga</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
