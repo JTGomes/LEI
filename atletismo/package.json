@@ -8,10 +8,14 @@
     "firebase": "^4.13.1",
     "moment": "^2.22.1",
     "react": "^16.3.1",
+<<<<<<< HEAD
     "react-big-calendar": "^0.19.0",
     "react-chartist": "^0.13.1",
     "react-chartjs-2": "^2.7.0",
     "react-chartjs2": "^1.2.1",
+=======
+    "react-bootstrap-table": "^4.3.1",
+>>>>>>> fd8935f2de4f31acf760b29695c8bdaf898c1fa0
     "react-dom": "^16.3.1",
     "react-easy-chart": "^1.0.0",
     "react-icons": "^2.2.7",
@@ -19,8 +23,18 @@
     "react-notification-badge": "^1.3.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "0.9.5",
+<<<<<<< HEAD
     "react-svg-line-chart": "^2.0.1",
     "reactstrap": "^5.0.0"
+=======
+    "reactstrap": "^5.0.0",
+    "react-chartjs-2": "^2.5.x",
+    "react-big-calendar": "^0.19.0",
+    "moment": "^2.4.0",
+    "chart.js": "^2.3",
+    "react-notification-badge": "^1.3.4",
+    "firebase": "^4.13.1"
+>>>>>>> fd8935f2de4f31acf760b29695c8bdaf898c1fa0
   },
   "devDependencies": {},
   "scripts": {
