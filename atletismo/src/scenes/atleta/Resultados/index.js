@@ -42,20 +42,20 @@ function Results(props) {
         </tbody>
       </Table>
       <Selection
-          name="Provas"
-          items={["Nacionais","Regionais","Internacionais"]}
+        name="Provas"
+        items={["Nacionais","Regionais","Internacionais"]}
       />
       <Selection
-          name="Modalidade"
-          items={["4x100m","100m","200m"]}
+        name="Modalidade"
+        items={["4x100m","100m","200m"]}
       />
       <Selection
-          name="Local"
-          items={["Rio de Janeiro","Berlim"]}
+        name="Local"
+        items={["Rio de Janeiro","Berlim"]}
       />
       <Selection
-          name="Classificação"
-          items={["1º","2º","3º","4º"]}
+        name="Classificação"
+        items={["1º","2º","3º","4º"]}
       />
     </div>
   );

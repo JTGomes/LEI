@@ -36,17 +36,16 @@ class Performance extends React.Component {
         data={this.state.chartData}
         options={{
           maintainAspectRatio: true,
-          position: 'relative',
           elements: {
             line: {
-                tension: 0, // disables bezier curves
+              tension: 0, // disables bezier curves
             }
           },
           title:{
             display: 'Tempos',
             text: 'Registo dos Tempos de Provas',
             fontSize:25
-          },
+          }
         }}
       />
       <a>Desde: </a>

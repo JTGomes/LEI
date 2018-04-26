@@ -15,7 +15,7 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 //evento passado pode ser por props...
 function Calendar(props) {
-  console.log(moment);
+  //console.log(moment);
   return(
     <div className="calendar">
       <BigCalendar
