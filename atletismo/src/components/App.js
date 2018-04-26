@@ -18,13 +18,33 @@ class App extends Component {
   render() {
 
     return (
+     <div>
+        <div id="buttons">
+            <a href="/treinador" target="_self">
+                <button>
+                    Treinador
+                </button>
+            </a>
+            <a href="./atleta">
+                <button>
+                    Atleta
+                </button>
+            </a>
+            <a href='./admin'>
+                <button>
+                    Dirigentes
+                </button>
+            </a>
+        </div>
       <BrowserRouter>
+
             <Switch>
               <Route  path={routes.DIRETOR} component={AppDiretor} />
               <Route  path={routes.ATLETA} component={AppAtleta} />
               <Route  path={routes.TREINADOR} component={AppTreinador} />
             </Switch>
       </BrowserRouter>
+     </div>
     );
   }
 }
