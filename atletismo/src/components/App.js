@@ -22,6 +22,7 @@ class App extends Component {
             <Switch>
               <Route  path={routes.DIRETOR} component={AppDiretor} />
               <Route  path={routes.ATLETA} component={AppAtleta} />
+              <Route  path={routes.TREINADOR} component={AppTreinador} />
             </Switch>
       </BrowserRouter>
     );

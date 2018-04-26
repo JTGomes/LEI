@@ -23,9 +23,9 @@ class SideBar extends Component{
 
     getLinkNav(elem,link,icon,text){
 
-      return <li key={elem} className="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+      return <li key={elem} className="nav-item" data-toggle="collapse" >
         <TooltipItem placement="right"  target={'tooltip'+elem} text={text}  toggle={this.state.toggle} />
-        <NavLink to={link} id={'tooltip'+elem} activeClassName="active" className="nav-link" >
+        <NavLink to={link} exact id={'tooltip'+elem} activeClassName="active" className="nav-link" >
           {icon}
           <span className="nav-link-text">{text}</span>
         </NavLink>
