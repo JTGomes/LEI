@@ -66,17 +66,17 @@ class Registo extends Component {
           </div>
         </div>
         <br/>
-        <Table responsive hover className="validar">
+        <Table responsive hover>
           <thead>
             <tr>
               <th>Nome do Atleta</th>
-              <th></th>
+              <th>Aceitar/Rejeitar</th>
             </tr>
           </thead>
           <tbody>
 
-            <tr style={{cursor:'pointer'}} >
-              <td onClick={()=>{this.initModalUser('userid')}}>João Dias do Amaral</td>
+            <tr>
+              <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser('userid')}}>João Dias do Amaral</td>
               <td>
                 <Button color="success" onClick={()=>{this.initModal('uid',true)}}>
                   <Check />

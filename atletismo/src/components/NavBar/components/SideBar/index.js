@@ -19,13 +19,17 @@ class SideBar extends Component{
       document.body.classList.toggle('sidebar-minimized');
     }
 
-
+    componentWillUnmount(){
+      if(this.state.toggle){
+        document.body.classList.toggle('sidebar-minimized');
+      }
+    }
 
     getLinkNav(elem,link,icon,text){
 
-      return <li key={elem} className="nav-item" data-toggle="collapse" >
+      return <li key={elem} className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
         <TooltipItem placement="right"  target={'tooltip'+elem} text={text}  toggle={this.state.toggle} />
-        <NavLink to={link} exact id={'tooltip'+elem} activeClassName="active" className="nav-link" >
+        <NavLink to={link} id={'tooltip'+elem} activeClassName="active" className="nav-link" >
           {icon}
           <span className="nav-link-text">{text}</span>
         </NavLink>

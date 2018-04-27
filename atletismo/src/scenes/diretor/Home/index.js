@@ -10,7 +10,7 @@ class Home extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div class="row">
+        <div className="row">
         <div className="col-lg-12">
           <h1>Pagamentos Pendentes</h1>
         </div>
@@ -22,8 +22,8 @@ class Home extends Component {
              <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
          </BootstrapTable>
          <br/>
-         <div class="row">
-           <div class="col-lg-12">
+         <div className="row">
+           <div className="col-lg-12">
              <h1>Exames Médicos em Falta</h1>
            </div>
         </div>
@@ -36,8 +36,8 @@ class Home extends Component {
           <ListGroupItem tag="a" href="#" action>Vestibulum at eros</ListGroupItem>
         </ListGroup>
         <br/>
-        <div class="row">
-          <div class="col-lg-12">
+        <div className="row">
+          <div className="col-lg-12">
             <h1>Lesionados</h1>
           </div>
        </div>

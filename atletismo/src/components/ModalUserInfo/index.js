@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGroup, ListGroupItem} from 'reactstrap';
 
 
@@ -21,7 +22,7 @@ class ModalUserInfo extends Component {
               <small className="d-block">João Gomes</small>
             </Media>
           </Media>
-          <Table responsive borderless>
+          <Table responsive>
             <tbody>
               <tr>
                 <td>Data de Nascimento:</td>
@@ -43,8 +44,8 @@ class ModalUserInfo extends Component {
                 <td>Redes Sociais</td>
                 <td>
                   <ListGroup>
-                    <ListGroupItem>facebook.com/jgomes</ListGroupItem>
-                    <ListGroupItem>twitter.com/jgomes</ListGroupItem>
+                    <ListGroupItem><a href="https://facebook.com/">facebook.com/jgomes</a></ListGroupItem>
+                    <ListGroupItem><a href="https://twitter.com/">twitter.com/jgomes</a></ListGroupItem>
                   </ListGroup>
                 </td>
               </tr>
@@ -52,7 +53,9 @@ class ModalUserInfo extends Component {
           </Table>
         </ModalBody>
         <ModalFooter>
-            <Button color="primary">Página Atleta</Button>
+            <Link to="/atleta">
+            <Button color="primary" >Página do Atleta</Button>
+            </Link>
             <Button color="secondary" onClick={this.props.toggle}>Sair</Button>
           </ModalFooter>
         </Modal>
