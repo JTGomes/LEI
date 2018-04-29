@@ -37,7 +37,6 @@ class App extends Component {
             </a>
         </div>
       <BrowserRouter>
-
             <Switch>
               <Route  path={routes.DIRETOR} component={AppDiretor} />
               <Route  path={routes.ATLETA} component={AppAtleta} />

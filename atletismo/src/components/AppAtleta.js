@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route} from 'react-router-dom'
 import * as routes from '../constants/routes';
 import NavBar from './NavBar'
 import Dados from '../scenes/atleta/Dados';
@@ -34,7 +34,6 @@ class AppAtleta extends Component {
 
   render() {
     return (
-      <BrowserRouter>
         <div >
           <NavBar sidebarLinks={this.state.sidebarLinks}/>
           <div className="content-wrapper">
@@ -47,7 +46,7 @@ class AppAtleta extends Component {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+  
     );
   }
 }

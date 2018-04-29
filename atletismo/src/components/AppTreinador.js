@@ -29,7 +29,7 @@ class AppTreinador extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+
         <div >
           <NavBar sidebarLinks={this.state.sidebarLinks} home={routes.TREINADOR}/>
           <div className="content-wrapper">
@@ -42,7 +42,7 @@ class AppTreinador extends Component {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+    
     );
   }
 }

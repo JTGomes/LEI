@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 import Close from 'react-icons/lib/fa/close';
+import ModalUserInfo from '../../../components/ModalUserInfo';
 import './style.css';
 import {Button, Modal,ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
@@ -12,10 +13,12 @@ class Registo extends Component {
     this.state = {
       modal: false,
       accept: false,
-
+      modalUserInfo: false,
+      uid: undefined,
     };
 
     this.toggle = this.toggle.bind(this);
+    this.toggleM = this.toggleM.bind(this);
 
   }
 
@@ -25,12 +28,25 @@ class Registo extends Component {
     });
   }
 
+  toggleM(){
+    this.setState({
+      modalUserInfo: !this.state.modalUserInfo,
+    })
+  }
+
   initModal(userid, aceitar){
     this.setState({
       modal: true,
       accept : aceitar,
       uid: userid,
     });
+  }
+
+  initModalUser(userID){
+    this.setState({
+      modalUserInfo: true,
+      uid: userID,
+    })
   }
 
   acceptUser(){
@@ -50,17 +66,17 @@ class Registo extends Component {
           </div>
         </div>
         <br/>
-        <Table responsive hover className="validar">
+        <Table responsive hover>
           <thead>
             <tr>
               <th>Nome do Atleta</th>
-              <th></th>
+              <th>Aceitar/Rejeitar</th>
             </tr>
           </thead>
           <tbody>
 
-            <tr style={{cursor:'pointer'}}>
-              <td>João Dias do Amaral</td>
+            <tr>
+              <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser('userid')}}>João Dias do Amaral</td>
               <td>
                 <Button color="success" onClick={()=>{this.initModal('uid',true)}}>
                   <Check />
@@ -75,7 +91,7 @@ class Registo extends Component {
 
         </Table>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>Aceitação de Registo</ModalHeader>
           <ModalBody>
             {'Tem a certeza que pretende ' + (this.state.accept? 'aceitar o registo do atleta?' : 'rejeitar o registo do atleta?') }
@@ -88,6 +104,7 @@ class Registo extends Component {
               <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
             </ModalFooter>
           </Modal>
+          <ModalUserInfo toggle={this.toggleM} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
         </div>
 
     );

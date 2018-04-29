@@ -29,7 +29,7 @@ class AppDiretor extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+
         <div >
           <NavBar sidebarLinks={this.state.sidebarLinks} />
           <div className="content-wrapper">
@@ -39,7 +39,7 @@ class AppDiretor extends Component {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+    
     );
   }
 }

@@ -61,7 +61,7 @@ class Notificacao extends Component{
         <PopoverHeader className="text-center"><strong>Notificações</strong></PopoverHeader>
         <PopoverBody  >
           <div className="list-group" id="style-13" style={{maxHeight:'300px', overflow: 'auto'}}>
-            {this.getNotificacoes("Aniversário","21/20/2018","Aniversário de José António")}
+            {this.getNotificacoes("Aniversário","21/02/2018","Aniversário de José António")}
           </div>
         </PopoverBody>
       </Popover>
