@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import * as routes from '../constants/routes';
 import NavBar from './NavBar'
 import Home from '../scenes/diretor/Home';
@@ -34,12 +34,12 @@ class AppDiretor extends Component {
           <NavBar sidebarLinks={this.state.sidebarLinks} />
           <div className="content-wrapper">
             <Switch>
-              <Route exact path={routes.HOMEDIRETOR} component={Home} />
+              <Route exact path={routes.DIRETOR} component={Home} />
               <Route exact path={routes.REGISTOS} component={Registos} />
             </Switch>
           </div>
         </div>
-    
+
     );
   }
 }

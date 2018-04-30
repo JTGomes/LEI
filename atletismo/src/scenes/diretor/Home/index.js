@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { Table } from 'reactstrap';
 import {ListGroup , ListGroupItem} from 'reactstrap';
 import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import Exames from './components/Exames';
 const products = [{id : 1, name : 'Júlio', price: 100},{id : 2, name : 'Júlio Dias', price: 10}];
 
 
@@ -28,13 +30,7 @@ class Home extends Component {
            </div>
         </div>
         <hr/>
-        <ListGroup>
-          <ListGroupItem tag="a" href="#" action>Cras justo odio</ListGroupItem>
-          <ListGroupItem tag="a" href="#" action>Dapibus ac facilisis in</ListGroupItem>
-          <ListGroupItem tag="a" href="#" action>Morbi leo risus</ListGroupItem>
-          <ListGroupItem tag="a" href="#" action>Porta ac consectetur ac</ListGroupItem>
-          <ListGroupItem tag="a" href="#" action>Vestibulum at eros</ListGroupItem>
-        </ListGroup>
+        <Exames />
         <br/>
         <div className="row">
           <div className="col-lg-12">
@@ -42,13 +38,14 @@ class Home extends Component {
           </div>
        </div>
        <hr/>
-         <ListGroup>
+         <ListGroup className="mb-5">
            <ListGroupItem tag="a" href="#" action>Cras justo odio</ListGroupItem>
            <ListGroupItem tag="a" href="#" action>Dapibus ac facilisis in</ListGroupItem>
            <ListGroupItem tag="a" href="#" action>Morbi leo risus</ListGroupItem>
            <ListGroupItem tag="a" href="#" action>Porta ac consectetur ac</ListGroupItem>
            <ListGroupItem tag="a" href="#" action>Vestibulum at eros</ListGroupItem>
          </ListGroup>
+
       </div>
 
     );

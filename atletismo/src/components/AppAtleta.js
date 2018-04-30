@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route} from 'react-router-dom'
+import { Switch, Route} from 'react-router-dom'
 import * as routes from '../constants/routes';
 import NavBar from './NavBar'
 import Dados from '../scenes/atleta/Dados';
@@ -38,7 +38,7 @@ class AppAtleta extends Component {
           <NavBar sidebarLinks={this.state.sidebarLinks}/>
           <div className="content-wrapper">
             <Switch>
-              <Route exact path={routes.DATA_ATLETA} component={Dados} />
+              <Route exact path={routes.ATLETA} component={Dados} />
               <Route exact path={routes.RESULTADOS} component={Resultados} />
               <Route exact path={routes.DESEMPENHO} component={Desempenho} />
               <Route exact path={routes.FOTO} component={Fotos} />
@@ -46,7 +46,7 @@ class AppAtleta extends Component {
             </Switch>
           </div>
         </div>
-  
+
     );
   }
 }

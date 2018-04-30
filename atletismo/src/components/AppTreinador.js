@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import * as routes from '../constants/routes';
 import NavBar from './NavBar';
 import User from 'react-icons/lib/fa/user';
@@ -33,15 +33,15 @@ class AppTreinador extends Component {
           <NavBar sidebarLinks={this.state.sidebarLinks} home={routes.TREINADOR}/>
           <div className="content-wrapper">
             <Switch>
-                <Route exact path='/treinador' component={TPersonalDataFrame}/>
-                <Route exact path='/treinador/Atletas' component={TPlayersFrame}/>
-                <Route exact path='/treinador/Resultados' component={TResultsFrame}/>
-                <Route exact path='/treinador/Calendario' component={TRCalenderFrame}/>
-                <Route exact path='/treinador/Other' component={TOtherFrame}/>
+                <Route exact path={routes.TREINADOR} component={TPersonalDataFrame}/>
+                <Route exact path={routes.TATLETA} component={TPlayersFrame}/>
+                <Route exact path={routes.TRESULTADOS} component={TResultsFrame}/>
+                <Route exact path={routes.TCALENDARIO} component={TRCalenderFrame}/>
+                <Route exact path={routes.TOTHERS} component={TOtherFrame}/>
             </Switch>
           </div>
         </div>
-    
+
     );
   }
 }
