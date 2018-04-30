@@ -7,9 +7,6 @@ class TResultsTable extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            data : props.data
-        }
     }
 
     render() {
@@ -53,7 +50,7 @@ class TResultsTable extends React.Component {
                                 )
                             }
                         ] }
-                    defaultPageSize ={10}
+                    defaultPageSize={10}
                     className="-striped -highlight"
                 />
             </div>
