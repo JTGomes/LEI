@@ -21,7 +21,7 @@ class AppAtleta extends Component {
     super(props);
     this.state={
       sidebarLinks: [
-        { link: routes.DATA_ATLETA, icon: <User className="icon" />, text: 'Dados Atleta'},
+        { link: routes.ATLETA, icon: <User className="icon" />, text: 'Dados Atleta'},
         { link: routes.DESEMPENHO, icon: <Performance className="icon" />, text: 'Dados Desempenho'},
         { link: routes.RESULTADOS, icon: <Provas className="icon" />, text: 'Resultado de Provas'},
         { link: routes.FOTO, icon: <Foto className="icon"/>, text: 'Fotografias'},

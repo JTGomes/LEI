@@ -17,7 +17,7 @@ class AppDiretor extends Component {
     super(props);
     this.state={
       sidebarLinks: [
-                      { link: routes.HOMEDIRETOR, icon: <HomeIcon className="icon" />, text: 'Home Page'},
+                      { link: routes.DIRETOR, icon: <HomeIcon className="icon" />, text: 'Home Page'},
                       { link: routes.REGISTOS, icon: <Registo className="icon"/>, text: 'Registos Pendentes'},
                       { link: '/alfredo', icon: <RunIcon className="icon" />, text: 'Gestão Atletas'},
                       { link: '/alfredo', icon: <TieIcon className="icon" />, text: 'Gestão Treinadores'},
