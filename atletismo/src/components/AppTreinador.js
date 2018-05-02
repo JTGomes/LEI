@@ -10,7 +10,7 @@ import TPersonalDataFrame from '../scenes/treinador/TPersonalDataFrame.js';
 import TPlayersFrame from '../scenes/treinador/TPlayersFrame.js';
 import TResultsFrame from '../scenes/treinador/TResultsFrame.js';
 //import TRCalenderFrame from '../scenes/treinador/TRCalenderFrame.js';
-import TRCalenderFrame from '../scenes/treinador/TableFrame.js';
+import TRCalenderFrame from './Tabela/TableFrame.js';
 import TOtherFrame from '../scenes/treinador//TOtherFrame.js';
 
 class AppTreinador extends Component {
@@ -38,7 +38,7 @@ class AppTreinador extends Component {
                 <Route exact path='/treinador/Atletas' component={TPlayersFrame}/>
                 <Route exact path='/treinador/Resultados' component={TResultsFrame}/>
                 <Route exact path='/treinador/Calendario' component={TRCalenderFrame}/>
-                <Route exact path='/treinador/Other' component={TOtherFrame}/>
+                <Route exact path='/treinador/Outros' component={TOtherFrame}/>
             </Switch>
           </div>
         </div>

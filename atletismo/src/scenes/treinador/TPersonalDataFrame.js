@@ -82,13 +82,15 @@ class TPersonalDataFrame extends React.Component {
       			</p>
       		</div>
       		<div id="file_submit">
+				<form action={"/"} method={"post"}>
       			<div id="sub">
       				<img src="http://img.freepik.com/icones-gratis/arquivo-na-pasta_318-77855.jpg?size=338&ext=jpg" alt="aaa" />
-      				<input type="file" name="Escolher Ficheiro" size="40"/>
+      				<input type="file" accept={".pdf"} name="Escolher Ficheiro" size="40"/>
       			</div>
+				</form>
       			<div id="sub">
       				<img src="http://img.freepik.com/icones-gratis/arquivo-na-pasta_318-77855.jpg?size=338&ext=jpg" alt="aaa" />
-      				<input type="file" name="Escolher Ficheiro" size="40"/>
+      				<input type="file" accept=".pdf" name="Escolher Ficheiro" size="40"/>
       			</div>
       		</div>
 
