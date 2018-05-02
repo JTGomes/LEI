@@ -7,9 +7,10 @@ import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGro
 class ModalUserInfo extends Component {
 
   render() {
+    let user = this.props.treinador?'Treinador':'Atleta';
     return (
       <Modal isOpen={this.props.modalUserInfo} toggle={this.props.toggle} >
-        <ModalHeader toggle={this.props.toggle}>Dados do Atleta</ModalHeader>
+        <ModalHeader toggle={this.props.toggle}>{'Dados do '+user}</ModalHeader>
         <ModalBody >
           <Media >
             <Media left>
@@ -54,7 +55,7 @@ class ModalUserInfo extends Component {
         </ModalBody>
         <ModalFooter>
             <Link to="/atleta">
-            <Button color="primary" >Página do Atleta</Button>
+            <Button color="primary" >{'Página do '+user }</Button>
             </Link>
             <Button color="secondary" onClick={this.props.toggle}>Sair</Button>
           </ModalFooter>

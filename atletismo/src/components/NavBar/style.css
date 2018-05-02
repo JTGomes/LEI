@@ -54,7 +54,6 @@
 
   #mainNav .navbar-collapse .navbar-sidenav.mini > .nav-item{
     width: 54px;
-    height: 30px;
     overflow: hidden;
   }
 
@@ -83,8 +82,6 @@
     top: 0;
     left: 0;
     width: 250px;
-    min-height: 500px;
-    max-height: calc(100vh - 56px);
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;

@@ -1,49 +1,30 @@
 import React, { Component } from 'react';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {ListGroup , ListGroupItem} from 'reactstrap';
-import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-const products = [{id : "Setembro", name : 'Júlio', price: 100},{id : "Março", name : 'Júlio Dias', price: 10}];
-import { Table, Button } from 'reactstrap';
+import Lesionados from './components/Lesionados';
+import Exames from './components/Exames';
+import Pagamentos from './components/Pagamentos'
+
+
 
 class Home extends Component {
 
+
   render() {
+
     return (
-      <div className="container-fluid">
+      <div className="container-fluid mb-4">
         <div className="row">
         <div className="col-lg-12">
           <h1>Pagamentos Pendentes</h1>
         </div>
       </div>
-        <hr/>
-          <Table striped>
-              <thead>
-              <tr>
-                  <th>Nome</th>
-                  <th>Mês(es) em atraso</th>
-                  <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              { products.map( (value) => ( <tr>
-                                 <th scope="row">{value.name}</th>
-                                 <td> {value.id} </td>
-                                 <td><Button color="danger">Pago</Button></td>
-                         </tr>))
-              }
-              </tbody>
-          </Table>
+      <Pagamentos />
          <br/>
-         <div className="row">
+         <div className="row mt-4 mb-3">
            <div className="col-lg-12">
              <h1>Exames Médicos em Falta</h1>
            </div>
         </div>
-        <hr/>
-        <ListGroup>
-            <ListGroupItem tag="a" href="#" action>Justina Costa Rogriguez</ListGroupItem>
-            <ListGroupItem tag="a" href="#" action>Ana Tereza </ListGroupItem>
-        </ListGroup>
+        <Exames />
         <br/>
         <div className="row">
           <div className="col-lg-12">
@@ -51,10 +32,7 @@ class Home extends Component {
           </div>
        </div>
        <hr/>
-         <ListGroup>
-           <ListGroupItem tag="a" href="#" action>Justina Costa Rogriguez</ListGroupItem>
-           <ListGroupItem tag="a" href="#" action>Ana Tereza </ListGroupItem>
-         </ListGroup>
+       <Lesionados />
       </div>
 
     );
