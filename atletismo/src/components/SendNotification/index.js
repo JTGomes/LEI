@@ -13,6 +13,7 @@ class SendNotification extends React.Component {
 
   onSubmit = (event) =>{
     console.log('send notification');
+    //event.preventDefault();
   }
 
   render() {
