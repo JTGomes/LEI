@@ -29,9 +29,6 @@ class Performance extends React.Component {
   render() {
   return(
     <div className='chart'>
-      <a>Número de provas realizadas: 58</a>
-      <p />
-      <a>Distância total percorrida: 60Km</a>
       <Line
         data={this.state.chartData}
         options={{

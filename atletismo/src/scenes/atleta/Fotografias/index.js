@@ -19,7 +19,7 @@ class Photos extends React.Component {
   render() {
     return (
       <div className="gallery">
-        <ImageGallery items={urls}/>
+        <ImageGallery items={urls} showPlayButton={false}/>
       </div>
     )
   }

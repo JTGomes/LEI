@@ -4,8 +4,13 @@
 	text-align: left;
 }
 
-.aboutathlete th {
+.Title {
 	font-family: Raleway, sans-serif;
 	font-size: 20px;
-	color: #424EBCFF;
+	color: #424EBCFF !important;
+}
+
+.gridcontent {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
