@@ -9,8 +9,7 @@ import RunIcon from 'react-icons/lib/md/directions-run';
 import TPersonalDataFrame from '../scenes/treinador/TPersonalDataFrame.js';
 import TPlayersFrame from '../scenes/treinador/TPlayersFrame.js';
 import TResultsFrame from '../scenes/treinador/TResultsFrame.js';
-//import TRCalenderFrame from '../scenes/treinador/TRCalenderFrame.js';
-import TRCalenderFrame from './Tabela/TableFrame.js';
+import TRCalenderFrame from '../scenes/treinador/TRCalenderFrame.js';
 import TOtherFrame from '../scenes/treinador//TOtherFrame.js';
 
 class AppTreinador extends Component {
