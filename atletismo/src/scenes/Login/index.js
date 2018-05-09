@@ -1,24 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Link, WrappedLink } from 'react-router-dom'
 import './css/login.css'
 
 class Login extends React.Component {
 
-  state = {
+  state={
     email: '',
     password: '',
   }
 
-  onChange = (e) => {
+  onChange=(e) => {
     this.setState({
         [e.target.name]: e.target.value,
     });
   }
 
-  onSubmit = (e) => {
+  onSubmit=(e) => {
     console.log(e);/*
-    const response = this.props.mutate({
+    const response=this.props.mutate({
         variables: this.state,
     });
     console.log(response);*/
@@ -37,23 +35,23 @@ class Login extends React.Component {
                 name="email"
                 type="email"
                 placeholder="Email" 
-                onChange = {e => this.onChange(e)}
-                value = {this.state.email}
+                onChange={e => this.onChange(e)}
+                value={this.state.email}
                 />
             </p>    
             <p>
             <label className="titles">Password</label>
               <input
-                name = "password"
+                name="password"
                 type="password"
                 placeholder="Password"
-                onChange = {e => this.onChange(e)}
-                value = {this.state.password}
+                onChange={e => this.onChange(e)}
+                value={this.state.password}
                  />
             </p>
             <p>
            
-              <input onClick = {() => this.onSubmit()}
+              <input onClick={() => this.onSubmit()}
                 type="submit"
                 value="Login" />
            
