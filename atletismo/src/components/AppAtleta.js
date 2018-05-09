@@ -24,8 +24,7 @@ class AppAtleta extends Component {
         { link: routes.ATLETA, icon: <User className="icon" />, text: 'Dados Atleta'},
         { link: routes.DESEMPENHO, icon: <Performance className="icon" />, text: 'Dados Desempenho'},
         { link: routes.RESULTADOS, icon: <Provas className="icon" />, text: 'Resultado de Provas'},
-        { link: routes.FOTO, icon: <Foto className="icon"/>, text: 'Fotografias'},
-        { link: '/alfredo', icon: <Vid className="icon"/>, text: 'Videos'},
+        { link: routes.FOTO, icon: <Foto className="icon"/>, text: 'Galeria'},
         { link: routes.CALENDAR, icon: <Calendar className="icon"/>, text: 'Calendário'}
       ],
     }
