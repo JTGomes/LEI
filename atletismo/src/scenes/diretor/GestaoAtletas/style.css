@@ -1,0 +1,9 @@
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.btnDisable{
+  background-color: #bcc0c6!important;
+  border-color: #bcc0c6!important;
+}

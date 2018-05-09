@@ -4,6 +4,7 @@ import * as routes from '../constants/routes';
 import NavBar from './NavBar'
 import Home from '../scenes/diretor/Home';
 import Registos from '../scenes/diretor/Registo';
+import GestaoAtletas from '../scenes/diretor/GestaoAtletas';
 import RunIcon from 'react-icons/lib/md/directions-run';
 import TieIcon from 'react-icons/lib/fa/black-tie';
 import Trophy from 'react-icons/lib/fa/trophy';
@@ -19,7 +20,7 @@ class AppDiretor extends Component {
       sidebarLinks: [
                       { link: routes.DIRETOR, icon: <HomeIcon className="icon" />, text: 'Home Page'},
                       { link: routes.REGISTOS, icon: <Registo className="icon"/>, text: 'Registos Pendentes'},
-                      { link: '/alfredo', icon: <RunIcon className="icon" />, text: 'Gestão Atletas'},
+                      { link: routes.G_ATLETAS, icon: <RunIcon className="icon" />, text: 'Gestão Atletas'},
                       { link: '/alfredo', icon: <TieIcon className="icon" />, text: 'Gestão Treinadores'},
                       { link: '/alfredo', icon: <Trophy className="icon"/>, text: 'Últimos resultados'}
                     ],
@@ -36,6 +37,7 @@ class AppDiretor extends Component {
             <Switch>
               <Route exact path={routes.DIRETOR} component={Home} />
               <Route exact path={routes.REGISTOS} component={Registos} />
+              <Route exact path={routes.G_ATLETAS} component={GestaoAtletas} />
             </Switch>
           </div>
         </div>

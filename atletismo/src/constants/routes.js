@@ -11,6 +11,7 @@ export const VIDEOS= ATLETA + '/videos';
 export const CALENDAR= ATLETA + '/calendar';
 export const HOMEDIRETOR= DIRETOR + '/home';
 export const REGISTOS= DIRETOR + '/registo';
+export const G_ATLETAS= DIRETOR + '/atletas';
 export const TDADOS = TREINADOR + '/DadosPessoais';
 export const TATLETA = TREINADOR + '/Atletas';
 export const TRESULTADOS = TREINADOR + '/Resultados';

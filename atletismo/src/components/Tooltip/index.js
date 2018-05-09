@@ -27,7 +27,7 @@ class TooltipItem extends Component{
   render(){
 
     return(
-      <Tooltip placement={this.props.placement} isOpen={this.state.tooltipOpen && this.props.toggle } target={this.props.target} toggle={this.toggle}>
+      <Tooltip delay={{show:0,hide:0}} placement={this.props.placement} isOpen={this.state.tooltipOpen && this.props.toggle } target={this.props.target} toggle={this.toggle}>
       {this.props.text}
       </Tooltip>
     );
