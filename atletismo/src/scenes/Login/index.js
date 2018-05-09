@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/login.css'
+import './css/login.css'
 
 class Login extends React.Component {
 
@@ -17,10 +17,12 @@ class Login extends React.Component {
   }
 
   onSubmit = (e) => {
+    console.log(e);/*
     const response = this.props.mutate({
         variables: this.state,
     });
-    console.log(response);
+    console.log(response);*/
+    this.props.onLogin(2);
   }
 
   render () {
@@ -50,21 +52,19 @@ class Login extends React.Component {
                  />
             </p>
             <p>
-            <Link to='../../atleta/Dados/index'>
+           
               <input onClick = {() => this.onSubmit()}
                 type="submit"
                 value="Login" />
-            </Link>
+           
             </p>
           </form>
 
           <div className="text-center">
-          <Link to="/Choose">
-            <a className="d-block small mt-3">Registar Conta</a>
-          </Link><br/>
+            <a className="d-block small mt-3" onClick={this.props.criaConta}>Registar Conta</a>
+          <br/>
             <a className="d-block small">Esqueceu-se da Password?</a>
           </div>
-
           </div>
     );
   }

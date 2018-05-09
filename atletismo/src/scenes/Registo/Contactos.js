@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/contactos.css';
+import './css/contactos.css';
 
 class Contactos extends React.Component {
 

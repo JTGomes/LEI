@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/documentos.css'
+import './css/documentos.css'
 
 class DocumentosT extends React.Component {
 

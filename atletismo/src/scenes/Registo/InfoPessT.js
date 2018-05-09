@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/infopess.css'
+import './css/infopess.css'
 
 class InfoPessT extends React.Component {
 

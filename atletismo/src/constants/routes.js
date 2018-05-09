@@ -3,6 +3,7 @@ export const REGISTAR = '/registo';
 export const ATLETA = '/atleta';
 export const DIRETOR = '/admin';
 export const TREINADOR = '/treinador';
+export const LOGIN = '/login';
 export const DATA_ATLETA = ATLETA + '/about';
 export const DESEMPENHO = ATLETA + '/stats';
 export const RESULTADOS= ATLETA + '/results';

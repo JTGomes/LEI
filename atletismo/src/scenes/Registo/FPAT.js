@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/fpa.css'
+import './css/fpa.css'
 
 class FPAT extends React.Component {
   render () {

@@ -1,0 +1,410 @@
+/*body {
+	background: url(images/ATL.png);
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  background-attachment: fixed;
+  height: 100%;
+  overflow: hidden;
+}*/
+
+.container {
+    position: relative;
+    width: 80%;
+    padding-left: 130px;
+}
+
+.progressbar {
+	counter-reset: step;
+}
+
+.progressbar li {
+	list-style-type: none;
+	float: left;
+	width: 20%;
+	position: relative;
+	text-align: center;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	color: #ddd;
+}
+
+.progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #D14444;
+	display: block;
+	text-align: center;
+	margin: 0 auto 10px auto;
+	border-radius: 50%;
+	background-color: #D14444;
+}
+
+.progressbar li:after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	background-color: #ddd;
+	top: 12px;
+	left: -50%;
+	z-index: -1;
+	height: 8px;
+}
+
+.progressbar li:first-child:after {
+	content: none;
+}
+
+.progressbar li.active {
+	color: white;
+}
+
+.progressbar li.active:before {
+	border-color: #D14444;
+}
+
+.progressbar li.active + li:after {
+	height: 8px;
+}
+
+.texto {
+	color: #D14444;
+}
+
+#formulario {
+	position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+#formulario h1 {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 70px;
+  color: #D14444;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0px;
+  margin-bottom: 0px;
+}
+
+#formulario h3 {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 20px;
+  color: #D14444;
+  text-align: center;
+}
+
+#formulario form {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	color: #D14444;
+  text-align: center;
+}
+
+#formulario input[type=text] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 17px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  padding: 3px 20px;
+  width: 25% !important;
+  opacity: 0.6;
+}
+
+#formulario input[type=email] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 17px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  padding: 3px 20px;
+  width: 14% !important;
+  opacity: 0.6;
+}
+
+#formulario input[name=telemovel] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 17px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  padding: 3px 20px;
+  width: 14% !important;
+  opacity: 0.6;
+}
+
+#formulario input[name=redes] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 17px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  padding: 3px 20px;
+  width: 14% !important;
+  opacity: 0.6;
+}
+
+#forms input[type=text] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  padding: 3px 20px;
+  width: 21% !important;
+  opacity: 0.6;
+}
+
+#formulario input[name=morada] {
+	border: 2px solid #D14444;
+    border-radius: 8px;
+    width: 25%;
+}
+
+#formulario input[name=postal] {
+	border: 2px solid #D14444;
+    border-radius: 8px;
+    width: 8% !important;
+}
+
+#formulario input[name=numero] {
+	border: 2px solid #D14444;
+    border-radius: 8px;
+    width: 8% !important;
+}
+
+#formulario input[name=localidade] {
+	border: 2px solid #D14444;
+    border-radius: 8px;
+    width: 8% !important;
+}
+
+#formulario input[type=password] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 17px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  padding: 3px 20px;
+  width: 16% !important;
+  opacity: 0.6;
+}
+
+#formulario input[name=cc] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+	border: 2px solid #D14444;
+  border-radius: 6px !important;
+  width: 11% !important;
+}
+
+#formulario input[name=con] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+	border: 2px solid #D14444;
+  border-radius: 6px !important;
+  width: 11% !important;
+}
+
+#formulario input[name=nac] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+	border: 2px solid #D14444;
+  border-radius: 6px !important;
+  width: 11% !important;
+}
+
+#formulario input[type=text]:focus {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+	border: 2px solid #D14444;
+  border-radius: 6px !important;
+  opacity: 1;
+}
+
+#formulario input[type=email]:focus {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+	border: 2px solid #D14444;
+  border-radius: 6px !important;
+  opacity: 1;
+}
+
+#formulario input[type=password]:focus {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+	border: 2px solid #D14444;
+  border-radius: 6px !important;
+  opacity: 1;
+}
+
+#formulario input[name="dia"] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 15px;
+  width: 4% !important;
+  padding: 3px 10px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  background-color: #f1f1f1;
+  opacity: 0.6;
+}
+
+#formulario input[name="mes"] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 15px;
+  width: 4% !important;
+  padding: 3px 10px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  background-color: #f1f1f1;
+  opacity: 0.6;
+}
+
+#formulario input[name="ano"] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  background-color: #f1f1f1;
+  width: 4% !important;
+  padding: 3px 10px;
+  font-size: 15px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  overflow: hidden;
+  opacity: 0.6;
+}
+
+select[name="escalao"] {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 15px;
+  width: 8%;
+  padding: 3px 10px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  background-color: #f1f1f1;
+  opacity: 0.6;
+}
+
+#formulario input[name="escalao"]:focus {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  width: 8%;
+  padding: 3px 10px;
+  border: 2px solid #D14444;
+  border-radius: 6px !important;
+  background-color: #f1f1f1;
+}
+
+#seguinte {
+  background-color: #D14444;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  padding: 16px 32px;
+  transition: all 0.5s;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  opacity: 0.6;
+}
+
+#seguinte {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  margin: -35px;
+}
+
+#seguinte:hover{
+  opacity: 1;
+}
+
+#seguinte:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+
+#anterior {
+  background-color: #D14444;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  padding: 16px 32px;
+  transition: all 0.5s;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  opacity: 0.6;
+}
+
+#anterior {
+  cursor: pointer;
+  display: inline-block !important;
+  position: relative;
+  transition: 0.5s;
+}
+
+#anterior:hover{
+  opacity: 1;
+}
+
+#anterior:hover:after {
+  opacity: 1;
+  left: -50px;
+}
+
+#formulario input[type=radio] {
+  border: 2px solid #D14444;
+    border-radius: 8px;
+}
+
+#formulario input[name=teste] {
+    border: 2px solid #D14444;
+    border-radius: 8px;
+    padding: 3px 20px;
+    width: 14%;
+    background-color: white;
+    background-position: 5px -1px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+#label {
+    border: 2px solid #D14444;
+    border-radius: 8px;
+    padding: 3px 20px;
+    width: 20%;
+    background-repeat: no-repeat;
+}
+
+#formulario input[type="file"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    opacity: 0;
+}
+
+#remove {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  background-color: #D14444;
+  border: none;
+  border-radius: 6px !important;
+  color: #D14444;
+  text-align: center;
+  font-size: 16px;
+  padding: .300rem .75rem;
+  transition: all 0.5s !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  opacity: 0.6;
+  display: inline-block;
+  position: relative;
+  margin: -41px;
+}
+
+#adiciona {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  background-color: #D14444;
+  border: none;
+  border-radius: 6px !important;
+  color: #D14444;
+  text-align: center;
+  font-size: 16px;
+  padding: .375rem .75rem;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-bottom: 2px !important;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  opacity: 0.6;
+  display: inline-block;
+  position: relative;
+  margin: -35px;
+}
