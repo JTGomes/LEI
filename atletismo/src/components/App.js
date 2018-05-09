@@ -4,45 +4,73 @@ import * as routes from '../constants/routes';
 import Home from '../scenes/diretor/Home';
 import AppDiretor from './AppDiretor';
 import AppAtleta from './AppAtleta';
+import Choose from '../scenes/Registo/Choose.js'
 import AppTreinador from './AppTreinador';
-import Registo from '../scenes/Registo';
+//import Registo from '../scenes/Registo';
 import Login from '../scenes/Login';
 
 
 class App extends Component {
-  // <Route exact path={routes.REGISTAR} component={Registo} />
-  // <Route exact path={routes.ATLETA} component={AppAtleta} />
-  // <Route exact path={routes.DIRETOR} component={AppDiretor} />
-  // <Route exact path={routes.TREINADOR} component={AppTreinador} />
-  // <Route exact path={routes.HOME} component={AppDiretor}/>
+  constructor(props){
+    super(props);
+    this.state={
+        estado:0
+    };
+    this.changeState = this.changeState.bind(this);
+    this.criaConta = this.criaConta.bind(this);
+  }
+
+  changeState(newState){
+      this.setState({
+        estado: newState
+      })    
+  }
+
+  criaConta(){
+    console.log("hello");
+    this.changeState(1);
+  }
+
+  switchState(state){
+
+    switch(state){
+        case 1: 
+                return (<Choose />)
+        case 2:
+                return (<AppAtleta onLogOut={() => this.changeState(0)}/>);
+        case 3:
+                return (<AppTreinador onLogOut={() => this.changeState(0)} />);
+        case 4:
+              return  (<AppDiretor onLogOut={() => this.changeState(0)} />);
+        default:
+                return (<Login onLogin={ (k) => this.changeState(k)} criaConta={this.criaConta}/>)
+    }
+  }
+
   render() {
 
     return (
      <div>
         <div id="buttons">
-            <a href="/treinador" target="_self">
+            <a onClick={() => this.changeState(3)} target="_self">
                 <button>
                     Treinador
                 </button>
             </a>
-            <a href="./atleta">
+            <a onClick={() => this.changeState(2)}>
                 <button>
                     Atleta
                 </button>
             </a>
-            <a href='./admin'>
+            <a onClick={() => this.changeState(4)}>
                 <button>
                     Dirigentes
                 </button>
             </a>
         </div>
-      <BrowserRouter>
-            <Switch>
-              <Route  path={routes.DIRETOR} component={AppDiretor} />
-              <Route  path={routes.ATLETA} component={AppAtleta} />
-              <Route  path={routes.TREINADOR} component={AppTreinador} />
-            </Switch>
-      </BrowserRouter>
+        <BrowserRouter>
+        {this.switchState(this.state.estado)}
+        </BrowserRouter>
      </div>
     );
   }

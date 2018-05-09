@@ -1,59 +1,58 @@
 import React from 'react';
 import FaEdit from 'react-icons/lib/fa/edit';
+import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official';
+import FaTwitterSquare from 'react-icons/lib/fa/twitter-square';
+import FaInstagram from 'react-icons/lib/fa/instagram';
+import ModalEditInfo from './component/modalPersonal';
+import ModalEditDocs from './component/modalDocs';
 import './About.css';
 
 class About extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      modalUserInfo: false,
-      modalNotification: false,
-      uid: undefined,
-      name: undefined,
+      modalDataEdit: false,
+      modalDocs: false,
     }
-    this.toggle = this.toggle.bind(this);
-    this.toggleS = this.toggleS.bind(this);
+    this.toggleDE = this.toggleDE.bind(this);
+    this.toggleD = this.toggleD.bind(this);
   }
 
-  toggle(){
+  toggleDE(){
     this.setState({
-      modalUserInfo: !this.state.modalUserInfo,
+      modalDataEdit: !this.state.modalDataEdit,
     })
   }
 
-  toggleS(){
+  toggleD(){
     this.setState({
-      modalNotification: !this.state.modalNotification,
+      modalDocs: !this.state.modalDocs,
     })
   }
 
-  initModalUser(userID){
+  initModalDados(){
     this.setState({
-      modalUserInfo: true,
-      uid: userID,
+      modalDataEdit: true,
     })
   }
 
-
-  initModalNotification(userID,name){
+  initModalDocs(){
     this.setState({
-        modalNotification: true,
-        uid: userID,
-        name: name,
+      modalDocs: true,
     })
   }
+
 
   render() {
     return(
-      <div className="aboutathlete">
-        <a className="Title">Dados Pessoais <FaEdit /></a>
+      <div className="aboutathlete container-fluid">
+        <a className="Title">Dados Pessoais <FaEdit onClick={()=>this.initModalDados()} style={{cursor:'pointer'}}/></a>
         <hr />
         <div className="gridcontent">
           <a>Nome Completo: {this.props.name}</a>
           <a>Género: {this.props.gender}</a>
           <a>NIF: {this.props.nif}</a>
           <a>Data de Nascimento: {this.props.birth}</a>
-          <a>Morada: {this.props.address}</a>
           <a>Número de telemóvel: {this.props.phone}</a>
           <a>Endereço de e-mail: {this.props.email}</a>
           <a>Nacionalidade: {this.props.nacionalidade}</a>
@@ -66,7 +65,7 @@ class About extends React.Component {
           <a>Nº cartão de sócio: {this.props.socioNum}</a>
           <a>Treinador(es): {this.props.treinadores}</a>
         </div>
-        <a className="Title"><pre/>Dados de Filiação <FaEdit /></a>
+        <a className="Title"><pre/>Dados de Filiação</a>
         <hr />
         <div className="gridcontent">
           <a>Tipo de Filiação: {this.props.filiacao}</a>
@@ -75,13 +74,22 @@ class About extends React.Component {
           <a>Subsídio: {this.props.subs}</a>
           <a>Equipamento disponível: {this.props.equip}</a>
         </div>
-        <a className="Title"><pre/>Documentos <FaEdit /></a>
+        <a className="Title"><pre/>Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></a>
         <hr />
         <div className="gridcontent">
           <a>Cartão de Cidadão {this.props.id}</a>
           <a>Exames Médicos {this.props.medical}</a>
           <a>Imprimir</a>
         </div>
+        <a className="Title"><pre/>Redes Sociais</a>
+        <hr />
+        <div className="social">
+          <FaFacebookOfficial />
+          <FaTwitterSquare />
+          <FaInstagram />
+        </div>
+        <ModalEditInfo toggle={this.toggleDE} modalDataEdit={this.state.modalDataEdit} />
+        <ModalEditDocs toggle={this.toggleD} modalDocs={this.state.modalDocs} />
       </div>
     );
   }
