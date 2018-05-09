@@ -45,7 +45,7 @@ class About extends React.Component {
 
   render() {
     return(
-      <div className="aboutathlete">
+      <div className="aboutathlete container-fluid">
         <a className="Title">Dados Pessoais <FaEdit onClick={()=>this.initModalDados()} style={{cursor:'pointer'}}/></a>
         <hr />
         <div className="gridcontent">

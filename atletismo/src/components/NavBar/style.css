@@ -1,20 +1,35 @@
 #mainNav .navbar-collapse .navbar-sidenav > .nav-item:hover{
-  background-color: #d14450;
+  background-color: #d14444;
 }
 
 #mainNav .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
   padding: 1em;
-  color: black;
+  margin-left: -4px;
+  margin-top: 4px;
+  color: white;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-size: 20px;
   font-weight: 500;
-
 }
 
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+    color: #D14444 !important;
+}
+
+.navbar-light .navbar-brand {
+    color: white !important;
+}
+
+#mainNav .navbar-collapse .navbar-sidenav > .nav-item {
+    width: 100%;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
 .active{
-  border-left: 3px solid white;
-  background-color: #ebe5e5;
+  background-color: white;
+  text-decoration-color: #d14444;
 }
 
 .navbar {
@@ -22,14 +37,23 @@
 }
 
 .icon{
-  margin-right: 10px;
+  margin-right: 14px;
   font-size: 23px;
+}
+
+.arrow {
+  color: white;
 }
 
 .content-wrapper{
   margin-top: 56px;
 }
 
+li {
+    padding: 3px 0;
+    display: inline-block;
+    color: white;
+}
 /* .nav-item .nav-link{
   height: 50px;
 } */

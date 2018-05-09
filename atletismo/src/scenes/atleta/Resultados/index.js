@@ -56,7 +56,7 @@ class Results extends React.Component {
       <ReactTable
         data={this.state.data}
         columns={col}
-        defaultPageSize={5}
+        defaultPageSize={10}
       />
       </div>
     );

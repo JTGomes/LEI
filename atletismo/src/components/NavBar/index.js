@@ -55,7 +55,7 @@ class NavBar extends Component{
           Tem a certeza que pretende fazer Logout?
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.toggle}><LogoutIcon style={{margin:'0 5px 0 0'}}/>Logout</Button>
+          <Button color="primary" onClick={this.toggle} style={{'background-color': '#D14444', border: '#D14444'}}><LogoutIcon style={{margin:'0 5px 0 0'}}/>Logout</Button>
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
