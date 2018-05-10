@@ -119,7 +119,7 @@ isSelected = key => {
         <div className="row">
           <Form className="col-lg-3">
             <FormGroup>
-              <Input type="text" name="searchbar" id="searchbar" value={this.state.input} placeholder="Pesquisar Atleta" onChange={event => this.handleInputSubmit(event)}/>
+              <Input type="text" name="searchbar" id="searchbar" value={this.state.input} placeholder="Pesquisar treinador" onChange={event => this.handleInputSubmit(event)}/>
             </FormGroup>
           </Form>
           <div className="col-lg-3">
@@ -131,7 +131,7 @@ isSelected = key => {
          data={this.filter_data_byName(data)}
          columns={[
            {
-           Header: 'Nome do Atleta',
+           Header: 'Nome do Treinador',
            accessor: 'nome',
            Cell: row => (
              <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original.uid)}>{row.original.nome}</div>
@@ -157,7 +157,7 @@ isSelected = key => {
          {...checkboxProps}
        />
 
-      <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
+     <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} treinador={true}/>
       </div>
 
     );

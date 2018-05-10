@@ -3,9 +3,8 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import Cog from 'react-icons/lib/fa/cog';
 import SendIcon from 'react-icons/lib/fa/paper-plane';
 import RemoveIcon from 'react-icons/lib/go/x';
-import Pay from 'react-icons/lib/fa/dollar';
-import EquipIcon from 'react-icons/lib/io/tshirt';
-import SendNotification from '../../../../components/SendNotification';
+import SendNotification from '../../../../../components/SendNotification';
+
 
 class OptionMenu extends Component {
  constructor(props) {
@@ -34,10 +33,9 @@ toggleS(){
 initModalNotification(userID,name){
   this.setState({
       modalNotification: true,
-      uid: userID,
-      name: name,
   })
 }
+
 
   render() {
     return (
@@ -48,9 +46,7 @@ initModalNotification(userID,name){
           </DropdownToggle>
           <DropdownMenu >
             <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalNotification()}><SendIcon style={{color:'#296ddb'}}/>{'  '}Enviar Notificação</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser()}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Acesso</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.Equipamento()}><EquipIcon />{'  '}Equipamento</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.Pagamento()}><Pay style={{color: '#0fba00'}}/>{'  '}Pagamentos</DropdownItem>
+            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser()}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Página</DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <SendNotification toggle={this.toggleS} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalNotification}/>
