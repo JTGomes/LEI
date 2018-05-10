@@ -45,8 +45,8 @@ class ModalUserInfo extends Component {
                 <td>Redes Sociais</td>
                 <td>
                   <ListGroup>
-                    <ListGroupItem><a href="https://facebook.com/">facebook.com/jgomes</a></ListGroupItem>
-                    <ListGroupItem><a href="https://twitter.com/">twitter.com/jgomes</a></ListGroupItem>
+                    <ListGroupItem><a href="https://facebook.com/" target={"_blank"}>facebook.com/jgomes</a></ListGroupItem>
+                    <ListGroupItem><a href="https://twitter.com/" target={"_blank"}>twitter.com/jgomes</a></ListGroupItem>
                   </ListGroup>
                 </td>
               </tr>

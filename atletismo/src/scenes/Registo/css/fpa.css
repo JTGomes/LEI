@@ -1,0 +1,67 @@
+.container h1 {
+  font-family: 'Yanone Kaffeesatz', sans-serif !important;
+  color: #D14444;
+  margin-top: 1000px;
+}
+
+.container {
+    position: relative;
+    width: 80%;
+    padding-left: 130px;
+}
+
+.progressbar {
+    counter-reset: step;
+}
+
+.progressbar li {
+    list-style-type: none;
+    float: left;
+    width: 20%;
+    position: relative;
+    text-align: center;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: #ddd;
+}
+
+.progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #D14444;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background-color: #D14444;
+}
+
+.progressbar li:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    background-color: #D14444;
+    top: 12px;
+    left: -50%;
+    z-index: -1;
+}
+
+.progressbar li:first-child:after {
+    content: none;
+}
+
+.progressbar li.active {
+    color: #ddd;
+}
+
+.progressbar li.active:before {
+    border-color: #D14444;
+}
+
+.progressbar li.active + li:after {
+    background-color: #D14444;
+    height: 8px;
+}

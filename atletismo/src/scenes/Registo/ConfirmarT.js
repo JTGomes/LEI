@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/confirmar.css'
+import './css/confirmar.css'
 
 class ConfirmarT extends React.Component {
   render () {

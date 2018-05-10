@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, WrappedLink } from 'react-router-dom'
-//import './css/infopess.css'
+import { Link } from 'react-router-dom'
+import './css/infopess.css'
 
 class InfoPessT extends React.Component {
 
-  state = {
+  state={
     nome: '',
     password: '',
     dia: '',
@@ -16,14 +16,14 @@ class InfoPessT extends React.Component {
     gender: '',
   }
 
-  onChange = (e) => {
+  onChange=(e) => {
     this.setState({
         [e.target.name]: e.target.value,
     });
   }
 
-  onSubmit = (e) => {
-    const response = this.props.mutate({
+  onSubmit=(e) => {
+    const response=this.props.mutate({
         variables: this.state,
     });
     console.log(response);
@@ -53,18 +53,18 @@ class InfoPessT extends React.Component {
               name="nome"
               type="text"
               placeholder="Nome" 
-              onChange = {e => this.onChange(e)}
-              value = {this.state.nome}
+              onChange={(e) => this.onChange(e)}
+              value={this.state.nome}
             />
             </p>
             <p>
             Password<br/>
             <input
-              name = "password"
+              name="password"
               type="password"
               placeholder="Password"
-              onChange = {e => this.onChange(e)}
-              value = {this.state.password}
+              onChange={e => this.onChange(e)}
+              value={this.state.password}
             />
             </p>
             <p>
@@ -73,62 +73,62 @@ class InfoPessT extends React.Component {
               name="dia"
               type="text"
               placeholder="DD" 
-              onChange = {e => this.onChange(e)}
-              value = {this.state.dia}
+              onChange={e => this.onChange(e)}
+              value={this.state.dia}
             />&nbsp;
             <input
               name="mes"
               type="text"
               placeholder="MM" 
-              onChange = {e => this.onChange(e)}
-              value = {this.state.mes}
+              onChange={e => this.onChange(e)}
+              value={this.state.mes}
             />&nbsp;
             <input
               name="ano"
               type="text"
               placeholder="AAAA" 
-              onChange = {e => this.onChange(e)}
-              value = {this.state.ano}
+              onChange={e => this.onChange(e)}
+              value={this.state.ano}
             />
             </p>
             <p>
             Nacionalidade<br/>
             <input
-              name = "nac"
+              name="nac"
               type="text"
               placeholder="Nacionalidade"
-              onChange = {e => this.onChange(e)}
-              value = {this.state.nac}
+              onChange={e => this.onChange(e)}
+              value={this.state.nac}
             />
             </p>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número CC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número de Contribuinte<br/>
             <input
-              name = "cc"
+              name="cc"
               type="text"
               placeholder="Número do CC"
-              onChange = {e => this.onChange(e)}
-              value = {this.state.cc}
+              onChange={e => this.onChange(e)}
+              value={this.state.cc}
             />&nbsp;
             <input
-              name = "con"
+              name="con"
               type="text"
               placeholder="Número de Contribuinte"
-              onChange = {e => this.onChange(e)}
-              value = {this.state.con}
+              onChange={e => this.onChange(e)}
+              value={this.state.con}
             />
             <br/><br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Género&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
             <input
-              name = "genero"
+              name="genero"
               type="radio"
-              onChange = {e => this.onChange(e)}
-              value = {this.state.gender}
+              onChange={e => this.onChange(e)}
+              value={this.state.gender}
             /> Feminino
             <input
-              name = "genero"
+              name="genero"
               type="radio"
-              onChange = {e => this.onChange(e)}
-              value = {this.state.gender}
+              onChange={e => this.onChange(e)}
+              value={this.state.gender}
             /> Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </form>
           <form>

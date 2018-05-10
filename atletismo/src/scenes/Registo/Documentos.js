@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, WrappedLink } from 'react-router-dom'
-//import './css/documentos.css'
+import './css/documentos.css'
 
 class Documentos extends React.Component {
 

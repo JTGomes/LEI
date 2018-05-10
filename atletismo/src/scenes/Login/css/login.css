@@ -1,0 +1,104 @@
+/*html {
+  background-image: url("./ATL.jpg");
+  background-repeat: no-repeat;
+}*/
+
+.login {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  color: #D14444;
+  text-align: center;
+}
+
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.login-header {
+  background: #D14444;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: .25rem;
+}
+
+.login-container {
+  background: white;
+  padding: 12px;
+  border-radius: .25rem;
+}
+
+.login p {
+  padding: 12px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.login p .titles {
+  display: inline-block;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.login input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: .375rem .75rem;
+  outline: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: .25rem;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+  border-radius: .25rem;
+}
+
+.login input[type="email"]:focus,
+.login input[type="password"]:focus {
+  border-color: #888;
+  border-radius: .25rem;
+}
+
+.login input[type="submit"] {
+  background: #D14444;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.login input[type="submit"]:hover {
+  background: #D14444;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.login input[type="submit"]:focus {
+  border-color: #D14444;
+}
+
+.login h1 {
+  text-align: center;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 60px;
+  color: #D14444;
+}

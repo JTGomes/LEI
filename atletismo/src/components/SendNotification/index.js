@@ -3,6 +3,11 @@ import {Button, Modal,ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Labe
 import Send from 'react-icons/lib/fa/paper-plane';
 
 class SendNotification extends React.Component {
+
+
+
+
+  
   constructor(props){
     super(props);
     this.state = {

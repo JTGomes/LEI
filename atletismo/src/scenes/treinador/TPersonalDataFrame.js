@@ -1,101 +1,93 @@
 import React from 'react';
-import "./Tpersonaldata.css";
+import ModalEditInfo from './component/modalPersonal';
+import ModalEditDocs from './component/modalDocs';
+import FaEdit from 'react-icons/lib/fa/edit';
+import "./css/Tpersonaldata.css";
 
 class TPersonalDataFrame extends React.Component {
   
-	constructor(props){
-		super(props);
-		this.state = {
-			data: { 
-				name: "José Mário dos Santos Mourinho Félix" ,
-				genero: "Masculino",
-				nif: "123789456",
-				nacionalidade: "Portuguesa",
-				morada: "Rua Doutor Alberto Sampaio, 67",
-				codigopostal: "4815-689" ,
-				local: "Braga" ,
-				socio: "sim"
-			},
-			contrato: {
-				end: "01/09/2018",
-				salario:"30500€"
-			},
-			doc: {
-				cc:"/",
-				em:"/"
-			}
-		};
-	}
+  constructor(props){
+    super(props);
+    this.state = {
+      data: { 
+        name: "José Mário dos Santos Mourinho Félix" ,
+        genero: "Masculino",
+        nif: "123789456",
+        nacionalidade: "Portuguesa",
+        morada: "Rua Doutor Alberto Sampaio, 67",
+        codigopostal: "4815-689" ,
+        local: "Braga" ,
+        socio: "sim"
+      },
+      contrato: {
+        end: "01/09/2018",
+        salario:"30500€"
+      },
+      doc: {
+        cc:"/",
+        em:"/"
+      },
+      modalDataEdit: false,
+      modalDocs: false,
+    };
+    this.toggleDE = this.toggleDE.bind(this);
+    this.toggleD = this.toggleD.bind(this);
+  }
+
+  toggleDE(){
+    this.setState({
+      modalDataEdit: !this.state.modalDataEdit,
+    })
+  }
+
+  toggleD(){
+    this.setState({
+      modalDocs: !this.state.modalDocs,
+    })
+  }
+
+  initModalDados(){
+    this.setState({
+      modalDataEdit: true,
+    })
+  }
+
+  initModalDocs(){
+    this.setState({
+      modalDocs: true,
+    })
+  }
 
 
   render() {
     return (
-      <div>
-      	<div id="dados_pessoais">
-      		<h1> Dados Pessoais</h1>
-      		<div id="campos">
-      		<p id="spanme"> Nome Completo: 
-      			<span> {this.state.data.name} </span>
-      		</p>
-      		<p id="spanme"> Género: 
-      			 <span> {this.state.data.genero} </span>
-      		</p>
-      		<p id="spanme"> NIF:
-      			 <span> {this.state.data.nif} </span>
-      		</p>
-      		<p id="spanme"> Nacionalidade: 
-      			 <span> {this.state.data.nacionalidade} </span>
-      		</p>
-      		<p id="spanme"> Morada 
-      			 <span> {this.state.data.morada} </span>
-      		</p>
-      		<p id="spanme"> Código Postal: 
-      			 <span> {this.state.data.codigopostal} </span>
-      		</p>
-      		<p id="spanme"> Localidade 
-      			 <span> {this.state.data.local} </span>
-      		</p>
-      		<p id="spanme"> Sócio 
-      			 <span> {this.state.data.socio} </span>
-      		</p>
-      		</div>
-      	</div>
-      	<div id="dados_filiação">
-      		<h1> Dados Pessoais</h1>
-      		<div id="campos">
-      		<p id="spanme"> Contrato até: 
-      			<span> {this.state.contrato.end} </span>
-      		</p>
-      		<p id="spanme"> Salário:
-      			<span> {this.state.contrato.salario} </span>
-      		</p>
-      		</div>
-      	</div>
-      	<div id="documentos">
-      		<h1> Dados Pessoais</h1>
-      		<div id="campos">
-      			<p> 
-      				<a href={this.state.doc.cc}> Cartão de Cidadão </a>
-      			</p>
-      			<p>
-      				<a href={this.state.doc.em}> Exames médicos </a>
-      			</p>
-      		</div>
-      		<div id="file_submit">
-				<form action={"/"} method={"post"}>
-      			<div id="sub">
-      				<img src="http://img.freepik.com/icones-gratis/arquivo-na-pasta_318-77855.jpg?size=338&ext=jpg" alt="aaa" />
-      				<input type="file" accept={".pdf"} name="Escolher Ficheiro" size="40"/>
-      			</div>
-				</form>
-      			<div id="sub">
-      				<img src="http://img.freepik.com/icones-gratis/arquivo-na-pasta_318-77855.jpg?size=338&ext=jpg" alt="aaa" />
-      				<input type="file" accept=".pdf" name="Escolher Ficheiro" size="40"/>
-      			</div>
-      		</div>
-
-
-      	</div>
+      <div className="aboutcoach container-fluid">
+        <a className="Title">Dados Pessoais <FaEdit onClick={()=>this.initModalDados()} style={{cursor:'pointer'}}/></a>
+        <hr />
+        <div className="gridcontent">
+          <a>Nome Completo: {this.state.data.name} </a>
+          <a>Género: {this.state.data.genero} </a>
+          <a>NIF {this.state.data.nif} </a>
+          <a>Nacionalidade: {this.state.data.nacionalidade} </a>
+          <a>Morada: {this.state.data.morada} </a>
+          <a>Código Postal: {this.state.data.codigopostal} </a>
+          <a>Localidade: {this.state.data.local} </a>
+          <a>Sócio: {this.state.data.socio} </a>
+        </div>
+        <a className="Title">Dados de Filiação</a>
+        <hr />
+        <div className="gridcontent">
+          <a>Contrato até: {this.state.contrato.end} </a>
+          <a>Salário: {this.state.contrato.salario} </a>
+        </div>
+        <a className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></a>
+        <hr />
+        <div className="gridcontent">
+          <a>Cartão de Cidadão: {this.state.doc.cc} </a>
+          <a>Exame Médico: {this.state.doc.em} </a>
+        </div>
+        <ModalEditInfo toggle={this.toggleDE} modalDataEdit={this.state.modalDataEdit} />
+        <ModalEditDocs toggle={this.toggleD} modalDocs={this.state.modalDocs} />
       </div>
     );
   }

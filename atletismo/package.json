@@ -12,6 +12,7 @@
     "react-bootstrap-table": "^4.3.1",
     "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.3.1",
+    "react-facebook-login": "^4.0.1",
     "react-icons": "^2.2.7",
     "react-image-gallery": "^0.8.7",
     "react-images": "^0.5.17",
