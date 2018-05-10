@@ -156,7 +156,7 @@ isSelected = key => {
          className="-striped -highlight"
          {...checkboxProps}
        />
-
+     
       <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
       </div>
 
