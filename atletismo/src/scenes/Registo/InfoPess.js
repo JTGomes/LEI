@@ -4,17 +4,33 @@ import './css/infopess.css'
 
 class InfoPess extends React.Component {
 
-  state = {
-    nome: '',
-    password: '',
-    dia: '',
-    mes: '',
-    ano: '',
-    nacionalidade: '',
-    cc: '',
-    con: '',
-    gender: '',
-    escalao: '',
+  constructor(props) {
+    super(props);
+    if(props.data) {
+        this.state = {
+            nome: props.data.nome,
+            password: props.data.password,
+            dia: props.data.dia,
+            mes: props.data.mes,
+            ano: props.data.ano,
+            nacionalidade: props.data.nacionalidade,
+            cc: props.data.cc,
+            con: props.data.con,
+            gender: props.data.gender,
+            escalao: props.data.escalao,
+        }
+    }else this.state = {
+        nome: '',
+        password: '',
+        dia: '',
+        mes: '',
+        ano: '',
+        nacionalidade: '',
+        cc: '',
+        con: '',
+        gender: '',
+        escalao: '',
+    }
   }
 
   onChange = (e) => {
@@ -24,11 +40,9 @@ class InfoPess extends React.Component {
     console.log(this.state.nome);
   }
 
-  onSubmit = (e) => {
-    const response = this.props.mutate({
-        variables: this.state,
-    });
-    console.log(response);
+  onSubmit(e){
+    this.props.onNext(1,this.state);
+    console.log("Passo 1");
   }
 
   render () {
@@ -148,11 +162,10 @@ class InfoPess extends React.Component {
             </select>
         </form>
           <form>
-          <Link to='/Contactos'>
-            <button id="seguinte">
+            <button id="seguinte"  onClick={(e) => this.onSubmit(e)}>
               Seguinte
             </button>
-          </Link>
+
           </form>
           </h3>
         </div>

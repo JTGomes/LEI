@@ -4,14 +4,28 @@ import './css/contactos.css'
 
 class ContactosT extends React.Component {
 
-  state = {
-    email: '',
-    telemovel: '',
-    redes: [{ url: '' }],
-    morada: '',
-    postal: '',
-    localidade: '',
+  constructor(props){
+    super(props);
+    if(props.data){
+      this.state = {
+          email: props.data.email,
+          telemovel: props.data.telemovel,
+          redes: props.data.redes,
+          morada: props.data.morada,
+          postal: props.data.postal,
+          localidade: props.data.localidade,
+      }
+    }else
+        this.state = {
+            email: '',
+            telemovel: '',
+            redes: [{ url: '' }],
+            morada: '',
+            postal: '',
+            localidade: '',
+        }
   }
+
 
   handleRedesChange = (idx) => (evt) => {
     const newRedes = this.state.redes.map((redes, sidx) => {
@@ -123,16 +137,12 @@ class ContactosT extends React.Component {
       </form><br/>
 
       <form>
-      <Link to='/InfoPessT'>
-        <button id="anterior">
+        <button id="anterior" onClick={(e) => this.props.onPrev(2,this.state)}>
           Anterior
         </button>
-      </Link>
-      <Link to='/DocumentosT'>
-        <button id="seguinte">
+        <button id="seguinte" onClick={(e) => this.props.onNext(2,this.state)}>
           Seguinte
         </button>
-      </Link>
       </form>
       </h3>
       </div>

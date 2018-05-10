@@ -3,17 +3,31 @@ import { Link, WrappedLink } from 'react-router-dom'
 import './css/infopess.css'
 
 class InfoPessT extends React.Component {
-
-  state = {
-    nome: '',
-    password: '',
-    dia: '',
-    mes: '',
-    ano: '',
-    nacionalidade: '',
-    cc: '',
-    con: '',
-    gender: '',
+  constructor(props){
+    super(props);
+    if(props.data){
+      this.state = {
+          nome: props.data.nome,
+          password: props.data.password,
+          dia: props.data.dia,
+          mes: props.data.mes,
+          ano: props.data.ano,
+          nacionalidade: props.data.nacionalidade,
+          cc: props.data.cc,
+          con: props.data.con,
+          gender: props.data.gender,
+      }
+    }else this.state = {
+        nome: '',
+        password: '',
+        dia: '',
+        mes: '',
+        ano: '',
+        nacionalidade: '',
+        cc: '',
+        con: '',
+        gender: '',
+    }
   }
 
   onChange = (e) => {
@@ -22,12 +36,10 @@ class InfoPessT extends React.Component {
     });
   }
 
-  onSubmit = (e) => {
-    const response = this.props.mutate({
-        variables: this.state,
-    });
-    console.log(response);
-  }
+    onSubmit(e){
+        this.props.onNext(1,this.state);
+        console.log("Passo 1");
+    }
 
   render () {
     return (
@@ -132,11 +144,9 @@ class InfoPessT extends React.Component {
             /> Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </form>
           <form>
-          <Link to='/ContactosT'>
-            <button id="seguinte">
+            <button id="seguinte" onClick={(e) =>this.onSubmit(e)}>
               Seguinte
             </button>
-          </Link>
           </form>
           </h3>
         </div>

@@ -35,7 +35,7 @@ class App extends Component {
 
     switch(state){
         case 1: 
-                return (<Choose />)
+                return (<Choose onEnd={(data)=>{console.log(data);this.changeState(0);}}/>)
         case 2:
                 return (<AppAtleta onLogOut={() => this.changeState(0)}/>);
         case 3:
