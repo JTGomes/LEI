@@ -74,9 +74,11 @@ class UltimosResultados extends Component {
               accessor: 'classificacao'
             },
             {
-              Header: 'Gera Notícia',
+              Header: 'Gerar Notícia',
               Cell: row => (
-              <News component={row}/>
+              <div className="text-center">
+                  <News component={row}/>
+              </div>
               )
             }
 
