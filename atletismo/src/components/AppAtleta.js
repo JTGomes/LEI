@@ -11,7 +11,6 @@ import CalendarA from '../scenes/atleta/Calendar';
 import Foto from 'react-icons/lib/fa/camera';
 import Performance from 'react-icons/lib/fa/line-chart';
 import Calendar from 'react-icons/lib/fa/calendar';
-import Vid from 'react-icons/lib/fa/video-camera';
 import User from 'react-icons/lib/fa/user';
 import Provas from 'react-icons/lib/fa/trophy';
 

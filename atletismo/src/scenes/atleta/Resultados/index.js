@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import Selection from '../../../components/Selection'
 import './Results.css';
 
 //definir nome das colunas a aparecer na tabela

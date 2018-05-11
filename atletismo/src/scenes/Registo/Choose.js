@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, WrappedLink, Link } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import InfoPess from './InfoPess.js'
 import InfoPessT from './InfoPessT.js'
 import './css/choose.css'
@@ -20,7 +20,7 @@ class Choose extends React.Component {
        registerData: [],
        passo:0,
        caminho:undefined
-    }
+    };
     this.onNext = this.onNext.bind(this);
     this.onPrev = this.onPrev.bind(this);
   }

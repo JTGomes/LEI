@@ -1,0 +1,12 @@
+#ModalHeader {
+  position: relative;
+}
+#ModalHeader, .modal-backdrop {
+  position: absolute;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #D14444;
+    border-color: #D14444;
+}
