@@ -28,14 +28,6 @@ class UltimosResultados extends Component {
    //this.toggle = this.toggle.bind(this);
    this.state = {
      modalNew: false,
-     uid: undefined,
-     nome: undefined,
-     prova: undefined,
-     data: undefined,
-     local: undefined,
-     especialidade: undefined,
-     resultado: undefined,
-     classificacao: undefined,
    };
  }
 

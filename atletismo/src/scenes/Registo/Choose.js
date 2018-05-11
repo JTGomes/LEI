@@ -1,5 +1,4 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom'
 import InfoPess from './InfoPess.js'
 import InfoPessT from './InfoPessT.js'
 import './css/choose.css'
@@ -77,7 +76,7 @@ class Choose extends React.Component {
   renderChoice(){
     return (
         <section className="intro" id='intro'>
-            <row>
+            <div className="row">
                 <div className="col-lg-6 col-sm-12 left">
                     <button onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
                         <p>
@@ -92,7 +91,7 @@ class Choose extends React.Component {
                         </p>
                     </button>
                 </div>
-            </row>
+            </div>
         </section>
     )
   }
@@ -108,7 +107,7 @@ class Choose extends React.Component {
           case 4:
               return (<ConfirmarT onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
           case 5:
-              return (<FPAT onNext={() => this.props.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>)
+              return (<FPAT onNext={() => this.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>)
           default:
               return -1;
       }
@@ -124,7 +123,7 @@ class Choose extends React.Component {
           case 4:
               return (<Confirmar onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
           case 5:
-              return (<FPA onNext={() => this.props.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+              return (<FPA onNext={() => this.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
           default:
               return -1;
       }

@@ -3,9 +3,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import * as routes from '../constants/routes';
 import AppDiretor from './AppDiretor';
 import AppAtleta from './AppAtleta';
-import Registo from '../scenes/Registo'
+import Registo from '../scenes/Registo/Choose.js';
 import AppTreinador from './AppTreinador';
 import Login from '../scenes/Login';
+import ErrorPage from '../scenes/ErrorPage';
 
 
 class App extends Component {
@@ -35,11 +36,12 @@ class App extends Component {
         </div>
         <BrowserRouter>
           <Switch>
-            <Route  exact path={routes.HOME} component={Login} />
+            <Route exact path={routes.HOME} component={Login} />
             <Route  path={routes.DIRETOR} component={AppDiretor} />
             <Route  path={routes.ATLETA} component={AppAtleta} />
             <Route  path={routes.TREINADOR} component={AppTreinador} />
             <Route  path={routes.REGISTAR} component={Registo} />
+            <Route  component={ErrorPage} />
           </Switch>
         </BrowserRouter>
      </div>

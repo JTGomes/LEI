@@ -1,18 +1,61 @@
 import React, { Component } from 'react';
-import {Modal, ModalBody, ModalFooter, ModalHeader, Button} from 'reactstrap';
+import {Modal, ModalBody, ModalFooter, ModalHeader, Button, Alert, Collapse, Card, CardBody} from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
+
+const data = [{id:1, dataAdquirido: '02/09/2017'},
+              {id:4, dataAdquirido:'25/09/2017'},
+              {id:3, dataAdquirido:'16/09/2017'},
+              {id:7, dataAdquirido:'12/09/2017'},
+              ]
+
 
 class ModalEquipamento extends Component {
   constructor(props){
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state={
-
+      equipamento:['Fato de treino','Sweatshirt','Polo',
+                   'Lycras (calções e calças)','Impermeável',
+                   'Mochila','Calções passeio','T-shirt',
+                   'Sapatilhas', 'Kispo', 'Camisola de Competição'
+                 ],
+      collapse: false,
     }
   }
 
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
+  }
 
   setEquipamento(){
 
+  }
+
+  showEquipamento(data){
+    if(data.length===11){
+      return
+      <Alert color="success">
+        Todo o equipamento já foi entregue.
+      </Alert>
+    }
+    return  this.state.equipamento.map( (equip,elem) =>
+      data.find((obj)=> obj.id === elem)? null :
+      <div key={elem} className="col-6">
+        <div className="custom-control custom-checkbox ">
+          <input type="checkbox" className="custom-control-input" id={"customCheck"+elem}/>
+          <label className="custom-control-label" htmlFor={"customCheck"+elem}>{equip}</label>
+        </div>
+      </div>
+    );
+  }
+
+  showEquipamentoAdquirido(data){
+    return  data.map( (equip,elem) =>
+      <div key={elem} className="col-6">
+        <p className="mb-0"><small><Check />{this.state.equipamento[equip.id]}</small></p>
+        <p className="mt-0"><small>{"Entregue a "+equip.dataAdquirido}</small></p>
+      </div>
+    );
   }
 
   render() {
@@ -23,52 +66,22 @@ class ModalEquipamento extends Component {
         <ModalBody>
           <form>
             <div className="row">
-              <div className="col-6" id="labelado">
-                <div className="custom-control custom-checkbox ">
-                  <input type="checkbox" className="custom-control-input" id="customCheck1"/>
-                  <label className="custom-control-label" for="customCheck1">Fato de treino</label>
-                </div>
-                <div className="custom-control custom-checkbox ">
-                  <input type="checkbox" className="custom-control-input" id="customCheck2"/>
-                  <label className="custom-control-label" for="customCheck2">Polo</label>
-                </div>
-                <div className="custom-control custom-checkbox ">
-                  <input type="checkbox" className="custom-control-input" id="customCheck3"/>
-                  <label className="custom-control-label" for="customCheck3">Lycras (calções e calças)</label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck4"/>
-                  <label className="custom-control-label" for="customCheck4">Impermeável</label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck5"/>
-                  <label className="custom-control-label" for="customCheck5">Mochila</label>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck6"/>
-                  <label className="custom-control-label" for="customCheck6">Calções passeio</label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck7"/>
-                  <label className="custom-control-label" for="customCheck7">T-shirts</label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck8"/>
-                  <label className="custom-control-label" for="customCheck8">Sapatilhas</label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck9"/>
-                  <label className="custom-control-label" for="customCheck9">Kispo</label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input" id="customCheck0"/>
-                  <label className="custom-control-label" for="customCheck0">Equipamento de competição</label>
-                </div>
-              </div>
+            {this.showEquipamento(data)}
             </div>
           </form>
+          <div className="row mt-2 pl-2">  
+              <Button outline color="primary" onClick={this.toggle} size="sm" >Ver equipamento entregue</Button>
+          </div>
+          <Collapse isOpen={this.state.collapse}>
+            <Card>
+              <CardBody>
+                <div className="row">
+                  {this.showEquipamentoAdquirido(data)}
+                </div>
+              </CardBody>
+            </Card>
+          </Collapse>
+
         </ModalBody>
         <ModalFooter>
           <Button color="success" onClick={()=>this.setEquipamento()}><Check />{' '}Validar</Button>{' '}

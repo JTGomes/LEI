@@ -1,7 +1,5 @@
 export const HOME = '/';
 export const REGISTAR = '/registo';
-export const REG_ATLETA = REGISTAR + '/atleta';
-export const REG_TREINADOR = REGISTAR + '/treinador';
 
 
 export const ATLETA = '/atleta';

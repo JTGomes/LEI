@@ -61,7 +61,7 @@ class Login extends React.Component {
           </form>
 
           <div className="text-center">
-            <Link to={routes.REGISTAR} className="d-block small mt-3">Registar Conta</Link>
+            <Link to={routes.REGISTAR} className="d-block small mt-3" style={{color:'#d14444'}}>Registar Conta</Link>
           <br/>
             <a className="d-block small">Esqueceu-se da Password?</a>
           </div>
