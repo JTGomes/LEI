@@ -22,16 +22,12 @@ class FPAT extends React.Component {
 
       <div id="buttons">
       <form>
-      <Link to='/ConfirmarT'>
-        <button id="anterior">
+        <button id="anterior" onClick={(e) => this.props.onNext()}>
           Sim
         </button>
-      </Link>
-      <Link to='https://lince.fpatletismo.pt/'>
-        <button id="seguinte">
-          Fazer Registo
-        </button>
-      </Link>
+        <a className={"button"} id="seguinte" href={"https://lince.fpatletismo.pt/publico/registo.aspx"} target={"_blank"} onClick={(e) => this.props.onNext()}>
+                Fazer Registo
+        </a>
       </form>
       </div>
       </div>

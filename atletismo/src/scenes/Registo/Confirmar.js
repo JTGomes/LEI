@@ -47,16 +47,12 @@ class Confirmar extends React.Component {
 
       <div id="buttons">
       <form>
-      <Link to='/Documentos'>
-        <button id="anterior" formaction="file:documentos.html">
+        <button id="anterior" formaction="file:documentos.html" onClick={(e) => this.props.onPrev(4,{})}>
           Anterior
         </button>
-      </Link>
-      <Link to='/FPA'>
-        <button id="seguinte" formaction="file:lince.html">
+        <button id="seguinte" formaction="file:lince.html" onClick={(e) => this.props.onNext(4,{})}>
           Confirmar Registo
         </button>
-      </Link>
       </form>
       </div>
       </div>

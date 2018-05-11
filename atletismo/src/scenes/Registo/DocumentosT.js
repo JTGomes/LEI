@@ -4,14 +4,27 @@ import './css/documentos.css'
 
 class DocumentosT extends React.Component {
 
-  state = {
-    foto: '',
-    cc: '',
-    am: '',
-    socio: '',
-    nsocio: '',
-    ntreinador: '',
-  }
+    constructor(props){
+        super(props);
+        if(props.data){
+            this.state = {
+                foto: props.data.foto,
+                cc: props.data.cc,
+                am: props.data.am,
+                socio: props.data.socio,
+                nsocio: props.data.nsocio,
+                ntreinador: props.data.ntreinador,
+            }
+        }else this.state = {
+            foto: '',
+            cc: '',
+            am: '',
+            socio: '',
+            nsocio: '',
+            ntreinador: '',
+        }
+    }
+
   
   onChange = (e) => {
         this.setState({
@@ -103,16 +116,12 @@ class DocumentosT extends React.Component {
     </form>
 
     <form>
-    <Link to='/ContactosT'>
-      <button id="anterior" formaction="file:contactos.html">
+      <button id="anterior" formaction="file:contactos.html" onClick={(e) => this.props.onPrev(3,this.state)}>
         Anterior
       </button>
-    </Link>
-    <Link to='ConfirmarT'>
-      <button id="seguinte" formaction="file:conclusao.html">
+      <button id="seguinte" formaction="file:conclusao.html" onClick={(e) => this.props.onNext(3,this.state)}>
         Registar
       </button>
-    </Link>
     </form>
     </h3>
     </div>
