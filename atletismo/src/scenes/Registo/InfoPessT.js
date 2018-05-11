@@ -42,7 +42,7 @@ class InfoPessT extends React.Component {
             <li>Registo FPA</li>
           </ul>
         </div>
-        
+
         <div id="formulario">
           <h1>REGISTO DE TREINADORES</h1>
           <h3>Faça aqui o seu registo e torne-se treinador no SC Braga
@@ -52,7 +52,7 @@ class InfoPessT extends React.Component {
             <input
               name="nome"
               type="text"
-              placeholder="Nome" 
+              placeholder="Nome"
               onChange={(e) => this.onChange(e)}
               value={this.state.nome}
             />
@@ -72,21 +72,21 @@ class InfoPessT extends React.Component {
             <input
               name="dia"
               type="text"
-              placeholder="DD" 
+              placeholder="DD"
               onChange={e => this.onChange(e)}
               value={this.state.dia}
             />&nbsp;
             <input
               name="mes"
               type="text"
-              placeholder="MM" 
+              placeholder="MM"
               onChange={e => this.onChange(e)}
               value={this.state.mes}
             />&nbsp;
             <input
               name="ano"
               type="text"
-              placeholder="AAAA" 
+              placeholder="AAAA"
               onChange={e => this.onChange(e)}
               value={this.state.ano}
             />

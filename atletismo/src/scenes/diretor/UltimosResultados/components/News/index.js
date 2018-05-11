@@ -3,7 +3,7 @@ import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 import jsPDF from 'jspdf';
 import $ from 'jquery';
 
-class News extends React.Component {
+class News extends Component {
 
   constructor(props) {
     super(props);

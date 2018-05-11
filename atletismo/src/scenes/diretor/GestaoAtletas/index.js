@@ -91,8 +91,8 @@ isSelected = key => {
 };
 
   render() {
-    const { toggleSelection, toggleAll, isSelected, logSelection } = this;
- const {  columns, selectAll } = this.state;
+    const { toggleSelection, toggleAll, isSelected} = this;
+ const {  selectAll } = this.state;
 
  const checkboxProps = {
    selectAll,
@@ -156,7 +156,7 @@ isSelected = key => {
          className="-striped -highlight"
          {...checkboxProps}
        />
-     
+
       <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
       </div>
 

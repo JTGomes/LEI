@@ -1,4 +1,6 @@
 import React from 'react';
+import * as routes from '../../constants/routes';
+import {  Link } from 'react-router-dom'
 import './css/login.css'
 
 class Login extends React.Component {
@@ -20,7 +22,7 @@ class Login extends React.Component {
         variables: this.state,
     });
     console.log(response);*/
-    this.props.onLogin(2);
+    //this.props.onLogin(2);
   }
 
   render () {
@@ -34,11 +36,11 @@ class Login extends React.Component {
               <input
                 name="email"
                 type="email"
-                placeholder="Email" 
+                placeholder="Email"
                 onChange={e => this.onChange(e)}
                 value={this.state.email}
                 />
-            </p>    
+            </p>
             <p>
             <label className="titles">Password</label>
               <input
@@ -50,16 +52,16 @@ class Login extends React.Component {
                  />
             </p>
             <p>
-           
+
               <input onClick={() => this.onSubmit()}
                 type="submit"
                 value="Login" />
-           
+
             </p>
           </form>
 
           <div className="text-center">
-            <a className="d-block small mt-3" onClick={this.props.criaConta}>Registar Conta</a>
+            <Link to={routes.REGISTAR} className="d-block small mt-3">Registar Conta</Link>
           <br/>
             <a className="d-block small">Esqueceu-se da Password?</a>
           </div>

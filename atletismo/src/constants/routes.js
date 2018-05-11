@@ -1,22 +1,25 @@
 export const HOME = '/';
 export const REGISTAR = '/registo';
+export const REG_ATLETA = REGISTAR + '/atleta';
+export const REG_TREINADOR = REGISTAR + '/treinador';
+
+
 export const ATLETA = '/atleta';
-export const DIRETOR = '/admin';
-export const TREINADOR = '/treinador';
-export const LOGIN = '/login';
-export const DATA_ATLETA = ATLETA + '/about';
 export const DESEMPENHO = ATLETA + '/stats';
 export const RESULTADOS= ATLETA + '/results';
 export const FOTO= ATLETA + '/photos';
-export const VIDEOS= ATLETA + '/videos';
 export const CALENDAR= ATLETA + '/calendar';
-export const HOMEDIRETOR= DIRETOR + '/home';
+
+
+export const DIRETOR = '/admin';
 export const REGISTOS= DIRETOR + '/registo';
 export const G_ATLETAS= DIRETOR + '/atletas';
 export const G_TREINADOR= DIRETOR + '/treinador';
 export const LASTRESULTS= DIRETOR + '/resultados';
 export const EXATLETAS= DIRETOR + '/exAtletas';
-export const TDADOS = TREINADOR + '/DadosPessoais';
+
+
+export const TREINADOR = '/treinador';
 export const TATLETA = TREINADOR + '/Atletas';
 export const TRESULTADOS = TREINADOR + '/Resultados';
 export const TCALENDARIO = TREINADOR + '/Calendario';

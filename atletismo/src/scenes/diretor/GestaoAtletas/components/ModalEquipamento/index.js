@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Modal, ModalBody, ModalFooter, ModalHeader, Button, Input, Form, FormGroup, Label} from 'reactstrap';
+import {Modal, ModalBody, ModalFooter, ModalHeader, Button} from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 
 class ModalEquipamento extends Component {

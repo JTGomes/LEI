@@ -91,8 +91,8 @@ isSelected = key => {
 };
 
   render() {
-    const { toggleSelection, toggleAll, isSelected, logSelection } = this;
- const {  columns, selectAll } = this.state;
+ const { toggleSelection, toggleAll, isSelected } = this;
+ const { selectAll } = this.state;
 
  const checkboxProps = {
    selectAll,
