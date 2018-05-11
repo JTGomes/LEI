@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalBody, ModalTitle, ModalHeader, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 import jsPDF from 'jspdf';
-// import $ from 'jquery';
+import $ from 'jquery';
 
 class News extends React.Component {
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
+    this.toggle=this.toggle.bind(this);
 
     this.state = {
       titulo: 'ATLETISMO SPORTING CLUBE DE BRAGA',
@@ -33,12 +32,10 @@ class News extends React.Component {
     };
   }
 
-  close() {
-    this.setState({ showModal: false });
-  }
-
-  open() {
-    this.setState({ showModal: true });
+  toggle(){
+    this.setState({
+      showModal: !this.state.showModal,
+    })
   }
 
   onChange = (e) => {
@@ -48,20 +45,17 @@ class News extends React.Component {
   }
 
   rand(a) {
-    let i = (a).length;
-    const j = Math.floor(Math.random() * i);
-    return a[j];
+    return a[Math.floor(Math.random() * (a).length)];
   }
 
-  click () {
+  saveFile () {
     var doc = new jsPDF()
-    var test = 'Chupamos'
-	  // doc.fromHTML($('#news').html(), 15, 15, {
-    //   'width': 170,
-    // });
-    doc.text(test),
+	  doc.fromHTML($('#news').html(), 15, 15, {
+      'width': 170,
+    });
     doc.save('Noticia.pdf');
   };
+
 
   render() {
 
@@ -69,16 +63,16 @@ class News extends React.Component {
       <div>
 
         <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={this.open}
+        color="secondary"
+        size="lg"
+        onClick={this.toggle}
         >
         <i className="far fa-newspaper"></i>
         </Button>
 
-        <Modal isOpen={this.state.showModal} toggle={this.close}>
-          <ModalHeader closeButton>
-            <ModalTitle>Notícias</ModalTitle>
+        <Modal isOpen={this.state.showModal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>
+            Notícias
           </ModalHeader>
           <ModalBody>
           <div id="news">
@@ -91,8 +85,8 @@ class News extends React.Component {
           </div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={this.click}>Guardar</Button>
-            <Button onClick={this.close}>Fechar</Button>
+            <Button color="primary" onClick={()=>this.saveFile()}>Guardar</Button>
+            <Button onClick={this.toggle}>Fechar</Button>
           </ModalFooter>
         </Modal>
 
