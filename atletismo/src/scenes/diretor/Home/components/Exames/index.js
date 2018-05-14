@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table,Button,Alert } from 'reactstrap';
+import { Table,Button,Alert,Form,FormGroup,Input } from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 import PDF from 'react-icons/lib/fa/file-pdf-o';
 import ModalUserInfo from '../../../../../components/ModalUserInfo';
@@ -20,6 +20,7 @@ class Exames extends Component {
       modalNotification: false,
       uid: undefined,
       name: undefined,
+      input: '',
     }
     this.toggle = this.toggle.bind(this);
     this.toggleS = this.toggleS.bind(this);
@@ -55,6 +56,20 @@ class Exames extends Component {
   }
 
 
+  filter_data_byName(data){
+          if(this.state.input===''){
+            return data;
+          }
+          const text = this.state.input.toUpperCase();
+          return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+   }
+
+   handleInputSubmit(event) {
+     this.setState({
+       input: event.target.value
+     });
+   }
+
   getRow(obj,elem){
     return (<tr key={elem}>
              <td onClick={()=>this.initModalUser(obj.uid)} style={{cursor:'pointer'}}>{obj.nome}</td>
@@ -67,31 +82,41 @@ class Exames extends Component {
 
 
 
+
   render() {
     return (
       <div>
         {data.length>0 ?
-          <Table responsive hover striped >
-            <thead >
-              <tr >
-                <th>Nome do Atleta</th>
-                <th>Data de Nascimento</th>
-                <th>Validar Exame Médico</th>
-                <th>Exame Médico</th>
-                <th>Notificar</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map( (obj,elem) => this.getRow(obj,elem))}
-            </tbody>
-          </Table>:
+          <div>
+            <div className="row">
+              <Form className="col-lg-3">
+                <FormGroup>
+                  <Input type="text" name="searchbar" id="searchbar" value={this.state.input} placeholder="Pesquisar Atleta" onChange={event => this.handleInputSubmit(event)}/>
+                </FormGroup>
+              </Form>
+            </div>
+            <Table responsive hover striped >
+              <thead >
+                <tr >
+                  <th>Nome do Atleta</th>
+                  <th>Data de Nascimento</th>
+                  <th>Validar Exame Médico</th>
+                  <th>Exame Médico</th>
+                  <th>Notificar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
+              </tbody>
+            </Table>
+          </div>:
           <Alert color="success">
             Não há exames médicos em falta
           </Alert>}
 
-      <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
-      <SendNotification toggle={this.toggleS} user={this.state.uid} name={this.state.name} isOpen={this.state.modalNotification}/>
-      </div>
+          <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
+          <SendNotification toggle={this.toggleS} user={this.state.uid} name={this.state.name} isOpen={this.state.modalNotification}/>
+        </div>
     );
   }
 

@@ -13,7 +13,6 @@ class NavBar extends Component{
     super(props);
     this.state = {
       modal: false,
-      show: false,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -46,7 +45,7 @@ class NavBar extends Component{
               </button>
             </li>
           </ul>
-          <SideBar sidebarLinks={this.props.sidebarLinks} click={this.toggleShow}/>
+          <SideBar sidebarLinks={this.props.sidebarLinks} />
         </div>
       </nav>
       <Modal isOpen={this.state.modal} toggle={this.toggle} >
@@ -55,7 +54,7 @@ class NavBar extends Component{
           Tem a certeza que pretende fazer Logout?
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.toggle} style={{'background-color': '#D14444', border: '#D14444'}}><LogoutIcon style={{margin:'0 5px 0 0'}}/>Logout</Button>
+          <Button color="primary" onClick={this.toggle} style={{backgroundColor: '#D14444', border: '#D14444'}}><LogoutIcon style={{margin:'0 5px 0 0'}}/>Logout</Button>
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

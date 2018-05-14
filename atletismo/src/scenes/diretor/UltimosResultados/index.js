@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import News from './components/News'
+import News from './components/News';
+//import matchSorter from 'match-sorter'
+
 const data =[{
       nome: 'José João Almeida',
       prova: 'Jogos Olímpicos',
@@ -22,42 +24,55 @@ const data =[{
       classificacao: 1
     }]
 class UltimosResultados extends Component {
-  constructor(props) {
-   super(props);
 
-   //this.toggle = this.toggle.bind(this);
-   this.state = {
-     modalNew: false,
-   };
- }
 
+  filter_data_byName(data, input){
+          const text = input.toUpperCase();
+          return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+   }
 
   render() {
 
     return (
       <div className="container-fluid mb-4">
         <ReactTable
+          filterable
           data={data}
           columns={
             [{
               Header: 'Nome',
-              accessor: 'nome'
+              accessor: 'nome',
+              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+                return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);},
+              filterAll: true
             },{
               Header: 'Prova',
-              accessor: 'prova'
+              accessor: 'prova',
+              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+                return data.filter( data_row => data_row.prova.toUpperCase().indexOf(text) !== -1);},
+              filterAll: true
             }
             ,{
               Header: 'Tipo',
               accessor: 'tipo'
             },{
               Header: 'Modalidade',
-              accessor: 'modalidade'
+              accessor: 'modalidade',
+              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+                return data.filter( data_row => data_row.modalidade.toUpperCase().indexOf(text) !== -1);},
+              filterAll: true
             },{
               Header: 'Data',
-              accessor: 'dia'
+              accessor: 'dia',
+              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+                return data.filter( data_row => data_row.dia.toUpperCase().indexOf(text) > -1);},
+              filterAll: true
             },{
               Header: 'Local',
-              accessor: 'local'
+              accessor: 'local',
+              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+                return data.filter( data_row => data_row.local.toUpperCase().indexOf(text) !== -1);},
+              filterAll: true
             },{
               Header: 'Resultado(s)',
               accessor: 'resultado'
@@ -71,12 +86,14 @@ class UltimosResultados extends Component {
               <div className="text-center">
                   <News component={row}/>
               </div>
-              )
+            ),
+            filterable:false,
             }
 
           ]
           }
           defaultPageSize={10}
+          className="-striped -highlight"
         />
 
       </div>

@@ -7,7 +7,7 @@ import Pay from 'react-icons/lib/fa/dollar';
 import EquipIcon from 'react-icons/lib/io/tshirt';
 import SendNotification from '../../../../../components/SendNotification';
 import ModalEquipamento from '../ModalEquipamento';
-import ModalPagamento from '../ModalPagamento';
+import ModalPagamento from '../../../../../components/ModalPagamento';
 
 class OptionMenu extends Component {
  constructor(props) {

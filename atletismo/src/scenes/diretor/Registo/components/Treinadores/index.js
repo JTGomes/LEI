@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Check from 'react-icons/lib/fa/check';
 import Close from 'react-icons/lib/fa/close';
 import ModalUserInfo from '../../../../../components/ModalUserInfo';
-import {Button, Modal,ModalHeader, ModalBody, ModalFooter,Table} from 'reactstrap';
+import {Button, Modal,ModalHeader, ModalBody, ModalFooter,Table, Form, FormGroup,Input} from 'reactstrap';
 
-
+const data=[
+  {nome:'Guilherma Azevedo Silva',uid:'uid'},
+  {nome:'Manuel Hugo Silva Lobo',uid:'uid'}]
 
 class Treinador extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Treinador extends Component {
       accept: false,
       modalUserInfo: false,
       uid: undefined,
+      input: '',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -58,11 +61,46 @@ class Treinador extends Component {
     //completar para rejeitar o treinador
   }
 
+  getRow(obj,elem){
+    return (<tr key={elem}>
+        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.uid)}}>{obj.nome}</td>
+        <td>
+          <Button color="success" onClick={()=>{this.initModal(obj.uid,true)}}>
+            <Check />
+          </Button>{'  '}
+          <Button color="danger" onClick={()=>{this.initModal(obj.uid,false)}}>
+            <Close />
+          </Button>
+        </td>
+         </tr>);
+  }
+
+  filter_data_byName(data){
+          if(this.state.input===''){
+            return data;
+          }
+          const text = this.state.input.toUpperCase();
+          return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+   }
+
+   handleInputSubmit(event) {
+     this.setState({
+       input: event.target.value
+     });
+   }
+
 
   render() {
     return (
         <div>
-        <Table responsive hover>
+          <div className="row">
+            <Form className="col-lg-3">
+              <FormGroup>
+                <Input type="text" name="searchbar" id="searchbar" value={this.state.input} placeholder="Pesquisar treinador" onChange={event => this.handleInputSubmit(event)}/>
+              </FormGroup>
+            </Form>
+          </div>
+        <Table responsive hover striped>
           <thead>
             <tr>
               <th>Nome do treinador</th>
@@ -70,17 +108,7 @@ class Treinador extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser('userid')}}>José Mourinho</td>
-              <td>
-                <Button color="success" onClick={()=>{this.initModal('uid',true)}}>
-                  <Check />
-                </Button>{'  '}
-                <Button color="danger" onClick={()=>{this.initModal('uid',false)}}>
-                  <Close />
-                </Button>
-              </td>
-            </tr>
+            {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
           </tbody>
         </Table>
 

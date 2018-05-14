@@ -33,10 +33,12 @@ class ModalEquipamento extends Component {
 
   showEquipamento(data){
     if(data.length===11){
-      return
-      <Alert color="success">
-        Todo o equipamento já foi entregue.
-      </Alert>
+      return(
+        <div className="col-12">
+          <Alert color="success">
+            Todo o equipamento já foi entregue.
+          </Alert>
+        </div>);
     }
     return  this.state.equipamento.map( (equip,elem) =>
       data.find((obj)=> obj.id === elem)? null :
@@ -69,7 +71,7 @@ class ModalEquipamento extends Component {
             {this.showEquipamento(data)}
             </div>
           </form>
-          <div className="row mt-2 pl-2">  
+          <div className="row mt-2 pl-2">
               <Button outline color="primary" onClick={this.toggle} size="sm" >Ver equipamento entregue</Button>
           </div>
           <Collapse isOpen={this.state.collapse}>

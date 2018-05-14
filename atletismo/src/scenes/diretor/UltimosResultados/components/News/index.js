@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap';
 import jsPDF from 'jspdf';
-import $ from 'jquery';
+
 
 class News extends Component {
 
@@ -29,13 +29,25 @@ class News extends Component {
       ligacao: ["mais uma excelente prestação através dos seus atletas.","novo resultado relevante através dos seus atletas.","um brilhante desempenho desportivo através dos seus atletas.","novamente uma excelente prestação através dos seus atletas."],
       sucesso: ["Mais uma grande jornada para o Atletismo do Sporting Clube de Braga.","Mais uma jornada notável para o atletismo do Sporting Clube de Braga.","O Sporting Clube de Braga alcançou mais uma vez uma excelente prestação.","Este resultado premeia o excelente desempenho do SCB.","Este desempenho perspetiva mais uma época de sucesso para a modalidade à imagem dos anos anteriores."],
       showModal: false,
+      value: '',
     };
   }
 
   toggle(){
     this.setState({
       showModal: !this.state.showModal,
+      value: this.getText(),
     })
+  }
+
+  getText(){
+    return `${this.state.titulo}
+
+    ${this.rand(this.state.inicio)} ${this.rand(this.state.clube)} ${this.rand(this.state.termos)} ${this.rand(this.state.week)} ${this.rand(this.state.ligacao)} ${this.rand(this.state.maissucesso)} ${this.rand(this.state.df)} ${this.props.component.original.prova}
+    ${this.rand(this.state.feminino)} ${this.props.component.original.nome} ${this.rand(this.state.termos)} ${this.rand(this.state.marca)} ${this.props.component.original.resultado} ${this.rand(this.state.resultado)} ${this.props.component.original.classificacao} ${this.props.component.original.local} ${this.rand(this.state.esp)} ${this.props.component.original.especialidade} ${this.rand(this.state.escalao)} ${"ESCALÃO"}
+    ${this.rand(this.state.masculino)} ${this.props.component.original.nome} ${this.rand(this.state.termos)} ${this.rand(this.state.marca)} ${this.props.component.original.resultado} ${this.rand(this.state.resultado)} ${this.props.component.original.classificacao} lugar ${this.rand(this.state.esp)} ${this.props.component.original.especialidade} ${this.rand(this.state.escalao)} ${"ESCALÃO"}
+    ${this.rand(this.state.sucesso)}
+              `;
   }
 
   onChange = (e) => {
@@ -49,15 +61,23 @@ class News extends Component {
   }
 
   saveFile () {
-    var doc = new jsPDF()
-	  doc.fromHTML($('#news').html(), 15, 15, {
-      'width': 170,
-    });
+    var doc = new jsPDF();
+    doc.setFontSize(12);
+    var splitText = doc.splitTextToSize(this.state.value, 180);
+    doc.text(20,20,splitText);
     doc.save('Noticia.pdf');
   };
 
+  handleChange(nvalue){
+    this.setState({value:nvalue})
+  }
+
+
+
 
   render() {
+
+
 
     return (
       <div>
@@ -76,12 +96,7 @@ class News extends Component {
           </ModalHeader>
           <ModalBody>
           <div id="news">
-
-            <p>{this.state.titulo}</p>
-            <p>{this.rand(this.state.inicio)} {this.rand(this.state.clube)} {this.rand(this.state.termos)} {this.rand(this.state.week)} {this.rand(this.state.ligacao)} {this.rand(this.state.maissucesso)} {this.rand(this.state.df)} {this.props.component.original.prova}</p>
-            <p>{this.rand(this.state.feminino)} {this.props.component.original.nome} {this.rand(this.state.termos)} {this.rand(this.state.marca)} {this.props.component.original.resultado} {this.rand(this.state.resultado)} {this.props.component.original.classificacao} {this.props.component.original.local} {this.rand(this.state.esp)} {this.props.component.original.especialidade} {this.rand(this.state.escalao)} {"ESCALÃO"}</p>
-            <p>{this.rand(this.state.masculino)} {this.props.component.original.nome} {this.rand(this.state.termos)} {this.rand(this.state.marca)} {this.props.component.original.resultado} {this.rand(this.state.resultado)} {this.props.component.original.classificacao} {"lugar"} {this.rand(this.state.esp)} {this.props.component.original.especialidade} {this.rand(this.state.escalao)} {"ESCALÃO"}</p>
-            <p>{this.rand(this.state.sucesso)}</p>
+            <Input type="textarea" name="text" id="exampleText" value={this.state.value} rows={20} onChange={(event)=>this.handleChange(event.target.value)}/>
           </div>
           </ModalBody>
           <ModalFooter>

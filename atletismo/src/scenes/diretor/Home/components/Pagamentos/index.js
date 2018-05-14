@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ModalUserInfo from '../../../../../components/ModalUserInfo';
-import {Button, Table, Alert } from 'reactstrap';
-import ModalPagamento from './components/ModalPagamento';
+import {Button, Table, Alert, Form, FormGroup, Input } from 'reactstrap';
+import ModalPagamento from '../../../../../components/ModalPagamento';
 
-const data=[{nome:'João Luís Costa',uid:'uid',mes: 3,},{nome:'Alfredo Lopes da Silva',uid:'uid',mes: 2,}]
+const data=[{nome:'João Luís Costa',uid:'uid',mes: ['janeiro','fevereiro','março'],},
+            {nome:'Alfredo Lopes da Silva',uid:'uid',mes: ['fevereiro','março'],}]
 
 class Pagamentos extends Component {
   constructor(props){
@@ -13,6 +14,7 @@ class Pagamentos extends Component {
       uid: undefined,
       modalPagamento: false,
       meses: undefined,
+      input: '',
     }
     this.toggle = this.toggle.bind(this);
     this.toggleP = this.toggleP.bind(this);
@@ -49,10 +51,24 @@ class Pagamentos extends Component {
   }
 
 
+  filter_data_byName(data){
+          if(this.state.input===''){
+            return data;
+          }
+          const text = this.state.input.toUpperCase();
+          return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+   }
+
+   handleInputSubmit(event) {
+     this.setState({
+       input: event.target.value
+     });
+   }
+
   getRow(obj,elem){
     return (<tr key={elem}>
              <td onClick={()=>this.initModalUser(obj.uid)} style={{cursor:'pointer'}}>{obj.nome}</td>
-             <td className="text-center">{obj.mes}</td>
+             <td className="text-center">{obj.mes.length}</td>
              <td className="text-center"><Button color="danger" onClick={()=>this.initModalPagamento(obj.uid,obj.mes)}>Pago</Button></td>
            </tr>);
   }
@@ -61,18 +77,27 @@ class Pagamentos extends Component {
     return (
       <div className="mt-3" >
       {data.length>0?
-        <Table  responsive striped hover bordered>
-          <thead >
-            <tr>
-              <th>Nome do Atleta</th>
-              <th className="text-center">Meses em Atraso</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          {data.map( (obj,elem) => this.getRow(obj,elem))}
-         </tbody>
-        </Table>
+        <div>
+          <div className="row">
+            <Form className="col-lg-3">
+              <FormGroup>
+                <Input type="text" name="searchbar" id="searchbar" value={this.state.input} placeholder="Pesquisar Atleta" onChange={event => this.handleInputSubmit(event)}/>
+              </FormGroup>
+            </Form>
+          </div>
+          <Table  responsive striped hover bordered>
+            <thead >
+              <tr>
+                <th>Nome do Atleta</th>
+                <th className="text-center">Meses em Atraso</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
+            </tbody>
+          </Table>
+        </div>
         :
         <Alert color="success">
           Não há pagamentos pendentes
