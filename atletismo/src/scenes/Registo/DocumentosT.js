@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, WrappedLink } from 'react-router-dom'
+//import { Link, WrappedLink } from 'react-router-dom'
 import './css/documentos.css'
 
 class DocumentosT extends React.Component {
@@ -26,7 +26,7 @@ class DocumentosT extends React.Component {
     }
 
   
-  onChange = (e) => {
+  onChange=(e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -61,8 +61,8 @@ class DocumentosT extends React.Component {
         <input
           name="foto"
           type="file"
-          onChange = {e => this.onChange(e)}
-          value = {this.state.foto}
+          onChange={e => this.onChange(e)}
+          value={this.state.foto}
         /><br/>
       </label><br/>
       Cartão do Cidadão<br/>
@@ -70,8 +70,8 @@ class DocumentosT extends React.Component {
         <input
           name="cc"
           type="file"
-          onChange = {e => this.onChange(e)}
-          value = {this.state.cc}
+          onChange={e => this.onChange(e)}
+          value={this.state.cc}
         /><br/>
       </label><br/>
       Atestado Médico<br/>
@@ -80,38 +80,38 @@ class DocumentosT extends React.Component {
           name="am"
           type="file"
           placeholder="Email" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.am}
+          onChange={e => this.onChange(e)}
+          value={this.state.am}
         /><br/>
       </label><br/>
       Sócio do SC Braga<br/>
         <input
           name="opcao"
           type="radio"
-          onChange = {e => this.onChange(e)}
-          value = {this.state.socio}
+          onChange={e => this.onChange(e)}
+          value={this.state.socio}
         />Sim&nbsp;
         <input
           name="opcao"
           type="radio"
-          onChange = {e => this.onChange(e)}
-          value = {this.state.socio}
+          onChange={e => this.onChange(e)}
+          value={this.state.socio}
         />Não<br/>
       Número de Sócio<br/>
         <input
           name="numero"
           type="text"
           placeholder="Número" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.nsocio}
+          onChange={e => this.onChange(e)}
+          value={this.state.nsocio}
         /><br/><br/>
       Número de Treinador (FPA)<br/>
         <input
           name="numero"
           type="text"
           placeholder="Número" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.nsocio}
+          onChange={e => this.onChange(e)}
+          value={this.state.nsocio}
         /><br/><br/>
     </form>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, WrappedLink } from 'react-router-dom'
+//import { Link, WrappedLink } from 'react-router-dom'
 import './css/contactos.css';
 
 class Contactos extends React.Component {
@@ -49,7 +49,7 @@ class Contactos extends React.Component {
     this.setState({ redes: this.state.redes.filter((s, sidx) => idx !== sidx) });
   }
 
-  onChange = (e) => {
+  onChange=(e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -85,16 +85,16 @@ class Contactos extends React.Component {
           name="email"
           type="email"
           placeholder="Email" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.email}
+          onChange={e => this.onChange(e)}
+          value={this.state.email}
         /><br/><br/>
         Telemóvel<br/>
         <input
           name="telemovel"
           type="text"
           placeholder="Telemóvel" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.telemovel}
+          onChange={e => this.onChange(e)}
+          value={this.state.telemovel}
         /><br/><br/>
         Redes Sociais&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="button" id="adiciona" onClick={this.handleAddRedes} classNameName="small">+</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -115,24 +115,24 @@ class Contactos extends React.Component {
           name="morada"
           type="text"
           placeholder="Morada" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.morada}
+          onChange={e => this.onChange(e)}
+          value={this.state.morada}
         /><br/><br/>
         Código Postal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Localidade<br/>
         <input
           name="postal"
           type="text"
           placeholder="Código Postal" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.postal}
+          onChange={e => this.onChange(e)}
+          value={this.state.postal}
         />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input
           name="localidade"
           type="text"
           placeholder="Localidade" 
-          onChange = {e => this.onChange(e)}
-          value = {this.state.localidade}
+          onChange={e => this.onChange(e)}
+          value={this.state.localidade}
         />
       </form><br/>
 
