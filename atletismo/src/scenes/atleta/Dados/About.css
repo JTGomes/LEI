@@ -12,9 +12,41 @@
 
 .gridcontent {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+}
+
+.section {
+	clear: left;
 }
 
 .social {
 	font-size: 30px;
+}
+
+#profile-pic {
+	width: 90px;
+	height: 90px;
+}
+
+#profile-change {
+	font-size: 10px;
+	text-align: left;
+	padding-bottom: 10px;
+}
+
+.col0 {
+	float: left;
+	margin: 0;
+	padding : 0;
+	width: 100px;
+	text-align: left;
+}
+
+
+.col {
+	float: left;
+	margin: 0;
+	padding : 0;
+	line-height : 8px;
+	width: 450px;
 }

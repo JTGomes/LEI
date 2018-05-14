@@ -11,11 +11,12 @@ class Photos extends React.Component {
     super();
     this.state = {
       showIndex: false,
+      lazyLoad: true,
       slideOnThumbnailHover: false,
       showBullets: true,
       infinite: true,
       showThumbnails: true,
-      showFullscreenButton: true,
+      showFullscreenButton: false,
       showGalleryFullscreenButton: true,
       showPlayButton: false,
       showGalleryPlayButton: true,
@@ -25,7 +26,8 @@ class Photos extends React.Component {
       thumbnailPosition: 'bottom',
       showVideo: {},
     };
-
+    //teste... a ser passado como props
+    //thumbnails e vídeos do youtube têm sempre a mesma estrutura em termos de links
     this.images = [
       {
         thumbnail: `https://img.youtube.com/vi/rk4Pxa8LE44/0.jpg`,
@@ -55,7 +57,7 @@ class Photos extends React.Component {
         thumbnailClass: 'featured-thumb',
         description: 'Foto de viagem a nada... Teste!'
       },
-    ].concat(this._getStaticImages());
+    ]
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -104,18 +106,6 @@ class Photos extends React.Component {
     this.setState({thumbnailPosition: event.target.value});
   }
 
-  _getStaticImages() {
-    let images = [];
-    for (let i = 2; i < 12; i++) {
-      images.push({
-        original: `${PREFIX_URL}${i}.jpg`,
-        thumbnail:`${PREFIX_URL}${i}t.jpg`
-      });
-    }
-
-    return images;
-  }
-
   _resetVideo() {
     this.setState({showVideo: {}});
 
@@ -129,6 +119,7 @@ class Photos extends React.Component {
   }
 
   _toggleShowVideo(url) {
+    // eslint-disable-next-line
     this.state.showVideo[url] = !Boolean(this.state.showVideo[url]);
     this.setState({
       showVideo: this.state.showVideo
@@ -168,7 +159,7 @@ class Photos extends React.Component {
           :
             <a onClick={this._toggleShowVideo.bind(this, item.embedUrl)}>
               <div className='play-button'></div>
-              <img src={item.original}/>
+              <img src={item.original} alt="ERRO!"/>
               {
                 item.description &&
                   <span
@@ -206,8 +197,8 @@ class Photos extends React.Component {
           showIndex={this.state.showIndex}
           showNav={this.state.showNav}
           thumbnailPosition={this.state.thumbnailPosition}
-          slideDuration={parseInt(this.state.slideDuration)}
-          slideInterval={parseInt(this.state.slideInterval)}
+          slideDuration={parseInt(this.state.slideDuration, 10)}
+          slideInterval={parseInt(this.state.slideInterval, 10)}
           slideOnThumbnailHover={this.state.slideOnThumbnailHover}
           additionalClass="app-image-gallery"
         />
