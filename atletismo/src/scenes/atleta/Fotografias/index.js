@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import ModalMedia from '../Resultados/components/modalMedia';
 import './Photos.css';
 
 const PREFIX_URL = 'https://raw.githubusercontent.com/xiaolin/react-image-gallery/master/static/';
@@ -25,6 +26,7 @@ class Photos extends React.Component {
       slideInterval: 2000,
       thumbnailPosition: 'bottom',
       showVideo: {},
+      modalMedia: false,
     };
     //teste... a ser passado como props
     //thumbnails e vídeos do youtube têm sempre a mesma estrutura em termos de links
@@ -57,7 +59,20 @@ class Photos extends React.Component {
         thumbnailClass: 'featured-thumb',
         description: 'Foto de viagem a nada... Teste!'
       },
-    ]
+    ];
+    this.toggleM = this.toggleM.bind(this);
+  }
+
+  toggleM(){
+    this.setState({
+      modalMedia: !this.state.modalMedia,
+    })
+  }
+
+  initModalMedia(){
+    this.setState({
+      modalMedia: true,
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -177,7 +192,7 @@ class Photos extends React.Component {
 
   render() {
     return (
-
+      <div className="container-fluid">
       <section className='app'>
         <ImageGallery
           ref={i => this._imageGallery = i}
@@ -203,6 +218,9 @@ class Photos extends React.Component {
           additionalClass="app-image-gallery"
         />
       </section>
+        <p onClick={()=>this.initModalMedia()} style={{cursor:'pointer'}}>+&nbsp;Adicionar Fotografia/Vídeo</p>
+        <ModalMedia modalMedia={this.state.modalMedia} toggle={this.toggleM} />
+      </div>
     );
   }
 }

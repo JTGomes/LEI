@@ -25,12 +25,6 @@ const data =[{
     }]
 class UltimosResultados extends Component {
 
-
-  filter_data_byName(data, input){
-          const text = input.toUpperCase();
-          return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
-   }
-
   render() {
 
     return (

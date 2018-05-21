@@ -3,9 +3,11 @@ import FaEdit from 'react-icons/lib/fa/edit';
 import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official';
 import FaTwitterSquare from 'react-icons/lib/fa/twitter-square';
 import FaInstagram from 'react-icons/lib/fa/instagram';
+import FaClose from 'react-icons/lib/fa/close';
 import ModalEditInfo from './component/modalPersonal';
 import ModalEditDocs from './component/modalDocs';
 import ModalPhoto from './component/modalPhoto';
+import DropdownEquipment from './component/dropdownEquipment';
 import './About.css';
 
 class About extends React.Component {
@@ -15,10 +17,16 @@ class About extends React.Component {
       modalDataEdit: false,
       modalDocs: false,
       modalPhoto: false,
+      dropdownOpen: false,
     }
+    //DE=Data Edit
     this.toggleDE = this.toggleDE.bind(this);
+    //D=Docs
     this.toggleD = this.toggleD.bind(this);
+    //P=Photo
     this.toggleP = this.toggleP.bind(this);
+    //DEq=Dropdown Equipment
+    this.toggleDEq = this.toggleDEq.bind(this);
   }
 
   toggleDE(){
@@ -37,6 +45,12 @@ class About extends React.Component {
     this.setState({
       modalPhoto: !this.state.modalPhoto,
     })
+  }
+
+  toggleDEq() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
   initModalDados(){
@@ -124,10 +138,11 @@ class About extends React.Component {
           <p>Data de Nascimento: {this.props.birth}</p>
           <p>Tipo de Documento: {this.props.identificacao}</p>
           <p>Localidade: {this.props.localidade}</p>
+          <p>Encarregado de Educação: <FaClose style={{color:'red'}} /></p>
         </div>
       </div>
       <div className="section">
-        <p className="Title"><pre/>Dados de Filiação</p>
+        <p className="Title">Dados de Filiação</p>
         <hr />
         <div className="col">
           <p>Tipo de Filiação: {this.props.filiacao}</p>
@@ -135,12 +150,13 @@ class About extends React.Component {
           <p>Escalão: {this.props.escalao}</p>
           <p>Subsídio: {this.props.subs}</p>
         </div>
-          <div className="col">
-            <p>Equipamento disponível: {this.props.equip}</p>
-          </div>
+        <div className="col">
+          <p>Inscrito desde:&nbsp;20/06/2018</p>
+          <DropdownEquipment dropdownOpen={this.state.dropdownOpen} toggle={this.toggleDEq} />
+        </div>
       </div>
       <div className="section">
-        <p className="Title"><pre/>Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></p>
+        <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></p>
         <hr />
         <div className="col">
           <p>Cartão de Cidadão {this.props.id}</p>
@@ -149,7 +165,7 @@ class About extends React.Component {
         </div>
       </div>
       <div className="section">
-        <p className="Title"><pre/>Redes Sociais</p>
+        <p className="Title">Redes Sociais</p>
         <hr />
         {this.renderSocial()}
       </div>
