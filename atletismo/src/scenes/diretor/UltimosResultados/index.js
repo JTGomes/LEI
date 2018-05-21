@@ -22,7 +22,7 @@ const data =[{
       local: 'Rio de Janeiro',
       resultado: 19.78,
       classificacao: 1
-    }]
+    }];
 class UltimosResultados extends Component {
 
 

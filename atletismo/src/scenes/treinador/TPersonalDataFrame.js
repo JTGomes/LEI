@@ -73,6 +73,7 @@ class TPersonalDataFrame extends React.Component {
           <a>Código Postal: {this.state.data.codigopostal} </a>
           <a>Localidade: {this.state.data.local} </a>
           <a>Sócio: {this.state.data.socio} </a>
+          <a>Nível de Formação IPDJ: {this.state.data.socio ? this.state.data.socio : ""}</a>
         </div>
         <a className="Title">Dados de Filiação</a>
         <hr />
