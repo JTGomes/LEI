@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "Atleta": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "Treinador": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "Diretor": {
+    "dataSource": "atletismo",
+    "public": true
+  }
+}

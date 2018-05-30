@@ -1,0 +1,68 @@
+{
+  "name": "Atleta",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "nome_competicao": {
+      "type": "string",
+      "required": true
+    },
+    "telemovel": {
+      "type": "number",
+      "required": true
+    },
+    "documento": {
+      "type": "string",
+      "required": true
+    },
+    "tipoDocumento": {
+      "type": "string",
+      "required": true
+    },
+    "morada": {
+      "type": "string",
+      "required": true
+    },
+    "genero": {
+      "type": "string",
+      "required": true
+    },
+    "nif": {
+      "type": "number",
+      "required": true
+    },
+    "nacionalidade": {
+      "type": "string",
+      "required": true
+    },
+    "codigoPostal": {
+      "type": "string",
+      "required": true
+    },
+    "localidade": {
+      "type": "string",
+      "required": true
+    },
+    "dataNascimento": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
