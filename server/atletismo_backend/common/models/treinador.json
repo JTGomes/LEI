@@ -1,0 +1,52 @@
+{
+  "name": "Treinador",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "nif": {
+      "type": "number",
+      "required": true
+    },
+    "morada": {
+      "type": "string",
+      "required": true
+    },
+    "localidade": {
+      "type": "string",
+      "required": true
+    },
+    "genero": {
+      "type": "string",
+      "required": true
+    },
+    "nacionalidade": {
+      "type": "string",
+      "required": true
+    },
+    "codPostal": {
+      "type": "string",
+      "required": true
+    },
+    "telemovel": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
