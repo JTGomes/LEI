@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
 import checkboxHOC from "react-table/lib/hoc/selectTable";
-const CheckboxTable = checkboxHOC(ReactTable);
 import 'react-table/react-table.css';
 import ModalUserInfo from '../../../components/ModalUserInfo';
 import { Button } from 'reactstrap';
 import OptionMenu from './components/OptionMenu';
 import SendIcon from 'react-icons/lib/fa/paper-plane';
 import {Form, FormGroup, Input, } from 'reactstrap';
-import './style.css'
+import './style.css';
+
+const CheckboxTable = checkboxHOC(ReactTable);
 
 const data=[{_id:1, nome: 'Júlio Santos dos Anjos', uid:'uid' },
             {_id:2, nome: 'António Luís Silva Marques', uid:'uid'},

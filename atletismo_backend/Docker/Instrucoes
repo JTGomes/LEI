@@ -1,0 +1,34 @@
+1º executar estas instruçoes, só depois colocar o servidor node a correr.
+->caso nao tenha a imagem do msql executar:
+	docker pull mysql/mysql-server
+->executar 
+	docker build --no-cache --tag=mysql-app .
+
+->Depois colocar a imagem a correr:
+
+	docker run --name="AtletismoSCB" --net="bridge" -p 8000:3306 -it mysql-app
+
+na pasta server/boot tem o ficheiro user.js o código que está ali deve ser comentado após gerar as tabelas, porque de cada vez que se inicia o servidor vai apagar as tabelas e criar de novo, apagando os dados todos.
+
+para parar a imagem executar 
+	docker stop AtletismoSCB 
+
+para pôr a imagem a correr de novo 
+
+	docker start AtletismoSCB
+
+
+
+comandos úteis:
+
+docker ps --> lista todas as imagens criadas
+docker ps -a --> lista as imagens que estao a correr
+docker pull <module> install docker module image.
+docker kill <image> kill an image
+docker build <path> create an image
+docker logs <image> monitor the output from container
+docker exec -it <name container> bash --> acede à shell do container
+
+Também há software que facilita a gestão das imagens, no caso do ubuntu existe o dockstation. 
+
+
