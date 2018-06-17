@@ -1,18 +1,7 @@
-import { ADD_ARTICLE } from "../constants/action-types";
+import userReducer from './userReducer.js';
+// import { combineReducers } from 'redux'
 
-const initialState = {
-  user: undefined,
-  userRole: undefined,
-  jwt: undefined
-};
+const rootReducer = userReducer;
 
-const rootReducer = (state = initialState, action) => {
-  switch(action.type){
-    case USER_LOGIN:
-      return { ...state, articles: [...state.articles, action.payload] };
-    default:
-      return state;
-  }
-}
 
 export default rootReducer;

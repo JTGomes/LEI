@@ -25,7 +25,7 @@ class DocumentosT extends React.Component {
         }
     }
 
-  
+
   onChange=(e) => {
         this.setState({
             [e.target.name]: e.target.value,
@@ -41,8 +41,8 @@ class DocumentosT extends React.Component {
 
   render () {
     return (
-      <div>
-        <div className="container">
+      <div className="imagem">
+        <div className="conteudo">
           <ul className="progressbar">
             <li className="active">Informações Pessoais</li>
             <li className="active">Contactos</li>
@@ -54,7 +54,7 @@ class DocumentosT extends React.Component {
 
     <div id="formulario">
       <h1>Documentos</h1>
-      <h3>Forneça os documentos pedidos<br/><br/>
+      <h3>Forneça os documentos pedidos</h3><br/><br/>
     <form>
       Foto<br/>
       <label id="label">
@@ -79,7 +79,6 @@ class DocumentosT extends React.Component {
         <input
           name="am"
           type="file"
-          placeholder="Email" 
           onChange={e => this.onChange(e)}
           value={this.state.am}
         /><br/>
@@ -101,29 +100,30 @@ class DocumentosT extends React.Component {
         <input
           name="numero"
           type="text"
-          placeholder="Número" 
+          placeholder="Número"
           onChange={e => this.onChange(e)}
           value={this.state.nsocio}
+          style={{minWidth: '200px'}}
         /><br/><br/>
       Número de Treinador (FPA)<br/>
         <input
           name="numero"
           type="text"
-          placeholder="Número" 
+          placeholder="Número"
           onChange={e => this.onChange(e)}
           value={this.state.nsocio}
+          style={{minWidth: '200px'}}
         /><br/><br/>
     </form>
 
     <form>
-      <button id="anterior" formaction="file:contactos.html" onClick={(e) => this.props.onPrev(3,this.state)}>
+      <button id="anterior" formAction="file:contactos.html" onClick={(e) => this.props.onPrev(3,this.state)}>
         Anterior
       </button>
-      <button id="seguinte" formaction="file:conclusao.html" onClick={(e) => this.props.onNext(3,this.state)}>
+      <button id="seguinte" formAction="file:conclusao.html" onClick={(e) => this.props.onNext(3,this.state)}>
         Registar
       </button>
     </form>
-    </h3>
     </div>
     </div>
     );

@@ -5,8 +5,8 @@ import './css/confirmar.css'
 class ConfirmarT extends React.Component {
   render () {
     return (
-      <div>
-      <div className="container">
+      <div className="imagem">
+      <div className="conteudo">
         <ul className="progressbar">
           <li className="active">Informações Pessoais</li>
           <li className="active">Contactos</li>
@@ -16,10 +16,12 @@ class ConfirmarT extends React.Component {
         </ul>
       </div>
 
-      <h1>Confirmação do Registo</h1>
-      <h3>Confirme todos os campos inseridos</h3>
+      <h1 className="text-center">Confirmação do Registo</h1>
+      <h3 className="text-center">Confirme todos os campos inseridos</h3>
+<div className="row justify-content-center">
 
-      <div id="registo">
+
+      <div id="registo" className="col-12">
         <h2><Link to='/InfoPess'>DADOS PESSOAIS</Link></h2>
         Nome: <label id="max">Exemplo</label><br/><br/>
         Data de Nascimento: <label id="max">01-01-2018</label><br/><br/>
@@ -28,7 +30,9 @@ class ConfirmarT extends React.Component {
         Género: <label id="max">Feminino</label><br/><br/>
       </div>
 
-      <div id="contactos">
+
+
+      <div id="contactos"  className="col-12">
         <h2><Link to='/Contactos'>CONTACTOS</Link></h2>
         Email: <label id="max">exemplo@gmail.com</label><br/><br/>
         Telemóvel: <label id="max">919 999 999</label><br/><br/>
@@ -37,7 +41,8 @@ class ConfirmarT extends React.Component {
         Código Postal: <label id="max">9999-999</label> Localidade: <label id="max">Exemplo</label>
       </div>
 
-      <div id="documentos">
+
+      <div id="documentos"  className="col-12">
         <h2><Link to='/Documentos'>DOCUMENTOS</Link></h2>
         Foto: <label id="max">FOTO.jpeg</label><br/><br/>
         Cartão do Cidadão: <label id="max">CC.pdf</label><br/><br/>
@@ -46,17 +51,19 @@ class ConfirmarT extends React.Component {
         Número de Treinador da FPA: <label id="max">999999999</label><br/><br/><br/>
       </div>
 
-      <div id="buttons">
+      <div id="buttons" className="col-12">
       <form>
-        <button id="anterior" formaction="file:documentos.html" onClick={(e) => this.props.onPrev(4,{})}>
+        <button id="anterior" formAction="file:documentos.html" onClick={(e) => this.props.onPrev(4,{})}>
           Anterior
         </button>
-        <button id="seguinte" formaction="file:lince.html" onClick={(e) => this.props.onNext(4,{})}>
+        <button id="seguinte" formAction="file:lince.html" onClick={(e) => this.props.onNext(4,{})}>
           Confirmar Registo
         </button>
       </form>
       </div>
       </div>
+      </div>
+
     );
   }
 }

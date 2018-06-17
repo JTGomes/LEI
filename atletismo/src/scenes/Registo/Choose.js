@@ -28,7 +28,6 @@ class Choose extends React.Component {
 
   disapear(){
     document.getElementById("intro").style = "display:none";
-     document.getElementById("buttons").style = "display:none";
   }
   // Passo presente e dados
   onNext(state,data){

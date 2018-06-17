@@ -32,7 +32,7 @@ class ContactosT extends React.Component {
       if (idx !== sidx) return redes;
       return { ...redes, name: evt.target.value };
     });
-    
+
     this.setState({ redes: newRedes });
   }
 
@@ -40,11 +40,11 @@ class ContactosT extends React.Component {
     const { name, redes } = this.state;
     alert(`Incorporated: ${name} with ${redes.length} redes`);
   }
-  
+
   handleAddRedes = () => {
     this.setState({ redes: this.state.redes.concat([{ url: '' }]) });
   }
-  
+
   handleRemoveRedes = (idx) => () => {
     this.setState({ redes: this.state.redes.filter((s, sidx) => idx !== sidx) });
   }
@@ -64,8 +64,8 @@ class ContactosT extends React.Component {
 
   render () {
     return (
-      <div>
-      <div className="container">
+      <div className="imagem">
+      <div className="conteudo">
         <ul className="progressbar">
           <li className="active">Informações Pessoais</li>
           <li><label className="texto">Contactos</label></li>
@@ -77,62 +77,69 @@ class ContactosT extends React.Component {
 
       <div id="formulario">
         <h1>Contactos</h1>
-        <h3>Insira no seguinte formulário os contactos pedidos<br/><br/>
+        <h3>Insira no seguinte formulário os contactos pedidos </h3><br/><br/>
 
       <form onSubmit={this.handleSubmit}>
         Email<br/>
         <input
           name="email"
           type="email"
-          placeholder="Email" 
+          placeholder="Email"
           onChange={e => this.onChange(e)}
           value={this.state.email}
+          style={{minWidth: '200px'}}
         /><br/><br/>
         Telemóvel<br/>
         <input
           name="telemovel"
           type="text"
-          placeholder="Telemóvel" 
+          placeholder="Telemóvel"
           onChange={e => this.onChange(e)}
           value={this.state.telemovel}
+          style={{minWidth: '200px'}}
         /><br/><br/>
         Redes Sociais&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" id="adiciona" onClick={this.handleAddRedes} classNameName="small">+</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="adiciona" onClick={this.handleAddRedes} style={{ color:'white'}} className="small"><strong>+</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;
         {this.state.redes.map((rede, idx) => (
-          <div classNameName="rede">
+          <div className="rede" key={idx}>
             <input
               type="text"
               name="redes"
               placeholder={"Facebook/Instagram/Twitter"}
               value={rede.url}
               onChange={this.handleRedesChange(idx)}
-            />&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" id="remove" onClick={this.handleRemoveRedes(idx)} classNameName="small">-</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              style={{minWidth: '200px'}}
+            />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" id="remove" onClick={this.handleRemoveRedes(idx)} className="small"><strong style={{ color:'white'}}>-</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </div>
         ))}<br/>
         Morada<br/>
         <input
           name="morada"
           type="text"
-          placeholder="Morada" 
+          placeholder="Morada"
           onChange={e => this.onChange(e)}
           value={this.state.morada}
+          style={{minWidth: '200px'}}
         /><br/><br/>
         Código Postal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Localidade<br/>
         <input
           name="postal"
           type="text"
-          placeholder="Código Postal" 
+          placeholder="Código Postal"
+          pattern="[0-9]{4}-[0-9]{3}"
           onChange={e => this.onChange(e)}
           value={this.state.postal}
+          style={{minWidth: '200px'}}
         />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input
           name="localidade"
           type="text"
-          placeholder="Localidade" 
+          placeholder="Localidade"
           onChange={e => this.onChange(e)}
           value={this.state.localidade}
+          style={{minWidth: '200px'}}
         />
       </form><br/>
 
@@ -144,7 +151,7 @@ class ContactosT extends React.Component {
           Seguinte
         </button>
       </form>
-      </h3>
+
       </div>
       </div>
     );

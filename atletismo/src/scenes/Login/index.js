@@ -1,14 +1,21 @@
 import React from 'react';
 import * as routes from '../../constants/routes';
-import {  Link } from 'react-router-dom'
-import './css/login.css'
+import {  Link } from 'react-router-dom';
+import {Alert} from 'reactstrap';
+import './css/login.css';
+import { userActions } from '../../actions/userActions';
+import { connect } from 'react-redux';
+
 
 class Login extends React.Component {
-
-  state={
+constructor(props){
+  super(props);
+  this.state={
     email: '',
     password: '',
   }
+}
+
 
   onChange=(e) => {
     this.setState({
@@ -16,13 +23,13 @@ class Login extends React.Component {
     });
   }
 
-  onSubmit=(e) => {
-    console.log(e);/*
-    const response=this.props.mutate({
-        variables: this.state,
-    });
-    console.log(response);*/
-    //this.props.onLogin(2);
+  onSubmit=(event) => {
+    event.preventDefault();
+    const creds = this.state;
+    const {dispatch} = this.props;
+    if(creds.email && creds.password){
+      dispatch(userActions.loginUser(creds))
+    }
   }
 
   render () {
@@ -53,7 +60,7 @@ class Login extends React.Component {
             </p>
             <p>
 
-              <input onClick={() => this.onSubmit()}
+              <input onClick={(event) => this.onSubmit(event)}
                 type="submit"
                 value="Login" />
 
@@ -61,6 +68,12 @@ class Login extends React.Component {
           </form>
 
           <div className="text-center">
+            {this.props.error &&
+              <Alert color="danger">
+                 {this.props.error}
+               </Alert>
+               }
+
             <Link to={routes.REGISTAR} className="d-block small mt-3" style={{color:'#d14444'}}>Registar Conta</Link>
           <br/>
             <a className="d-block small">Esqueceu-se da Password?</a>
@@ -70,4 +83,11 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state){
+  return {
+    error: state.errorMessage
+  };
+}
+
+
+export default connect(mapStateToProps,null)(Login);

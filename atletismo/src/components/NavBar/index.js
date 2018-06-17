@@ -1,31 +1,22 @@
 import React, { Component } from 'react';
 import * as routes from '../../constants/routes';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import SideBar from './components/SideBar';
 import logo from '../../images/logo.png';
 import Notificacao from './components/Notificacao';
 import LogoutIcon from 'react-icons/lib/fa/sign-out'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './style.css'
+import { userActions } from '../../actions/userActions';
+import { connect } from 'react-redux';
 
 class NavBar extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-    };
 
-    this.toggle = this.toggle.bind(this);
-  }
-
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
-
+logout(){
+  this.props.dispatch(userActions.logoutUser());
+}
 
   render(){
+
     return(
       <div>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -39,7 +30,7 @@ class NavBar extends Component{
               <Notificacao />
             </li>
             <li className="nav-item">
-              <button type="button" className="btn btn-light" onClick={this.toggle}>
+              <button type="button" className="btn btn-light" onClick={()=> this.logout()}>
                 <LogoutIcon style={{margin:'0 5px 0 0'}}/>
                 Logout
               </button>
@@ -48,19 +39,12 @@ class NavBar extends Component{
           <SideBar sidebarLinks={this.props.sidebarLinks} />
         </div>
       </nav>
-      <Modal isOpen={this.state.modal} toggle={this.toggle} >
-        <ModalHeader toggle={this.toggle}>Logout</ModalHeader>
-        <ModalBody>
-          Tem a certeza que pretende fazer Logout?
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={this.toggle} style={{backgroundColor: '#D14444', border: '#D14444'}}><LogoutIcon style={{margin:'0 5px 0 0'}}/>Logout</Button>
-          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
       </div>
       );
     }
   }
 
-export default NavBar;
+
+
+
+export default withRouter(connect(null)(NavBar));

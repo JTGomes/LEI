@@ -11,17 +11,18 @@ import TPlayersFrame from '../scenes/treinador/TPlayersFrame.js';
 import TResultsFrame from '../scenes/treinador/TResultsFrame.js';
 import TRCalenderFrame from '../scenes/treinador/TRCalenderFrame.js';
 import TOtherFrame from '../scenes/treinador//TOtherFrame.js';
+import AppAtleta from './AppAtleta';
+
 
 class AppTreinador extends Component {
   constructor(props){
     super(props);
     this.state={
       sidebarLinks: [
-        { link: routes.TREINADOR, icon: <User className="icon" />, text: 'Dados Treinador'},
-        { link: routes.TATLETA, icon: <RunIcon className="icon" />, text: 'Meus Atletas'},
-        { link: routes.TRESULTADOS, icon: <Provas className="icon" />, text: 'Resultados'},
-        { link: routes.TCALENDARIO, icon: <Calendar className="icon"/>, text: 'Calendário'},
-        { link: routes.TOTHERS, icon: <Calendar className="icon"/>, text: 'Outros'}
+        { link: routes.HOME, icon: <User className="icon" />, text: 'Dados Treinador'},
+        { link: '/atletas', icon: <RunIcon className="icon" />, text: 'Meus Atletas'},
+        { link: '/resultados', icon: <Provas className="icon" />, text: 'Resultados'},
+        { link: '/calendario', icon: <Calendar className="icon"/>, text: 'Calendário'},
       ],
     }
   }
@@ -29,18 +30,17 @@ class AppTreinador extends Component {
   render() {
     return (
 
-        <div >
-          <NavBar sidebarLinks={this.state.sidebarLinks} home={routes.TREINADOR}/>
-          <div className="content-wrapper">
-            <Switch>
-                <Route exact path={routes.TREINADOR} component={TPersonalDataFrame}/>
-                <Route exact path={routes.TATLETA} component={TPlayersFrame}/>
-                <Route exact path={routes.TRESULTADOS} component={TResultsFrame}/>
-                <Route exact path={routes.TCALENDARIO} component={TRCalenderFrame}/>
-                <Route exact path={routes.TOTHERS} component={TOtherFrame}/>
-            </Switch>
-          </div>
+      <div >
+        <NavBar sidebarLinks={this.state.sidebarLinks} />
+        <div className="content-wrapper">
+          <Switch>
+            <Route exact path={routes.HOME} component={TPersonalDataFrame}/>
+            <Route exact path={'/atletas'} component={TPlayersFrame}/>
+            <Route exact path={'/resultados'} component={TResultsFrame}/>
+            <Route exact path={'/calendario'} component={TRCalenderFrame}/>
+          </Switch>
         </div>
+      </div>
 
     );
   }

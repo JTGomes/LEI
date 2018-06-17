@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/infopess.css'
-
+import {Input} from 'reactstrap';
 class InfoPess extends React.Component {
 
   constructor(props) {
@@ -9,9 +9,7 @@ class InfoPess extends React.Component {
         this.state = {
             nome: props.data.nome,
             password: props.data.password,
-            dia: props.data.dia,
-            mes: props.data.mes,
-            ano: props.data.ano,
+            data: props.data.data,
             nacionalidade: props.data.nacionalidade,
             cc: props.data.cc,
             con: props.data.con,
@@ -21,9 +19,7 @@ class InfoPess extends React.Component {
     }else this.state = {
         nome: '',
         password: '',
-        dia: '',
-        mes: '',
-        ano: '',
+        data: '',
         nacionalidade: '',
         cc: '',
         con: '',
@@ -46,9 +42,9 @@ class InfoPess extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="imagem">
 
-        <div className="container-fluid">
+        <div className="conteudo">
           <ul className="progressbar">
             <li><label className="texto">Informações Pessoais</label></li>
             <li>Contactos</li>
@@ -82,30 +78,23 @@ class InfoPess extends React.Component {
               value={this.state.password}
             />
             </p>
-            <p>
-            Data de Nascimento<br/>
-            <input
-              name="dia"
-              type="text"
-              placeholder="DD"
-              onChange={e => this.onChange(e)}
-              value={this.state.dia}
-            />&nbsp;
-            <input
-              name="mes"
-              type="text"
-              placeholder="MM"
-              onChange={e => this.onChange(e)}
-              value={this.state.mes}
-            />&nbsp;
-            <input
-              name="ano"
-              type="text"
-              placeholder="AAAA"
-              onChange={e => this.onChange(e)}
-              value={this.state.ano}
-            />
-            </p>
+            <div className="row justify-content-center mb-3">
+
+              <div className="col-12">
+                Data de Nascimento
+              </div>
+
+              <div className="row">
+                <Input type="date" name="data" id="exampleDate"
+                  placeholder="data de nascimento"
+                  className="col-2 campo"
+                  style={{minWidth: '200px'}}
+                  onChange={e => this.onChange(e)}
+                  value={this.state.data}/>
+              </div>
+
+            </div>
+
             <p>
             Nacionalidade<br/>
             <input
@@ -114,6 +103,7 @@ class InfoPess extends React.Component {
               placeholder="Nacionalidade"
               onChange={e => this.onChange(e)}
               value={this.state.nac}
+              style={{minWidth: '200px'}}
             />
             </p>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número CC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número de Contribuinte<br/>
@@ -123,6 +113,7 @@ class InfoPess extends React.Component {
               placeholder="Número do CC"
               onChange={e => this.onChange(e)}
               value={this.state.cc}
+              style={{minWidth: '200px'}}
             />&nbsp;
             <input
               name="con"
@@ -130,6 +121,7 @@ class InfoPess extends React.Component {
               placeholder="Número de Contribuinte"
               onChange={e => this.onChange(e)}
               value={this.state.con}
+              style={{minWidth: '200px'}}
             />
             <br/><br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Género&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escalão<br/>
@@ -138,7 +130,7 @@ class InfoPess extends React.Component {
               type="radio"
               onChange={e => this.onChange(e)}
               value={this.state.gender}
-            /> Feminino
+            /> Feminino&nbsp;&nbsp;
             <input
               name="genero"
               type="radio"
