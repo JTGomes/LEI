@@ -1,24 +1,22 @@
 {
-  "name": "Diretor",
+  "name": "evento",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "nome": {
+    "evento": {
+      "type": "string",
+      "required": true
+    },
+    "data": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "user": {
-      "type": "belongsTo",
-      "model": "User",
-      "foreignKey": "userId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

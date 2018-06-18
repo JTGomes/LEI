@@ -1,0 +1,23 @@
+{
+  "name": "equipamento",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nome": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "equipamentos": {
+     "type": "hasAndBelongsToMany",
+     "model": "Atleta"
+   }
+  },
+  "acls": [],
+  "methods": {}
+}

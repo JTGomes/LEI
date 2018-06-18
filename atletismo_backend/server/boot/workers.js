@@ -33,3 +33,16 @@ var jobPagamentos = new CronJob('00 01 00 8 * *', function() {
   true, /* Start the job right now */
   'Europe/Lisbon'/* Time zone of this job. */
 );
+
+var jobExames = new CronJob('00 01 00 * * *', function() {
+        console.log('executou')
+        /*
+          Codigo que atualiza os exames
+        */
+  }, function () {
+    /* This function is executed when the job stops */
+    console.log('job parou')
+  },
+  true, /* Start the job right now */
+  'Europe/Lisbon'/* Time zone of this job. */
+);

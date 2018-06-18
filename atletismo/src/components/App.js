@@ -11,6 +11,7 @@ import { history } from '../constants/history';
 import {Atleta,Diretor,Treinador} from '../constants/Permissao';
 import {connect} from 'react-redux';
 import {userActions} from '../actions/userActions'
+import AppWrapper from './AppWrapper';
 
 class App extends Component {
   constructor(props){

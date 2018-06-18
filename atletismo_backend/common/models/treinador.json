@@ -6,10 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "nome": {
-      "type": "string",
-      "required": true
-    },
     "nif": {
       "type": "number",
       "required": true
@@ -37,6 +33,26 @@
     "telemovel": {
       "type": "number",
       "required": true
+    },
+    "ipdj": {
+      "type": "string",
+      "required": true
+    },
+    "socio": {
+      "type": "boolean",
+      "required": true
+    },
+    "dataContrato":{
+      "type": "string",
+      "required": false
+    },
+    "cartaoCidadao": {
+      "type": "string",
+      "required": true
+    },
+    "exameMedico": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
@@ -45,7 +61,17 @@
       "type": "belongsTo",
       "model": "User",
       "foreignKey": "userId"
-    }
+    },
+    "evento": {
+       "type": "hasMany",
+       "model": "evento",
+       "foreignKey": "atleta"
+     },
+     "atletas": {
+       "type" : "hasMany",
+       "model": "Atleta",
+       "foreignKey" : "treinadorId"
+     }
   },
   "acls": [],
   "methods": {}

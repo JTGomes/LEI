@@ -28,5 +28,29 @@
   "Diretor": {
     "dataSource": "atletismo",
     "public": true
+  },
+  "resultados": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "galeria": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "redes": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "equipamento": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "evento": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "notificacao": {
+    "dataSource": "atletismo",
+    "public": true
   }
 }

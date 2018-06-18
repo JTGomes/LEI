@@ -1,38 +1,46 @@
 {
-  "name": "User",
+  "name": "resultados",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "email": {
+    "nome": {
       "type": "string",
       "required": true
     },
-    "password": {
+    "tipo": {
       "type": "string",
       "required": true
     },
-    "role":{
+    "disciplina": {
       "type": "string",
       "required": true
     },
-    "validado":{
-      "type": "boolean",
+    "data": {
+      "type": "string",
       "required": true
     },
-    "nome":{
+    "local": {
+      "type": "string",
+      "required": true
+    },
+    "resultado": {
+      "type": "string",
+      "required": true
+    },
+    "classificacao": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "notificacoes": {
+    "galeria": {
       "type": "hasMany",
-      "model": "notificacao",
-      "foreignKey": "userId"
+      "model": "galeria",
+      "foreignKey": "resultadoId"
     }
   },
   "acls": [],

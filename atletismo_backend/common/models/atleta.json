@@ -6,19 +6,23 @@
     "validateUpsert": true
   },
   "properties": {
-    "nome": {
-      "type": "string",
+    "ativo": {
+      "type": "boolean",
       "required": true
     },
     "nome_competicao": {
       "type": "string",
       "required": true
     },
+    "isIsento": {
+      "type": "boolean",
+      "required": false
+    },
     "telemovel": {
       "type": "number",
       "required": true
     },
-    "documento": {
+    "nrdocumento": {
       "type": "string",
       "required": true
     },
@@ -53,6 +57,42 @@
     "dataNascimento": {
       "type": "string",
       "required": true
+    },
+    "nrSocio": {
+      "type": "string",
+      "required": false
+    },
+    "escalao": {
+      "type": "string",
+      "required": true
+    },
+    "subsidio": {
+      "type": "boolean",
+      "required": false
+    },
+    "exameFalta": {
+      "type": "boolean",
+      "required": true
+    },
+    "cartaoCidadao": {
+      "type": "string",
+      "required": true
+    },
+    "exameMedico": {
+      "type": "string",
+      "required": true
+    },
+    "encarregado": {
+      "type": "string",
+      "required": false
+    },
+    "contactoEnc": {
+      "type": "number",
+      "required": false
+    },
+    "fotoPerfil": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
@@ -61,6 +101,22 @@
       "type": "belongsTo",
       "model": "User",
       "foreignKey": "userId"
+    },
+    "resultados": {
+      "type": "hasMany",
+      "model": "resultados",
+      "foreignKey": "atleta"
+    },
+    "redes": {
+      "type": "hasMany",
+      "model": "redes",
+      "foreignKey": "atleta"
+    },
+     "evento": {
+        "type": "hasMany",
+        "model": "evento",
+        "foreignKey": "atleta"
+      }
     }
   },
   "acls": [],

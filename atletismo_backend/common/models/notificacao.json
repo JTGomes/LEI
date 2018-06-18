@@ -1,40 +1,31 @@
 {
-  "name": "User",
+  "name": "notificacao",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "email": {
+    "data": {
       "type": "string",
       "required": true
     },
-    "password": {
-      "type": "string",
-      "required": true
-    },
-    "role":{
-      "type": "string",
-      "required": true
-    },
-    "validado":{
+    "isRead": {
       "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "mensagem": {
+      "type": "string",
       "required": true
     },
-    "nome":{
+    "assunto": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "notificacoes": {
-      "type": "hasMany",
-      "model": "notificacao",
-      "foreignKey": "userId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }
