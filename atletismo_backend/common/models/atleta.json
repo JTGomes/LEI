@@ -16,7 +16,8 @@
     },
     "isIsento": {
       "type": "boolean",
-      "required": false
+      "required": true,
+      "default": false
     },
     "telemovel": {
       "type": "number",
@@ -117,7 +118,7 @@
         "model": "evento",
         "foreignKey": "atleta"
       }
-    }
+
   },
   "acls": [],
   "methods": {}

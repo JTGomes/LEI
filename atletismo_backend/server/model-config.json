@@ -25,10 +25,6 @@
     "dataSource": "atletismo",
     "public": true
   },
-  "Diretor": {
-    "dataSource": "atletismo",
-    "public": true
-  },
   "resultados": {
     "dataSource": "atletismo",
     "public": true

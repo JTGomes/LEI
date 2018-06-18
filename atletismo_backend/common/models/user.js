@@ -65,7 +65,7 @@ module.exports = function(User) {
             html: '<h1>Atletismo Braga</h1><p><strong>Já pode aceder à sua conta com o email.</strong></p>'// plain text body
           };
           mail.sendEmail(mailOptions);
-          
+
           return user.updateAttributes({ validado: true })})
      .then(user => callback(null, user))
      .catch(error => callback(error))
@@ -93,18 +93,21 @@ module.exports = function(User) {
     }
 
     User
-      .create({ email: credentials.email, password: hashPassword(credentials.password), role:'Treinador', validado: false })
+      .create({ email: credentials.email, password: hashPassword(credentials.password), role:'Treinador', validado: false, nome: credentials.nome })
       .then(user => {
         User.app.models.Treinador.create(
           {
-            nome: credentials.nome,
             nif: credentials.nif,
             morada: credentials.morada,
             localidade: credentials.localidade,
+            ipdj: credentials.ipdj,
             genero: credentials.genero,
             nacionalidade: credentials.nacionalidade,
             codPostal: credentials.codPostal,
+            socio: credentials.socio,
             telemovel: credentials.telemovel,
+            cartaoCidadao: credentials.cartaoCidadao,
+            exameMedico: credentials.exameMedico,
             userId: user.id
           }
         )
@@ -130,13 +133,13 @@ module.exports = function(User) {
     }
 
     User
-      .create({ email: credentials.email, password: hashPassword(credentials.password), role:'Atleta', validado: false })
+      .create({ email: credentials.email, password: hashPassword(credentials.password), role:'Atleta', validado: false, nome: credentials.nome })
       .then(user => {
         User.app.models.Atleta.create({
-          nome: credentials.nome,
+          ativo: true,
           nome_competicao: credentials.nome_competicao,
           telemovel: credentials.telemovel,
-          documento: credentials.documento,
+          nrdocumento: credentials.nrdocumento,
           tipoDocumento: credentials.tipoDocumento,
           morada: credentials.morada,
           genero: credentials.genero,
@@ -145,6 +148,12 @@ module.exports = function(User) {
           codigoPostal: credentials.codigoPostal,
           localidade: credentials.localidade,
           dataNascimento: credentials.dataNascimento,
+          nrSocio: credentials.nrSocio,
+          escalao: credentials.escalao,
+          exameFalta: false,
+          cartaoCidadao: credentials.cartaoCidadao,
+          exameMedico: credentials.exameMedico,
+          fotoPerfil: credentials.fotoPerfil,
           userId: user.id
         });
         return callback(null, createAuthToken(user))
@@ -170,11 +179,8 @@ module.exports = function(User) {
     }
 
     User
-      .create({ email: credentials.email, password: hashPassword(credentials.password), role:'Diretor', validado: true })
+      .create({ email: credentials.email, password: hashPassword(credentials.password), role:'Diretor', validado: true, nome: credentials.nome })
       .then(user => {
-        User.app.models.Diretor.create({
-            nome: credentials.nome
-        });
         return callback(null, createAuthToken(user))
         }
       )
