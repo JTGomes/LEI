@@ -21,7 +21,7 @@ class AppDiretor extends Component {
     super(props);
     this.state={
       sidebarLinks: [
-                      { link: routes.ATLETA, icon: <HomeIcon className="icon" />, text: 'Home Page'},
+                      { link: routes.HOME, icon: <HomeIcon className="icon" />, text: 'Home Page'},
                       { link: routes.REGISTOS, icon: <Registo className="icon"/>, text: 'Registos Pendentes'},
                       { link: routes.G_ATLETAS, icon: <RunIcon className="icon" />, text: 'Gestão Atletas'},
                       { link: routes.G_TREINADOR, icon: <TieIcon className="icon" />, text: 'Gestão Treinadores'},
@@ -39,7 +39,7 @@ class AppDiretor extends Component {
           <NavBar sidebarLinks={this.state.sidebarLinks} />
           <div className="content-wrapper">
             <Switch>
-              <Route exact path={routes.ATLETA} component={Home} />
+              <Route exact path={routes.HOME} component={Home} />
               <Route exact path={routes.REGISTOS} component={Registos} />
               <Route exact path={routes.G_ATLETAS} component={GestaoAtletas} />
               <Route exact path={routes.G_TREINADOR} component={GestaoTreinador} />

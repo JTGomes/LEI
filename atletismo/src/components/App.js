@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Router, Switch, Route } from 'react-router-dom'
 import * as routes from '../constants/routes';
 import AppDiretor from './AppDiretor';
+import AppAtletaID from './AppAtletaID';
 import AppAtleta from './AppAtleta';
 import Registo from '../scenes/Registo/Choose.js';
 import AppTreinador from './AppTreinador';
@@ -11,7 +12,7 @@ import { history } from '../constants/history';
 import {Atleta,Diretor,Treinador} from '../constants/Permissao';
 import {connect} from 'react-redux';
 import {userActions} from '../actions/userActions'
-import AppWrapper from './AppWrapper';
+
 
 class App extends Component {
   constructor(props){
@@ -22,7 +23,7 @@ class App extends Component {
   checkAuth(){
     const token = sessionStorage.getItem('jwtToken')
     if(token){
-      this.props.dispatch(userActions.login_action(token))
+      this.props.dispatch(userActions.login_action(token));
     }
     // }else{
     //   this.props.dispatch(userActions.logoutUser())
@@ -48,9 +49,10 @@ class App extends Component {
      <div>
         <Router history={history}>
           <Switch>
-            {UserPage}
-            <Route  path={'/atleta/:id'} component={Treinador(AppAtleta)} />
+            <Route  path='/treinador/:id' component={Diretor(AppTreinador)} />
+            <Route  path="/atleta/:id" component={Treinador(AppAtletaID)} />
             <Route  exact path={routes.REGISTAR} component={Registo} />
+            {UserPage}
             <Route  component={ErrorPage} />
           </Switch>
         </Router>

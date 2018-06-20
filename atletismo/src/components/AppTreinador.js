@@ -19,10 +19,10 @@ class AppTreinador extends Component {
     super(props);
     this.state={
       sidebarLinks: [
-        { link: routes.HOME, icon: <User className="icon" />, text: 'Dados Treinador'},
-        { link: '/atletas', icon: <RunIcon className="icon" />, text: 'Meus Atletas'},
-        { link: '/resultados', icon: <Provas className="icon" />, text: 'Resultados'},
-        { link: '/calendario', icon: <Calendar className="icon"/>, text: 'Calendário'},
+        { link: '/', icon: <User className="icon" />, text: 'Dados Treinador'},
+        { link: routes.TATLETA, icon: <RunIcon className="icon" />, text: 'Meus Atletas'},
+        { link: routes.TRESULTADOS, icon: <Provas className="icon" />, text: 'Resultados'},
+        { link: routes.TCALENDARIO, icon: <Calendar className="icon"/>, text: 'Calendário'},
       ],
     }
   }
@@ -34,10 +34,10 @@ class AppTreinador extends Component {
         <NavBar sidebarLinks={this.state.sidebarLinks} />
         <div className="content-wrapper">
           <Switch>
-            <Route exact path={routes.HOME} component={TPersonalDataFrame}/>
-            <Route exact path={'/atletas'} component={TPlayersFrame}/>
-            <Route exact path={'/resultados'} component={TResultsFrame}/>
-            <Route exact path={'/calendario'} component={TRCalenderFrame}/>
+            <Route exact path={'/'} component={TPersonalDataFrame}/>
+            <Route exact path={routes.TATLETA} component={TPlayersFrame}/>
+            <Route exact path={routes.TRESULTADOS} component={TResultsFrame}/>
+            <Route exact path={routes.TCALENDARIO} component={TRCalenderFrame}/>
           </Switch>
         </div>
       </div>

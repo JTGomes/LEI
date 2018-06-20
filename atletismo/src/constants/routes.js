@@ -2,23 +2,23 @@ export const HOME = '/';
 export const REGISTAR = '/registo';
 
 
-export const ATLETA = '/atleta';
-export const DESEMPENHO = ATLETA + '/stats';
-export const RESULTADOS= ATLETA + '/results';
-export const FOTO= ATLETA + '/photos';
-export const CALENDAR= ATLETA + '/calendar';
+export const ATLETA = '/';
+export const DESEMPENHO = '/stats';
+export const RESULTADOS=  '/results';
+export const FOTO=  '/photos';
+export const CALENDAR= '/calendar';
 
 
 export const DIRETOR = '/admin';
-export const REGISTOS= DIRETOR + '/registo';
-export const G_ATLETAS= DIRETOR + '/atletas';
-export const G_TREINADOR= DIRETOR + '/treinador';
-export const LASTRESULTS= DIRETOR + '/resultados';
-export const EXATLETAS= DIRETOR + '/exAtletas';
+export const REGISTOS= '/registos';
+export const G_ATLETAS= '/gestaoAtletas';
+export const G_TREINADOR= '/gestaoTreinador';
+export const LASTRESULTS= '/resultados';
+export const EXATLETAS=  '/exAtletas';
 
 
 export const TREINADOR = '/treinador';
-export const TATLETA = TREINADOR + '/Atletas';
-export const TRESULTADOS = TREINADOR + '/Resultados';
-export const TCALENDARIO = TREINADOR + '/Calendario';
-export const TOTHERS = TREINADOR + '/Outros';
+export const TATLETA = '/gestaoAtletas';
+export const TRESULTADOS =  '/resultados';
+export const TCALENDARIO =  '/calendario';
+export const TOTHERS =  '/Outros';

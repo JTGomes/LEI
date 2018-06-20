@@ -31,7 +31,7 @@ class AppAtleta extends Component {
   render() {
     return (
         <div >
-          <NavBar sidebarLinks={this.state.sidebarLinks} logout={this.props.onLogOut}/>
+          <NavBar sidebarLinks={this.state.sidebarLinks} />
           <div className="content-wrapper">
             <Switch>
               <Route exact path={routes.ATLETA} component={Dados} />
