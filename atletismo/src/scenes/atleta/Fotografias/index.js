@@ -39,25 +39,15 @@ class Photos extends React.Component {
         renderItem: this._renderVideo.bind(this)
       },
       {
-        original: `${PREFIX_URL}image_set_default.jpg`,
-        thumbnail: `${PREFIX_URL}image_set_thumb.jpg`,
-        imageSet: [
-          {
-            srcSet: `${PREFIX_URL}image_set_cropped.jpg`,
-            media : '(max-width: 1280px)',
-          },
-          {
-            srcSet: `${PREFIX_URL}image_set_default.jpg`,
-            media : '(min-width: 1280px)',
-          }
-        ]
+        original: `http://www.konbini.com/wp-content/blogs.dir/13/files/2017/06/75c1b160-1ff5-4efc-8749-d167d480c19e.jpg`,
+        thumbnail: `http://www.konbini.com/wp-content/blogs.dir/13/files/2017/06/75c1b160-1ff5-4efc-8749-d167d480c19e.jpg`,
       },
       {
-        original: `${PREFIX_URL}1.jpg`,
-        thumbnail: `${PREFIX_URL}1t.jpg`,
+        original: `http://topnaija.ng/wp-content/uploads/2017/11/usain-bolt.jpg`,
+        thumbnail: `http://topnaija.ng/wp-content/uploads/2017/11/usain-bolt.jpg`,
         originalClass: 'featured-slide',
         thumbnailClass: 'featured-thumb',
-        description: 'Foto de viagem a nada... Teste!'
+        description: 'Usain Bolt, gotta love em!'
       },
     ];
     this.toggleM = this.toggleM.bind(this);

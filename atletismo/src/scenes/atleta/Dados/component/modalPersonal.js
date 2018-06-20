@@ -1,7 +1,53 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import FaCheck from 'react-icons/lib/fa/check';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 class ModalEditInfo extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      chkbox: false,
+    };
+    this.changeChk = this.changeChk.bind(this);
+  }
+
+  changeChk() {
+    this.setState({
+      chkbox: !this.state.chkbox,
+    })
+  }
+
+  renderEncEdu() {
+    if(this.state.chkbox) {
+      return(
+        <div className="EncEdu">
+          <FormGroup>
+            <Label for="EDUname">Nome do Encarregado de Educação</Label>
+            <Input name="address" id="EDUname" placeholder="Maria Ana" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="EDUcontact">Contacto do Encarregado de Educação</Label>
+            <Input name="contact" id="EDUcontact" placeholder="939393939" />
+          </FormGroup>
+        </div>
+      );
+    }
+    else {
+      return(
+        <div className="EncEdu">
+          <FormGroup>
+            <Label for="EDUname">Nome do Encarregado de Educação</Label>
+            <Input disabled name="name" id="EDUname" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="EDUcontact">Contacto do Encarregado de Educação</Label>
+            <Input disabled name="contact" id="EDUcontact" />
+          </FormGroup>
+        </div>
+      );
+    }
+  }
+
   render() {
     return(
       <Modal isOpen={this.props.modalDataEdit} toggle={this.props.toggle}>
@@ -35,8 +81,17 @@ class ModalEditInfo extends React.Component {
               <Label for="locationform">Localidade</Label>
               <Input name="location" id="locationform" placeholder="Braga" />
             </FormGroup>
+            <FormGroup check inline>
+              <Label check>
+                <Input type="checkbox" defaultChecked={this.state.chkbox} onChange={this.changeChk} /> Adicionar Encarregado de Educação
+              </Label>
+            </FormGroup>
+            {this.renderEncEdu()}
           </Form>
         </ModalBody>
+        <ModalFooter>
+          <Button color="success"><FaCheck />&nbsp;Submeter</Button>
+        </ModalFooter>
       </Modal>
     );
   }

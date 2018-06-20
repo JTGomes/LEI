@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, Form, FormText, FormGroup, Label, Input } from 'reactstrap';
+import FaCheck from 'react-icons/lib/fa/check';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Form, FormText, FormGroup, Label, Input, Button } from 'reactstrap';
 
 class ModalEditDocs extends React.Component {
   render() {
@@ -24,6 +25,9 @@ class ModalEditDocs extends React.Component {
             </FormGroup>
           </Form>
         </ModalBody>
+        <ModalFooter>
+          <Button color="success"><FaCheck />&nbsp;Submeter</Button>
+        </ModalFooter>
       </Modal>
     );
   }
