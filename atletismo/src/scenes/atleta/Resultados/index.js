@@ -12,7 +12,7 @@ class Results extends React.Component {
     data: [{
       prova: 'Jogos Olímpicos',
       tipo: 'Coletivo',
-      modalidade: '4x100m',
+      disciplina: '4x100m',
       dia: '19/08/2016',
       local: 'Rio de Janeiro',
       resultado: 37.27,
@@ -20,7 +20,7 @@ class Results extends React.Component {
     },{
       prova: 'Jogos Olímpicos',
       tipo: 'Individual',
-      modalidade: '200m',
+      disciplina: '200m',
       dia: '18/09/2016',
       local: 'Rio de Fevereiro',
       resultado: 19.78,
@@ -37,10 +37,10 @@ class Results extends React.Component {
       Header: 'Tipo',
       accessor: 'tipo',
     },{
-      Header: 'Modalidade',
-      accessor: 'modalidade',
+      Header: 'Disciplina',
+      accessor: 'disciplina',
         filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-          return this.state.data.filter( data_row => data_row.modalidade.toUpperCase().indexOf(text) !== -1);},
+          return this.state.data.filter( data_row => data_row.disciplina.toUpperCase().indexOf(text) !== -1);},
         filterAll: true
     },{
       Header: 'Data',

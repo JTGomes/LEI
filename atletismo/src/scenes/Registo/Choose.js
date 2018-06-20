@@ -74,58 +74,55 @@ class Choose extends React.Component {
 
   renderChoice(){
     return (
-        <section className="intro" id='intro'>
-            <div className="row">
-                <div className="col-lg-6 col-sm-12 left">
-                    <button onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
-                        <p>
-                            TREINADORES
-                        </p>
-                    </button>
-                </div>
-                <div className="col-lg-6 col-sm-12 right">
-                    <button onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
-                        <p>
-                            ATLETAS
-                        </p>
-                    </button>
-                </div>
-            </div>
-        </section>
+      <section className="intro" id='intro'>
+        <div className="row">
+          <div className="col-lg-6 col-sm-12 left">
+            <img src="/images/coach.png" alt="test"/>
+            <button onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
+              <p>TREINADORES</p>
+            </button>
+          </div>
+          <div className="col-lg-6 col-sm-12 right">
+              <button onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
+                <p>ATLETAS</p>
+              </button>
+          </div>
+        </div>
+      </section>
     )
   }
 
   switchTreinador(state) {
-      switch (state) {
-          case 1:
-              return (<InfoPessT onNext={this.onNext} data={this.state.registerData[state-1]}/>);
-          case 2:
-              return (<ContactosT onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
-          case 3:
-              return (<DocumentosT onNext={this.onNext} onPrev={this.onPrev}  data={this.state.registerData[state-1]}/>);
-          case 4:
-              return (<ConfirmarT onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
-          case 5:
-              return (<FPAT onNext={() => this.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>)
-          default:
-              return -1;
-      }
+    switch (state) {
+      case 1:
+        return (<InfoPessT onNext={this.onNext} data={this.state.registerData[state-1]}/>);
+      case 2:
+        return (<ContactosT onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+      case 3:
+        return (<DocumentosT onNext={this.onNext} onPrev={this.onPrev}  data={this.state.registerData[state-1]}/>);
+      case 4:
+        return (<ConfirmarT onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+      case 5:
+        return (<FPAT onNext={() => this.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>)
+      default:
+        return -1;
+    }
   }
   switchAtleta(state){
-      switch (state) {
-          case 1:
-              return (<InfoPess onNext={this.onNext} data={this.state.registerData[state-1]}/>);
-          case 2:
-              return (<Contactos onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
-          case 3:
-              return (<Documentos onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
-          case 4:
-              return (<Confirmar onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
-          case 5:
-              return (<FPA onNext={() => this.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
-          default:
-              return -1;
-      }
+    switch (state) {
+      case 1:
+        return (<InfoPess onNext={this.onNext} data={this.state.registerData[state-1]}/>);
+      case 2:
+        return (<Contactos onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+      case 3:
+        return (<Documentos onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+      case 4:
+        return (<Confirmar onNext={this.onNext} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+      case 5:
+        return (<FPA onNext={() => this.onEnd(this.state.registerData)} onPrev={this.onPrev} data={this.state.registerData[state-1]}/>);
+      default:
+        return -1;
+    }
   }
 
   renderSwitch(state){
@@ -134,7 +131,7 @@ class Choose extends React.Component {
     }
     else{
       if( this.state.caminho === "treinador")
-          return this.switchTreinador(state);
+        return this.switchTreinador(state);
       else if(this.state.caminho==="atleta") return this.switchAtleta(state);
         else return (<div> Good try man.</div>);
     }
@@ -143,7 +140,7 @@ class Choose extends React.Component {
   render () {
     return (
       <div>
-          {this.renderSwitch(this.state.passo)}
+        {this.renderSwitch(this.state.passo)}
       </div>
     );
   }

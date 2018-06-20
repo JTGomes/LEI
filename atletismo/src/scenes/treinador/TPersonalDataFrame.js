@@ -61,31 +61,41 @@ class TPersonalDataFrame extends React.Component {
 
   render() {
     return (
-      <div className="aboutcoach container-fluid">
-        <a className="Title">Dados Pessoais <FaEdit onClick={()=>this.initModalDados()} style={{cursor:'pointer'}}/></a>
+      <div className="aboutathlete container-fluid">
+        <p className="Title">Dados Pessoais <FaEdit onClick={()=>this.initModalDados()} style={{cursor:'pointer'}}/></p>
         <hr />
-        <div className="gridcontent">
-          <a>Nome Completo: {this.state.data.name} </a>
-          <a>Género: {this.state.data.genero} </a>
-          <a>NIF {this.state.data.nif} </a>
-          <a>Nacionalidade: {this.state.data.nacionalidade} </a>
-          <a>Morada: {this.state.data.morada} </a>
-          <a>Código Postal: {this.state.data.codigopostal} </a>
-          <a>Localidade: {this.state.data.local} </a>
-          <a>Sócio: {this.state.data.socio} </a>
-          <a>Nível de Formação IPDJ: {this.state.data.socio ? this.state.data.socio : ""}</a>
+        <div className="section">
+          <div className="col">
+            <p>Nome Completo: {this.state.data.name} </p>
+            <p>Género: {this.state.data.genero} </p>
+            <p>NIF {this.state.data.nif} </p>
+            <p>Nacionalidade: {this.state.data.nacionalidade} </p>
+          </div>
+          <div className="col">
+            <p>Morada: {this.state.data.morada} </p>
+            <p>Código Postal: {this.state.data.codigopostal} </p>
+            <p>Localidade: {this.state.data.local} </p>
+            <p>Sócio: {this.state.data.socio} </p>
+          </div>
+          <div className="col">
+            <p>Nível de Formação IPDJ: {this.state.data.socio ? this.state.data.socio : ""}</p>
+          </div>
         </div>
-        <a className="Title">Dados de Filiação</a>
-        <hr />
-        <div className="gridcontent">
-          <a>Contrato até: {this.state.contrato.end} </a>
-          <a>Salário: {this.state.contrato.salario} </a>
+        <div className="section">
+          <p className="Title">Dados de Filiação</p>
+          <hr />
+          <div className="col">
+            <p>Contrato até: {this.state.contrato.end} </p>
+            <p>Salário: {this.state.contrato.salario} </p>
+          </div>
         </div>
-        <a className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></a>
-        <hr />
-        <div className="gridcontent">
-          <a>Cartão de Cidadão: {this.state.doc.cc} </a>
-          <a>Exame Médico: {this.state.doc.em} </a>
+        <div className="section">
+          <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></p>
+          <hr />
+          <div className="col">
+            <p>Cartão de Cidadão: {this.state.doc.cc} </p>
+            <p>Exame Médico: {this.state.doc.em} </p>
+          </div>
         </div>
         <ModalEditInfo toggle={this.toggleDE} modalDataEdit={this.state.modalDataEdit} />
         <ModalEditDocs toggle={this.toggleD} modalDocs={this.state.modalDocs} />

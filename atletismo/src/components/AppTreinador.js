@@ -34,7 +34,7 @@ class AppTreinador extends Component {
         <NavBar sidebarLinks={this.state.sidebarLinks} />
         <div className="content-wrapper">
           <Switch>
-            <Route exact path={routes.HOME} component={TPersonalDataFrame}/>
+            <Route exact path={'/treinador/dados'} component={TPersonalDataFrame}/>
             <Route exact path={'/atletas'} component={TPlayersFrame}/>
             <Route exact path={'/resultados'} component={TResultsFrame}/>
             <Route exact path={'/calendario'} component={TRCalenderFrame}/>
