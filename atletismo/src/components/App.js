@@ -3,6 +3,7 @@ import { Router, Switch, Route } from 'react-router-dom'
 import * as routes from '../constants/routes';
 import AppDiretor from './AppDiretor';
 import AppAtletaID from './AppAtletaID';
+import AppTreinadorID from './AppTreinadorID';
 import AppAtleta from './AppAtleta';
 import Registo from '../scenes/Registo/Choose.js';
 import AppTreinador from './AppTreinador';
@@ -49,8 +50,8 @@ class App extends Component {
      <div>
         <Router history={history}>
           <Switch>
-            <Route  path='/treinador/:id' component={Diretor(AppTreinador)} />
-            <Route  path="/atleta/:id" component={Treinador(AppAtletaID)} />
+            <Route  path='/treinador/:id' component={Diretor(AppTreinadorID)} />
+            <Route  path='/atleta/:id' component={Treinador(AppAtletaID)} />
             <Route  exact path={routes.REGISTAR} component={Registo} />
             {UserPage}
             <Route  component={ErrorPage} />

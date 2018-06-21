@@ -103,7 +103,7 @@ module.exports = function(User) {
             ipdj: credentials.ipdj,
             genero: credentials.genero,
             nacionalidade: credentials.nacionalidade,
-            codPostal: credentials.codPostal,
+            codigoPostal: credentials.codPostal,
             socio: credentials.socio,
             telemovel: credentials.telemovel,
             cartaoCidadao: credentials.cartaoCidadao,

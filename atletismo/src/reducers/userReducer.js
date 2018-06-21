@@ -4,6 +4,7 @@ const initialState = {
   user: undefined,
   userRole: undefined,
   isAuthenticated: false,
+  token: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -14,7 +15,8 @@ const userReducer = (state = initialState, action) => {
           user: decoded.userId,
           userRole: decoded.userRole,
           isAuthenticated: true,
-          errorMessage: ''
+          errorMessage: '',
+          token: action.token
         })
     case LOGIN_FAILURE:
         let message = action.message
@@ -29,7 +31,8 @@ const userReducer = (state = initialState, action) => {
         return Object.assign({}, state, {
           user: undefined,
           userRole: undefined,
-          isAuthenticated: false
+          isAuthenticated: false,
+          token : null
         })
     default:
         return state;

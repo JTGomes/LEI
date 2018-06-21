@@ -29,19 +29,18 @@ class AppAtleta extends Component {
   }
 
   render() {
-    let title = ""
-    //this.props.match.params ? title = this.match.params.id : title= "none"
+
     const { match: { params } } = this.props;
     return (
         <div >
           <NavBar sidebarLinks={this.state.sidebarLinks} />
           <div className="content-wrapper">
             <Switch>
-              <Route exact path={`/atleta/${params.id}`} component={Dados} />
-              <Route exact path={`/atleta/${params.id}/results`} component={Resultados} />
-              <Route exact path={`/atleta/${params.id}/stats`} component={Desempenho} />
-              <Route exact path={`/atleta/${params.id}/photos`} component={Fotos} />
-              <Route exact path={`/atleta/${params.id}/calendar`} component={CalendarA} />
+              <Route exact path={`/atleta/${params.id}`} component={()=> <Dados param={params.id}/>} />
+              <Route exact path={`/atleta/${params.id}/results`} component={() => <Resultados param={params.id}/>} />
+              <Route exact path={`/atleta/${params.id}/stats`} component={() => <Desempenho param={params.id}/>} />
+              <Route exact path={`/atleta/${params.id}/photos`} component={() => <Fotos param={params.id}/>} />
+              <Route exact path={`/atleta/${params.id}/calendar`} component={() => <CalendarA param={params.id}/>} />
             </Switch>
           </div>
         </div>
