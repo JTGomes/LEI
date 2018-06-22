@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official';
 import FaTwitterSquare from 'react-icons/lib/fa/twitter-square';
@@ -15,6 +17,8 @@ class About extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      info: [],
+      infoUser: [],
       modalDataEdit: false,
       modalDocs: false,
       modalPhoto: false,
@@ -28,6 +32,32 @@ class About extends React.Component {
     this.toggleP = this.toggleP.bind(this);
     //DEq=Dropdown Equipment
     this.toggleDEq = this.toggleDEq.bind(this);
+  }
+
+  componentDidMount(){
+
+    let url = this.props.userId;
+
+
+    if(this.props.param) {
+      url = this.props.param;
+    }
+
+    axios.get(`http://localhost:3000/api/Atleta/${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+        .then(response => {
+          this.setState({
+            info: response.data,
+          })
+        })
+        .catch(error => console.log(error))
+
+    axios.get(`http://localhost:3000/api/User/${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    .then(response => {
+      this.setState({
+        infoUser: response.data,
+      })
+    })
+    .catch(error => console.log(error))
   }
 
   toggleDE(){
@@ -96,15 +126,15 @@ class About extends React.Component {
   }
   //para fazer render dos botões das redes sociais
   renderSocial() {
-    if(!this.props.socialN) {
+    if(!this.state.info.socialN) {
       return(
         <p>Sem Redes Sociais associadas!</p>
       );
     }
     //verifica se objeto tem dada rede social como elemento
-    if(this.props.socialN.hasOwnProperty('facebook')) this.renderFaceb();
-    if(this.props.socialN.hasOwnProperty('twitter')) this.renderTwit();
-    if(this.props.socialN.hasOwnProperty('instagram')) this.renderInsta();
+    if(this.state.info.socialN.hasOwnProperty('facebook')) this.renderFaceb();
+    if(this.state.info.socialN.hasOwnProperty('twitter')) this.renderTwit();
+    if(this.state.info.socialN.hasOwnProperty('instagram')) this.renderInsta();
   }
 
   render() {
@@ -118,37 +148,37 @@ class About extends React.Component {
             <figcaption id="profile-change" style={{cursor:'pointer'}} onClick={()=>this.initModalPhoto()}>Alterar Imagem <FaEdit /></figcaption>
           </figure>
           <div className="col">
-            <p>Nome Completo: {this.props.name}</p>
-            <p>Número de telemóvel: {this.props.phone}</p>
-            <p>Nº de Documento: {this.props.documentId}</p>
-            <p>Sócio: {this.props.isSocio}</p>
+            <p><a class="info">Nome Completo:</a> {this.state.info.nome_competicao}</p>
+            <p><a class="info">Número de telemóvel:</a> {this.state.info.telemovel}</p>
+            <p><a class="info">Nº de Documento:</a> {this.state.info.nrdocumento}</p>
+            <p><a class="info">Sócio:</a> {1000}</p>
           </div>
           <div className="col">
-            <p>Género: {this.props.gender}</p>
-            <p>Endereço de e-mail: {this.props.email}</p>
-            <p>Morada: {this.props.morada}</p>
-            <p>Nº cartão de sócio: {this.props.socioNum}</p>
+            <p><a class="info">Género:</a> {this.state.info.genero}</p>
+            <p><a class="info">Endereço de e-mail:</a> {this.state.infoUser.email}</p>
+            <p><a class="info">Morada:</a> {this.state.info.morada}</p>
+            <p><a class="info">Nº cartão de sócio:</a> {this.state.info.nrSocio}</p>
           </div>
           <div className="col">
-            <p>NIF: {this.props.nif}</p>
-            <p>Nacionalidade: {this.props.nacionalidade}</p>
-            <p>Código Postal: {this.props.postal}</p>
-            <p>Treinador(es): {this.props.treinadores}</p>
+            <p><a class="info">NIF:</a> {this.state.info.nif}</p>
+            <p><a class="info">Nacionalidade:</a> {this.state.info.nacionalidade}</p>
+            <p><a class="info">Código Postal:</a> {this.state.info.codigoPostal}</p>
+            <p><a class="info">Treinador(es):</a> {this.state.info.treinadorId}</p>
           </div>
           <div className="col">
-            <p>Data de Nascimento: {this.props.birth}</p>
-            <p>Tipo de Documento: {this.props.identificacao}</p>
-            <p>Localidade: {this.props.localidade}</p>
+            <p><a class="info">Data de Nascimento:</a> {this.state.info.dataNascimento}</p>
+            <p><a class="info">Tipo de Documento:</a> {this.state.info.tipoDocumento}</p>
+            <p><a class="info">Localidade:</a> {this.state.info.morada}</p>
           </div>
         </div>
         <div className="section">
           <p className="Title">Dados de Filiação</p>
           <hr />
           <div className="col">
-            <p>Tipo de Filiação: {this.props.filiacao}</p>
-            <p>Contrato até: {this.props.contracaate}</p>
-            <p>Escalão: {this.props.escalao}</p>
-            <p>Subsídio: {this.props.subs}</p>
+            <p><a class="info">Tipo de Filiação:</a> {this.state.info.encarregado}</p>
+            <p><a class="info">Contrato até:</a> {this.state.info.encarregado}</p>
+            <p><a class="info">Escalão:</a> {this.state.info.escalao}</p>
+            <p><a class="info">Subsídio:</a> {this.state.info.subsidio}</p>
           </div>
           <div className="col">
             <DropdownEquipment dropdownOpen={this.state.dropdownOpen} toggle={this.toggleDEq} />
@@ -158,8 +188,8 @@ class About extends React.Component {
           <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></p>
           <hr />
           <div className="col">
-            <p>Cartão de Cidadão {this.props.id}</p>
-            <p>Exames Médicos {this.props.medical}</p>
+            <p><a class="info">Cartão de Cidadão:</a> {this.state.info.cartaoCidadao}</p>
+            <p><a class="info">Exames Médicos:</a> {this.state.info.exameMedico}</p>
             <p>Imprimir</p>
           </div>
         </div>
@@ -176,4 +206,12 @@ class About extends React.Component {
   }
 }
 
-export default About;
+function mapStateToProps(state){
+  return {
+    userId: state.user,
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(About);

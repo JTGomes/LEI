@@ -50,3 +50,7 @@
 	line-height : 8px;
 	width: 450px;
 }
+
+a.info {
+	font-weight: bold;
+}
