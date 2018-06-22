@@ -29,6 +29,7 @@ class GestaoAtletas extends Component {
     selection: [],
     selectAll: false,
     input: '',
+    data: []
   };
 }
 

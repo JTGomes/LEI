@@ -19,7 +19,13 @@ class AntigosAtletas extends Component {
      modalUserInfo: false,
      uid: undefined,
      input: '',
+     data : []
    };
+ }
+
+
+ componentDidMount(){
+   
  }
 
  toggleMU(){

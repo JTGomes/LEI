@@ -54,8 +54,6 @@ module.exports = function(User) {
      return callback(new Error('Precisa de ser diretor para efetuar esta operação'));
    }
 
-
-
    User.findById(data.userId)
      .then(user => {
          const  mailOptions = {
@@ -65,7 +63,12 @@ module.exports = function(User) {
             html: '<h1>Atletismo Braga</h1><p><strong>Já pode aceder à sua conta com o email.</strong></p>'// plain text body
           };
           mail.sendEmail(mailOptions);
-
+          if(data.isIsento){
+            console.log(user.id);
+            User.app.models.Atleta.findOne({where :{userId : user.id}})
+            .then(atleta => atleta.updateAttributes({ isIsento : data.isIsento}))
+            .catch(error => callback(error))
+          }
           return user.updateAttributes({ validado: true })})
      .then(user => callback(null, user))
      .catch(error => callback(error))
@@ -234,6 +237,31 @@ module.exports = function(User) {
       http: {verb: 'post'},
     }
   );
+
+  User.getUsersNaoValidos = function(req, data, callback){
+    const payload = decodeToken(req.headers.authorization);
+
+    if (!payload) {
+      return callback(new Error('Authentication is required'));
+    }
+
+    User.find({where:{ validado : false}})
+    .then(atletas => callback(null,atletas))
+    .catch(error => callback(error));
+  };
+
+  User.remoteMethod('getUsersNaoValidos',
+  {
+    accepts: [
+      { arg: 'req', type: 'object', http: { source: 'req' } },
+      { arg: 'data', type: 'any', required: false, http: { source: 'body' } },
+    ],
+    returns: { arg: 'accessToken', type: 'object', root: true },
+    http: {verb: 'get'},
+  }
+
+);
+
 
 
 };

@@ -3,10 +3,8 @@ import Check from 'react-icons/lib/fa/check';
 import Close from 'react-icons/lib/fa/close';
 import ModalUserInfo from '../../../../../components/ModalUserInfo';
 import {Button, Modal,ModalHeader, ModalBody, ModalFooter,Table, Form, FormGroup,Input} from 'reactstrap';
-
-const data=[
-  {nome:'Guilherma Azevedo Silva',uid:'uid'},
-  {nome:'Manuel Hugo Silva Lobo',uid:'uid'}]
+import axios from 'axios';
+import {connect} from 'react-redux';
 
 class Treinador extends Component {
   constructor(props) {
@@ -55,6 +53,14 @@ class Treinador extends Component {
 
   acceptUser(){
     //completar para aceitar o treinador
+    axios.put('http://localhost:3000/api/Users/validar',{userId : this.state.uid },
+              {headers:{'Authorization' : 'Bearer ' + this.props.token}}
+            )
+            .then(response =>{
+                  this.props.remover(this.state.uid);
+                  this.toggle();
+                })
+            .catch(error => console.log(error))
   }
 
   rejectUser(){
@@ -63,12 +69,12 @@ class Treinador extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.uid)}}>{obj.nome}</td>
+        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.id)}}>{obj.nome}</td>
         <td>
-          <Button color="success" onClick={()=>{this.initModal(obj.uid,true)}}>
+          <Button color="success" onClick={()=>{this.initModal(obj.id,true)}}>
             <Check />
           </Button>{'  '}
-          <Button color="danger" onClick={()=>{this.initModal(obj.uid,false)}}>
+          <Button color="danger" onClick={()=>{this.initModal(obj.id,false)}}>
             <Close />
           </Button>
         </td>
@@ -108,7 +114,7 @@ class Treinador extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
+            {this.filter_data_byName(this.props.data).map( (obj,elem) => this.getRow(obj,elem))}
           </tbody>
         </Table>
 
@@ -131,5 +137,9 @@ class Treinador extends Component {
     );
   }
 }
-
-export default Treinador;
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
+export default connect(mapStateToProps)(Treinador);

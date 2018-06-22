@@ -3,12 +3,8 @@ import Check from 'react-icons/lib/fa/check';
 import Close from 'react-icons/lib/fa/close';
 import ModalUserInfo from '../../../../../components/ModalUserInfo';
 import {Button, Modal,ModalHeader, ModalBody, ModalFooter,Table,Form, FormGroup, Label, Input} from 'reactstrap';
-
-const data=[
-  {nome:'João Luís Costa',uid:'uid'},
-  {nome:'Alfredo Lopes da Silva',uid:'uid'}]
-
-
+import axios from 'axios';
+import {connect} from 'react-redux';
 
 class Atleta extends Component {
   constructor(props) {
@@ -71,12 +67,12 @@ class Atleta extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.uid)}}>{obj.nome}</td>
+        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.id)}}>{obj.nome}</td>
         <td>
-          <Button color="success" onClick={()=>{this.initModal(obj.uid,true)}}>
+          <Button color="success" onClick={()=>{this.initModal(obj.id,true)}}>
             <Check />
           </Button>{'  '}
-          <Button color="danger" onClick={()=>{this.initModal(obj.uid,false)}}>
+          <Button color="danger" onClick={()=>{this.initModal(obj.id,false)}}>
             <Close />
           </Button>
         </td>
@@ -115,7 +111,7 @@ class Atleta extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
+            {this.filter_data_byName(this.props.data).map( (obj,elem) => this.getRow(obj,elem))}
           </tbody>
 
         </Table>
@@ -158,5 +154,10 @@ class Atleta extends Component {
     );
   }
 }
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
 
-export default Atleta;
+export default connect(mapStateToProps)(Atleta);
