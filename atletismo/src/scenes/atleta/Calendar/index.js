@@ -17,7 +17,7 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 function Calendar(props) {
   //console.log(moment);
   return(
-    <div className="calendar">
+    <div className="calendar container-fluid">
       <BigCalendar
       events={[
         {

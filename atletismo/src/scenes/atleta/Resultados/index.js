@@ -1,6 +1,10 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import ReactTable from "react-table";
 import Dropdown from './components/dropdown';
+import { Button } from 'reactstrap';
+import ModalAddResults from './components/modalAddResults';
 import "react-table/react-table.css";
 import './Results.css';
 
@@ -8,84 +12,111 @@ import './Results.css';
 //accessor equivale ao campo ao qual a coluna corresponde  
 
 class Results extends React.Component {
-  state = {
-    data: [{
-      prova: 'Jogos Olímpicos',
-      tipo: 'Coletivo',
-      disciplina: '4x100m',
-      dia: '19/08/2016',
-      local: 'Rio de Janeiro',
-      resultado: 37.27,
-      classificacao: 1
-    },{
-      prova: 'Jogos Olímpicos',
-      tipo: 'Individual',
-      disciplina: '200m',
-      dia: '18/09/2016',
-      local: 'Rio de Fevereiro',
-      resultado: 19.78,
-      classificacao: 1
-    }],
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalAddResults: false,
+      data: [],
+      col: [{
+        Header: 'Prova',
+        accessor: 'nome',
+        filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+          return this.state.data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);},
+        filterAll: true
+      },{
+        Header: 'Tipo',
+        accessor: 'tipo',
+      },{
+        Header: 'Disciplina',
+        accessor: 'disciplina',
+          filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+            return this.state.data.filter( data_row => data_row.disciplina.toUpperCase().indexOf(text) !== -1);},
+          filterAll: true
+      },{
+        Header: 'Data',
+        accessor: 'data',
+          filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+            return this.state.data.filter( data_row => data_row.data.toUpperCase().indexOf(text) !== -1);},
+          filterAll: true
+      },{
+        Header: 'Local',
+        accessor: 'local',
+        filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
+          return this.state.data.filter( data_row => data_row.local.toUpperCase().indexOf(text) !== -1);},
+        filterAll: true
+      },{
+        Header: 'Resultado(s)',
+        accessor: 'resultado',
+      },{
+        Header: 'Classificação',
+        accessor: 'classificacao',
+      },
+      {
+        Header: 'Opções',
+        Cell: row => (
+          <div className="text-center">
+            <Dropdown />
+          </div>
+        ),
+        filterable:false,
+        sortable: false,
+        style:{overflow:'visible'},
+      }],
+    }
+    this.toggleAR = this.toggleAR.bind(this);
+  }
 
-    col: [{
-      Header: 'Prova',
-      accessor: 'prova',
-      filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-        return this.state.data.filter( data_row => data_row.prova.toUpperCase().indexOf(text) !== -1);},
-      filterAll: true
-    },{
-      Header: 'Tipo',
-      accessor: 'tipo',
-    },{
-      Header: 'Disciplina',
-      accessor: 'disciplina',
-        filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-          return this.state.data.filter( data_row => data_row.disciplina.toUpperCase().indexOf(text) !== -1);},
-        filterAll: true
-    },{
-      Header: 'Data',
-      accessor: 'dia',
-        filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-          return this.state.data.filter( data_row => data_row.dia.toUpperCase().indexOf(text) !== -1);},
-        filterAll: true
-    },{
-      Header: 'Local',
-      accessor: 'local',
-      filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-        return this.state.data.filter( data_row => data_row.local.toUpperCase().indexOf(text) !== -1);},
-      filterAll: true
-    },{
-      Header: 'Resultado(s)',
-      accessor: 'resultado',
-    },{
-      Header: 'Classificação',
-      accessor: 'classificacao',
-    },
-    {
-      Header: 'Opções',
-      Cell: row => (
-        <div className="text-center">
-          <Dropdown />
-        </div>
-      ),
-      filterable:false,
-      sortable: false,
-      style:{overflow:'visible'},
-    }],
+  toggleAR(){
+    this.setState({
+      modalAddResults: !this.state.modalAddResults,
+    })
+  }
+
+  initModalAddResult(){
+    this.setState({
+      modalAddResults: true,
+    })
+  }
+
+  componentDidMount(){
+    let url = this.props.userId;
+    if(this.props.param) {
+      url = this.props.param;
+    }
+
+    axios.get(`http://localhost:3000/api/Atleta/${url}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+        this.setState({
+          data: response.data,
+        })
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
     return(
       <div className="results container-fluid">
-      <ReactTable
-        filterable
-        data={this.state.data}
-        columns={this.state.col}
-        defaultPageSize={10}
-      />
+        <div className="results-button">
+        <Button onClick={() => this.initModalAddResult()}>Adicionar Resultado</Button>
+        </div>
+        <ReactTable
+          filterable
+          data={this.state.data}
+          columns={this.state.col}
+          defaultPageSize={10}
+        />
+        <ModalAddResults modalAddResults={this.state.modalAddResults} toggle={this.toggleAR}/>
       </div>
     );
   }
 }
 
-export default Results;
+function mapStateToProps(state){
+  return {
+    userId: state.user,
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(Results);
