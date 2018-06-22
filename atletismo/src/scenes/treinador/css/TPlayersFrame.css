@@ -1,0 +1,17 @@
+.coach-players {
+	margin-top: -20px;
+}
+
+.coach-players-buttons {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.coach-players-button-left {
+	float: left;
+}
+
+.coach-players-button-right {
+	float: left;
+	margin-left: 10px
+}

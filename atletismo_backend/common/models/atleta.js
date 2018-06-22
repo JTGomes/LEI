@@ -2,17 +2,28 @@
 
 module.exports = function(Atleta) {
 
-	Atleta.ultimosResultados = function(req, data, callback) {
+   Atleta.getAtletas = function(req, data, callback){
+  //   const payload = decodeToken(req.headers.authorization);
+  //
+  //   if (!payload) {
+  //     return callback(new Error('Authentication is required'));
+  //   }
+  Atleta.find({
+    include:{
+        relation: "user",
+        scope:{
+           where: {
+             validado: true,
+            }
+          }
+        },where:{ativo:true}
+    })
+  .then(result => callback(null, result))
+  .catch(error => console.log(error))
 
-		Atleta.find({
-			include:{
-				relation: "resultados"
-			}
-		}).then(results => callback(null, results)).catch(error => console.log(error))
+  };
 
-	};
-
-	Atleta.remoteMethod('ultimosResultados',
+  Atleta.remoteMethod('getAtletas',
   {
     accepts: [
       { arg: 'req', type: 'object', http: { source: 'req' } },
