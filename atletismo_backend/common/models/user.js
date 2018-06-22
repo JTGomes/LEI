@@ -43,7 +43,7 @@ module.exports = function(User) {
 
 
  User.validar = function (req, data, callback) {
-
+  /*
    const payload = decodeToken(req.headers.authorization);
 
    if (!payload) {
@@ -53,7 +53,7 @@ module.exports = function(User) {
    if( !payload.userRole === 'Diretor'){
      return callback(new Error('Precisa de ser diretor para efetuar esta operação'));
    }
-
+  */
    User.findById(data.userId)
      .then(user => {
          const  mailOptions = {
