@@ -14,6 +14,7 @@ class Atleta extends Component {
       accept: false,
       modalUserInfo: false,
       uid: undefined,
+      user: undefined,
       isento: undefined,
       input: '',
     };
@@ -39,8 +40,9 @@ class Atleta extends Component {
     this.setState({
       modal: true,
       accept : aceitar,
-      uid: userid,
+      uid: userid.user.id,
       isento: undefined,
+      user: userid
     });
   }
 
@@ -71,7 +73,7 @@ class Atleta extends Component {
 
   rejectUser(){
     axios.post('http://localhost:3000/api/Users/rejeitaRegisto',
-    {userId: this.state.uid},
+    {userId: this.state.uid,role: this.state.user.user.role, id: this.state.user.id},
     {headers:{'Authorization' : 'Bearer ' + this.props.token}}
   ).then(response => {
         this.props.remover(this.state.uid);
@@ -82,12 +84,12 @@ class Atleta extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.id)}}>{obj.nome}</td>
+        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj)}}>{obj.user.nome}</td>
         <td>
-          <Button color="success" onClick={()=>{this.initModal(obj.id,true)}}>
+          <Button color="success" onClick={()=>{this.initModal(obj,true)}}>
             <Check />
           </Button>{'  '}
-          <Button color="danger" onClick={()=>{this.initModal(obj.id,false)}}>
+          <Button color="danger" onClick={()=>{this.initModal(obj,false)}}>
             <Close />
           </Button>
         </td>
@@ -163,7 +165,7 @@ class Atleta extends Component {
               <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
             </ModalFooter>
           </Modal>
-          <ModalUserInfo toggle={this.toggleM} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
+          {this.state.modalUserInfo && <ModalUserInfo toggle={this.toggleM} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />}
         </div>
 
     );

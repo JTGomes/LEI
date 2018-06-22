@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import checkboxHOC from "react-table/lib/hoc/selectTable";
 import 'react-table/react-table.css';
 import ModalUserInfo from '../../../components/ModalUserInfo';
+import SendNotificationALL from '../../../components/SendNotificationAll/SendNotificationALL.js'
 import { Button } from 'reactstrap';
 import OptionMenu from './components/OptionMenu';
 import SendIcon from 'react-icons/lib/fa/paper-plane';
@@ -12,15 +13,18 @@ import {connect} from 'react-redux';
 const CheckboxTable = checkboxHOC(ReactTable);
 
 
-class GestaoAtletas extends Component {
+class GestaoTreinador extends Component {
  constructor(props) {
   super(props);
 
   this.toggleMU = this.toggleMU.bind(this);
+  this.toggleNA = this.toggleNA.bind(this);
   this.state = {
     modalUserInfo: false,
+    modalNotifyAll: false,
     uid: undefined,
     selection: [],
+    selecionados: [],
     selectAll: false,
     input: '',
     data : []
@@ -31,7 +35,6 @@ componentDidMount(){
   axios.get('http://localhost:3000/api/Treinadors/getTreinadores',{headers:{'Authorization' : 'Bearer ' + this.props.token}})
   .then(response => {
     let utilizadores = response.data.filter(user => user.user)
-    console.log(utilizadores)
     utilizadores = utilizadores.map((utilizador, elem) => {utilizador._id = elem ; return utilizador})
     this.setState({ data : utilizadores })
   })
@@ -51,18 +54,32 @@ initModalUser(userID){
   })
 }
 
+toggleNA(){
+  this.setState({
+    modalNotifyAll: !this.state.modalNotifyAll,
+  })
+}
+
+
+
 toggleSelection = (key, shift, row) => {
   let selection = [...this.state.selection];
+  let selecionados = [...this.state.selecionados];
   const keyIndex = selection.indexOf(key)
   if (keyIndex >= 0) {
     selection = [
       ...selection.slice(0, keyIndex),
       ...selection.slice(keyIndex + 1)
     ];
+    selecionados = [
+      ...selecionados.slice(0, keyIndex),
+      ...selecionados.slice(keyIndex + 1)
+    ];
   } else {
     selection.push(key);
+    selecionados.push(row.user);
   }
-  this.setState({ selection });
+  this.setState({ selection, selecionados });
 };
 
 handleInputSubmit(event) {
@@ -82,14 +99,16 @@ filter_data_byName(data){
 toggleAll = () => {
   const selectAll = this.state.selectAll ? false : true;
   const selection = [];
+  const selecionados = [];
   if (selectAll) {
     const wrappedInstance = this.checkboxTable.getWrappedInstance();
     const currentRecords = wrappedInstance.getResolvedState().sortedData;
     currentRecords.forEach(item => {
       selection.push(item._original._id);
+      selecionados.push(item._original.user)
     });
   }
-  this.setState({ selectAll, selection });
+  this.setState({ selectAll, selection, selecionados });
 };
 
 isSelected = key => {
@@ -129,7 +148,7 @@ isSelected = key => {
             </FormGroup>
           </Form>
           <div className="col-lg-3">
-          <Button className={(this.state.selectAll|| this.state.selection.length>0)? "" : "disabled btnDisable"} color="primary"><SendIcon />{' '}Enviar Notificação</Button>
+          <Button className={(this.state.selectAll|| this.state.selection.length>0)? "" : "disabled btnDisable"} color="primary" onClick={this.toggleNA}><SendIcon />{' '}Enviar Notificação</Button>
           </div>
         </div>
         <CheckboxTable
@@ -164,7 +183,7 @@ isSelected = key => {
          className="-striped -highlight"
          {...checkboxProps}
        />
-
+     {this.state.modalNotifyAll && <SendNotificationALL  isOpen={this.state.modalNotifyAll} toggle={this.toggleNA} to={this.state.selecionados}/>}
      <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} treinador={true}/>
       </div>
 
@@ -179,4 +198,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps)(GestaoAtletas);
+export default connect(mapStateToProps)(GestaoTreinador);

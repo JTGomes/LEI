@@ -8,9 +8,11 @@ class Registo extends Component {
 constructor(props){
   super(props);
   this.state = {
-    users: []
+  Atletas : [],
+  Treinadores: []
   };
-  this.remover = this.remover.bind(this);
+  this.removerAtleta = this.removerAtleta.bind(this);
+  this.removerTreinador = this.removerTreinador.bind(this);
 
 }
 
@@ -18,7 +20,8 @@ componentDidMount(){
   axios.get('http://localhost:3000/api/Users/getUsersNaoValidos', {headers:{'Authorization' : 'Bearer ' + this.props.token}})
     .then(response =>{
         this.setState({
-          users: response.data
+          Atletas: response.data.Atletas,
+          Treinadores: response.data.Treinadores
         })}
     )
     .catch(error =>
@@ -26,9 +29,15 @@ componentDidMount(){
     )
 }
 
-  remover(id){
+  removerAtleta(id){
     this.setState(prevState => ({
-      users: prevState.users.filter(user => user.id !== id)
+      Atletas: prevState.Atletas.filter(user => user.user.id !== id)
+    }));
+  }
+
+  removerTreinador(id){
+    this.setState(prevState => ({
+      Treinadores: prevState.Treinadores.filter(user => user.user.id !== id)
     }));
   }
 
@@ -41,14 +50,14 @@ componentDidMount(){
           </div>
         </div>
         <br/>
-        <Atleta data ={this.state.users.filter(user => user.role==='Atleta')} remover={this.remover}/>
+        <Atleta data ={this.state.Atletas} remover={this.removerAtleta}/>
           <div className="row mt-5">
             <div className="col-lg-12">
               <h1>Treinadores que aguardam validação</h1>
             </div>
           </div>
           <br/>
-          <Treinador data = {this.state.users.filter(user => user.role==='Treinador')} remover={this.remover}/>
+          <Treinador data = {this.state.Treinadores} remover={this.removerTreinador}/>
 
         </div>
 

@@ -238,15 +238,44 @@ module.exports = function(User) {
   );
 
   User.getUsersNaoValidos = function(req, data, callback){
-    const payload = decodeToken(req.headers.authorization);
+    // const payload = decodeToken(req.headers.authorization);
+    //
+    // if (!payload) {
+    //   return callback(new Error('Authentication is required'));
+    // }
 
-    if (!payload) {
-      return callback(new Error('Authentication is required'));
-    }
+    let atletasJSON = [];
+    let treinadoresJson=[];
+    User.app.models.Atleta.find({
+      include:{
+          relation: "user",
+          scope:{
+             where: {
+               validado: false,
+              }
+            }
+          },where:{ativo:true}
+    })
+    .then(atletas =>  atletas.filter(atleta => atleta.toJSON().hasOwnProperty('user') ))
+    .then(listaAtletas =>  User.app.models.Treinador.find({
+                                      include:{
+                                          relation: "user",
+                                          scope:{
+                                             where: {
+                                               validado: false,
+                                              }
+                                            }
+                                          },where:{ativo:true}
+                                        })
+                                        .then(treinadores => {
+                                          var t = treinadores.filter(treinador => treinador.toJSON().hasOwnProperty('user') )
+                                          return callback(null, {Atletas: listaAtletas,Treinadores: t})
+                                          } )
 
-    User.find({where:{ validado : false}})
-    .then(atletas => callback(null,atletas))
-    .catch(error => callback(error));
+
+     )
+     .catch(error => console.log(error))
+
   };
 
   User.remoteMethod('getUsersNaoValidos',
@@ -262,30 +291,22 @@ module.exports = function(User) {
 );
 
 User.rejeitaRegisto = function(req, data, callback){
-  const payload = decodeToken(req.headers.authorization);
+  // const payload = decodeToken(req.headers.authorization);
+  //
+  // if (!payload) {
+  //   return callback(new Error('Authentication is required'));
+  // }
 
-  if (!payload) {
-    return callback(new Error('Authentication is required'));
-  }
-User.findById(data.userId)
-.then(utilizador => {
   User.destroyById(data.userId)
-  .then(user =>{
-    if(utilizador.role==='Atleta'){
-      User.app.models.Atleta.destroyAll({where : {userId : data.userId}})
+  .then(count => {
+    if(data.role==='Atleta'){
+      User.app.models.Atleta.destroyById(data.id)
       .then(count => callback(null, count))
-      .catch(error => console.log(error))
     }else{
-      User.app.models.Treinador.destroyAll({where : {userId : data.userId}})
+      User.app.models.Treinador.destroyById(data.id)
       .then(count => callback(null, count))
-      .catch(error => console.log(error))
-    }
-  }
-
-    )
-    .catch(error => callback(error));
-})
-.catch(error => console.log(error))
+    }})
+    .catch(erro => console.log(error))
 
 };
 
