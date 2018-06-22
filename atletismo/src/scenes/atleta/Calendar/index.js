@@ -16,7 +16,7 @@ moment.locale('pt');
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 //evento passado pode ser por props...
-<<<<<<< HEAD
+
 class Calendar extends React.Component {
     constructor(props){
     super(props);
@@ -63,6 +63,7 @@ class Calendar extends React.Component {
       </div>
     );
   }
+}
 
 function mapStateToProps(state){
   return {
