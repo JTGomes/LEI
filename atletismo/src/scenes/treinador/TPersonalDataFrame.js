@@ -86,7 +86,6 @@ class TPersonalDataFrame extends React.Component {
           <hr />
           <div className="col">
             <p>Contrato até: {this.state.contrato.end} </p>
-            <p>Salário: {this.state.contrato.salario} </p>
           </div>
         </div>
         <div className="section">

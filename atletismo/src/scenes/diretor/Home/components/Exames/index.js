@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import { Table,Button,Alert,Form,FormGroup,Input } from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 import PDF from 'react-icons/lib/fa/file-pdf-o';
@@ -6,26 +8,36 @@ import ModalUserInfo from '../../../../../components/ModalUserInfo';
 import SendNotification from '../../../../../components/SendNotification';
 import Send from 'react-icons/lib/fa/paper-plane';
 
-const data=[
-  {nome:'João Luís Costa',uid:'uid',nascimento: '02/02/1994',exame: 'http://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf'},
-  {nome:'Alfredo Lopes da Silva',uid:'uid',nascimento: '05/02/1990',exame: 'http://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf'}]
-
-
-
 class Exames extends Component {
   constructor(props){
     super(props);
     this.state = {
+      info: [],
       modalUserInfo: false,
       modalNotification: false,
       uid: undefined,
       name: undefined,
       input: '',
+      userId: undefined
     }
     this.toggle = this.toggle.bind(this);
     this.toggleS = this.toggleS.bind(this);
   }
 
+  componentDidMount() {
+
+    let config = {
+      headers: {'Authorization' : 'Bearer ' + this.props.token},
+    }
+
+    axios.get(`http://localhost:3000/api/Atleta?filter[where][exameFalta]=false`, config)
+        .then(response => {
+          this.setState({
+            info: response.data,
+          })
+        })
+        .catch(error => console.log(error))
+  }
 
   toggle(){
     this.setState({
@@ -47,11 +59,11 @@ class Exames extends Component {
   }
 
 
-  initModalNotification(userID,name){
+  initModalNotification(userID,name,){
     this.setState({
         modalNotification: true,
-        uid: userID,
         name: name,
+        userId: userID
     })
   }
 
@@ -72,21 +84,18 @@ class Exames extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-             <td onClick={()=>this.initModalUser(obj.uid)} style={{cursor:'pointer'}}>{obj.nome}</td>
-             <td >{obj.nascimento}</td>
-             <td ><Button color="success">< Check />{' '}Validar</Button></td>
-             <td><a target='_blank' href={obj.exame}><Button color="secondary"><PDF />{' '}ver exame</Button></a></td>
-            <td><Button color="primary" onClick={()=> this.initModalNotification(obj.uid,obj.nome)}><Send />{' '}Nova Notificação</Button></td>
+             <td onClick={()=>this.initModalUser(obj.info)} style={{cursor:'pointer'}}>{obj.nome_competicao}</td>
+             <td >{obj.dataNascimento}</td>
+             <td ><Button color="success"><Check />{' '}Validar</Button></td>
+             <td><a target='_blank' href={obj.exameMedico}><Button color="secondary"><PDF />{' '}ver exame</Button></a></td>
+            <td><Button color="primary" onClick={()=> this.initModalNotification(obj.userId,obj.nome_competicao)}><Send />{' '}Nova Notificação</Button></td>
          </tr>);
   }
-
-
-
 
   render() {
     return (
       <div>
-        {data.length>0 ?
+        {this.state.info.length>0 ?
           <div>
             <div className="row">
               <Form className="col-lg-3">
@@ -106,20 +115,28 @@ class Exames extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
+                {this.filter_data_byName(this.state.info).map( (obj,elem) => this.getRow(obj,elem))}
               </tbody>
             </Table>
           </div>:
           <Alert color="success">
             Não há exames médicos em falta
           </Alert>}
-
-          <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
-          <SendNotification toggle={this.toggleS} user={this.state.uid} name={this.state.name} isOpen={this.state.modalNotification}/>
+          <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.info} />
+          {this.state.userId && <SendNotification toggle={this.toggleS} name={this.state.name} userId={this.state.userId} isOpen={this.state.modalNotification}/>
+          }
         </div>
     );
   }
 
 }
 
-export default Exames;
+function mapStateToProps(state){
+  return {
+    userId: state.user,
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(Exames);

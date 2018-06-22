@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGroup, ListGroupItem} from 'reactstrap';
 
@@ -6,10 +8,11 @@ import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGro
 
 class ModalUserInfo extends Component {
   constructor(props){
-      super(props);
+    super(props);
   }
 
   render() {
+    console.log(this.props);
     let user = this.props.treinador?'Treinador':'Atleta';
     if(this.props.user){
     return (

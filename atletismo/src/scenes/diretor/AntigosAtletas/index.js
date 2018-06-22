@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import ReactTable from "react-table";
 import ModalUserInfo from '../../../components/ModalUserInfo';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
-const data=[{_id:1, nome: 'Júlio Santos dos Anjos', uid:'uid' },
-            {_id:2, nome: 'António Luís Silva Marques', uid:'uid'},
-            {_id:3, nome: 'Guilherme Ventura dos Reis', uid:'uid'},
-            {_id:4, nome: 'Madalena Silva Barros', uid:'uid'},
-            {_id:5, nome: 'Julieta Flores Costa Gonçalves', uid:'uid'},
-          ]
 
 class AntigosAtletas extends Component {
   constructor(props) {
@@ -19,14 +15,42 @@ class AntigosAtletas extends Component {
      modalUserInfo: false,
      uid: undefined,
      input: '',
-     data : []
+     data : [],
+     cols: [
+        {
+          Header: 'Nome do Atleta',
+          accessor: 'nome_competicao',
+          Cell: row => (
+            <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original.uid)}>{row.original.nome_competicao}</div>
+          )
+        },
+        {
+          Header: 'Devolver Acesso',
+          acessor: 'id',
+          Cell: row => (
+            <div className="text-center">
+             <Button color="success"><Check /></Button>
+            </div>
+          )
+        }
+        ]
    };
  }
 
+  componentDidMount() {
 
- componentDidMount(){
-   
- }
+    let config = {
+      headers: {'Authorization' : 'Bearer ' + this.props.token},
+    }
+    
+    axios.get(`http://localhost:3000/api/Atleta?filter[where][ativo]=true`, config)
+        .then(response => {
+          this.setState({
+            data: response.data,
+          })
+        })
+        .catch(error => console.log(error))
+  }
 
  toggleMU(){
    this.setState({
@@ -52,7 +76,7 @@ class AntigosAtletas extends Component {
            return data;
          }
          const text = this.state.input.toUpperCase();
-         return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+         return data.filter( data_row => data_row.nome_competicao.toUpperCase().indexOf(text) !== -1);
      }
 
   render() {
@@ -67,25 +91,8 @@ class AntigosAtletas extends Component {
         </Form>
       </div>
       <ReactTable
-        data={this.filter_data_byName(data)}
-        columns={[
-          {
-          Header: 'Nome do Atleta',
-          accessor: 'nome',
-          Cell: row => (
-            <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original.uid)}>{row.original.nome}</div>
-          )
-        },
-        {
-          Header: 'Devolver Acesso',
-          acessor: 'uid',
-          Cell: row => (
-            <div className="text-center">
-             <Button color="success"><Check /></Button>
-            </div>
-          )
-        }
-        ]}
+        data={this.filter_data_byName(this.state.data)}
+        columns={this.state.cols}
         defaultPageSize={10}
         className="-striped -highlight"
       />

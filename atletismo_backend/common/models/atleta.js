@@ -32,7 +32,6 @@ module.exports = function(Atleta) {
     returns: { arg: 'accessToken', type: 'object', root: true },
     http: {verb: 'get'},
   }
-
   );
 
 };
