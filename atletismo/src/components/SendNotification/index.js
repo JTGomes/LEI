@@ -1,24 +1,45 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import {Button, Modal,ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
 import Send from 'react-icons/lib/fa/paper-plane';
 
 class SendNotification extends React.Component {
 
-
-
-
-  
   constructor(props){
     super(props);
     this.state = {
       assunto: '',
       mensagem: '',
+      user: props.userId
     }
   }
 
   onSubmit = (event) =>{
-    console.log('send notification');
-    //event.preventDefault();
+    event.preventDefault();
+    let config = {
+      headers: {'Authorization' : 'Bearer ' + this.props.token},
+    }
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth() + 1;
+    var day = currentTime.getDate();
+    if(day.toString().length == 1)
+      day = "0"+day;
+    if(month.toString().length == 1)
+      month = "0"+month;
+    var tempo = `${day}/${month}/${year}`;
+    const pars = {
+      data: tempo,
+      mensagem: this.state.mensagem,
+      assunto: this.state.assunto
+    }
+    console.log(this.props.user);
+    axios.post(`http://localhost:3000/api/Users/${this.props.userId}/notificacoes`, pars, config)
+        .then(response => {
+          this.props.toggle();
+          })
+        .catch(error => console.log(error))
   }
 
   render() {

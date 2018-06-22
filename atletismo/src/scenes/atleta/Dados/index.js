@@ -51,7 +51,7 @@ class About extends React.Component {
         })
         .catch(error => console.log(error))
 
-    axios.get(`http://localhost:3000/api/User/${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    axios.get(`http://localhost:3000/api/Users/${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
     .then(response => {
       this.setState({
         infoUser: response.data,
@@ -155,7 +155,7 @@ class About extends React.Component {
           </div>
           <div className="col">
             <p><a class="info">Género:</a> {this.state.info.genero}</p>
-            <p><a class="info">Endereço de e-mail:</a> {this.state.infoUser.email}</p>
+            <p><a class="info">Endereço de E-mail:</a> {this.state.infoUser.email}</p>
             <p><a class="info">Morada:</a> {this.state.info.morada}</p>
             <p><a class="info">Nº cartão de sócio:</a> {this.state.info.nrSocio}</p>
           </div>

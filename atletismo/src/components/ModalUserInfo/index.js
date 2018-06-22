@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGroup, ListGroupItem} from 'reactstrap';
 
 
 
 class ModalUserInfo extends Component {
+  constructor(props){
+    super(props);
+  }
 
   render() {
+    console.log(this.props);
     let user = this.props.treinador?'Treinador':'Atleta';
     return (
       <Modal isOpen={this.props.modalUserInfo} toggle={this.props.toggle} >
@@ -18,7 +24,7 @@ class ModalUserInfo extends Component {
             </Media>
             <Media body className="ml-5 mt-4">
               <span className="d-block lead">
-                Joao Tiago Rocha Gomes
+                
               </span>
               <small className="d-block">João Gomes</small>
             </Media>
