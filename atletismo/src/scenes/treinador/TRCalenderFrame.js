@@ -16,21 +16,19 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 class TRCalenderFrame extends React.Component {
   render() {
     return (
-      <div>
-          <div className="calendar">
-              <BigCalendar
-                  events={[
-                      {
-                          start: new Date(),
-                          end: new Date(moment().add(1, "days")),
-                          title: "Competição Europeia"
-                      }
-                  ]}
-                  defaultDate={new Date()}
-                  defaultView="month"
-                  style={{ height: "80vh" }}
-              />
-          </div>
+      <div className="calendar container-fluid">
+        <BigCalendar
+          events={[
+            {
+              start: new Date(),
+              end: new Date(moment().add(1, "days")),
+              title: "Competição Europeia"
+            }
+          ]}
+          defaultDate={new Date()}
+          defaultView="month"
+          style={{ height: "80vh" }}
+        />
       </div>
     );
   }

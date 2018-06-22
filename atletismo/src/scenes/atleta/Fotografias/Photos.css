@@ -21,6 +21,9 @@ li {
   margin-left: 5px;
 } */
 
+.app {
+  margin-top: -20px;
+}
 
 .app-header {
   letter-spacing: 1px;
@@ -197,4 +200,8 @@ input.app-interval-input {
 
 .app-checkboxes li {
   display: block;
+}
+
+.galeria-atleta {
+  margin-top: 20px;
 }

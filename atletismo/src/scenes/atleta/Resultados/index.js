@@ -3,6 +3,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import ReactTable from "react-table";
 import Dropdown from './components/dropdown';
+import { Button } from 'reactstrap';
+import ModalAddResults from './components/modalAddResults';
 import "react-table/react-table.css";
 import './Results.css';
 
@@ -13,8 +15,8 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalAddResults: false,
       data: [],
-
       col: [{
         Header: 'Prova',
         accessor: 'nome',
@@ -61,35 +63,49 @@ class Results extends React.Component {
         style:{overflow:'visible'},
       }],
     }
+    this.toggleAR = this.toggleAR.bind(this);
+  }
+
+  toggleAR(){
+    this.setState({
+      modalAddResults: !this.state.modalAddResults,
+    })
+  }
+
+  initModalAddResult(){
+    this.setState({
+      modalAddResults: true,
+    })
   }
 
   componentDidMount(){
-
     let url = this.props.userId;
-
-
     if(this.props.param) {
       url = this.props.param;
     }
 
     axios.get(`http://localhost:3000/api/Atleta/${url}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
-        .then(response => {
-          this.setState({
-            data: response.data,
-          })
+      .then(response => {
+        this.setState({
+          data: response.data,
         })
-        .catch(error => console.log(error))
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
     return(
       <div className="results container-fluid">
-      <ReactTable
-        filterable
-        data={this.state.data}
-        columns={this.state.col}
-        defaultPageSize={10}
-      />
+        <div className="results-button">
+        <Button onClick={() => this.initModalAddResult()}>Adicionar Resultado</Button>
+        </div>
+        <ReactTable
+          filterable
+          data={this.state.data}
+          columns={this.state.col}
+          defaultPageSize={10}
+        />
+        <ModalAddResults modalAddResults={this.state.modalAddResults} toggle={this.toggleAR}/>
       </div>
     );
   }
