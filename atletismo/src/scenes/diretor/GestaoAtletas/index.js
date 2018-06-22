@@ -8,15 +8,10 @@ import OptionMenu from './components/OptionMenu';
 import SendIcon from 'react-icons/lib/fa/paper-plane';
 import {Form, FormGroup, Input, } from 'reactstrap';
 import './style.css';
-
+import axios from 'axios';
+import {connect} from 'react-redux';
 const CheckboxTable = checkboxHOC(ReactTable);
 
-const data=[{_id:1, nome: 'Júlio Santos dos Anjos', uid:'uid' },
-            {_id:2, nome: 'António Luís Silva Marques', uid:'uid'},
-            {_id:3, nome: 'Guilherme Ventura dos Reis', uid:'uid'},
-            {_id:4, nome: 'Madalena Silva Barros', uid:'uid'},
-            {_id:5, nome: 'Julieta Flores Costa Gonçalves', uid:'uid'},
-          ]
 
 class GestaoAtletas extends Component {
  constructor(props) {
@@ -33,6 +28,15 @@ class GestaoAtletas extends Component {
   };
 }
 
+componentDidMount(){
+  axios.get('http://localhost:3000/api/Atleta/getAtletas',{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+  .then(response => {
+    let utilizadores = response.data.filter(user => user.user)
+    utilizadores = utilizadores.map((utilizador, elem) => {utilizador._id = elem ; return utilizador})
+    this.setState({ data : utilizadores })
+  })
+  .catch(error => console.log(error) )
+}
 
 toggleMU(){
   this.setState({
@@ -72,7 +76,7 @@ filter_data_byName(data){
           return data;
         }
         const text = this.state.input.toUpperCase();
-        return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+        return data.filter( data_row => data_row.user.nome.toUpperCase().indexOf(text) !== -1);
     }
 
 toggleAll = () => {
@@ -130,22 +134,24 @@ isSelected = key => {
         </div>
         <CheckboxTable
          ref={r => (this.checkboxTable = r)}
-         data={this.filter_data_byName(data)}
+         data={this.filter_data_byName(this.state.data)}
          columns={[
            {
            Header: 'Nome do Atleta',
-           accessor: 'nome',
+           id: 'nome',
+           accessor: (obj) => obj.user.nome,
            Cell: row => (
-             <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original.uid)}>{row.original.nome}</div>
+             <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original)}>{row.original.user.nome}</div>
            )
           },
          {
            Header: 'Opções',
-           accessor: 'uid',
+           id: 'uid',
+           accessor: (obj) => obj.id,
            minWidth: 20,
            Cell: row => (
              <div className="text-center">
-               <OptionMenu  nome={row.original.nome} uid={row.original.uid}/>
+               <OptionMenu  nome={row.original.user.nome} uid={row.original.id}/>
              </div>
            ),
 
@@ -166,7 +172,11 @@ isSelected = key => {
   }
 }
 
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
 
 
-
-export default GestaoAtletas;
+export default connect(mapStateToProps)(GestaoAtletas);

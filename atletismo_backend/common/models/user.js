@@ -64,7 +64,6 @@ module.exports = function(User) {
           };
           mail.sendEmail(mailOptions);
           if(data.isIsento){
-            console.log(user.id);
             User.app.models.Atleta.findOne({where :{userId : user.id}})
             .then(atleta => atleta.updateAttributes({ isIsento : data.isIsento}))
             .catch(error => callback(error))
@@ -106,7 +105,7 @@ module.exports = function(User) {
             ipdj: credentials.ipdj,
             genero: credentials.genero,
             nacionalidade: credentials.nacionalidade,
-            codigoPostal: credentials.codPostal,
+            codigoPostal: credentials.codigoPostal,
             socio: credentials.socio,
             telemovel: credentials.telemovel,
             cartaoCidadao: credentials.cartaoCidadao,
@@ -158,7 +157,7 @@ module.exports = function(User) {
           exameMedico: credentials.exameMedico,
           fotoPerfil: credentials.fotoPerfil,
           userId: user.id
-        });
+        })
         return callback(null, createAuthToken(user))
         }
       )
@@ -262,6 +261,45 @@ module.exports = function(User) {
 
 );
 
+User.rejeitaRegisto = function(req, data, callback){
+  const payload = decodeToken(req.headers.authorization);
+
+  if (!payload) {
+    return callback(new Error('Authentication is required'));
+  }
+User.findById(data.userId)
+.then(utilizador => {
+  User.destroyById(data.userId)
+  .then(user =>{
+    if(utilizador.role==='Atleta'){
+      User.app.models.Atleta.destroyAll({where : {userId : data.userId}})
+      .then(count => callback(null, count))
+      .catch(error => console.log(error))
+    }else{
+      User.app.models.Treinador.destroyAll({where : {userId : data.userId}})
+      .then(count => callback(null, count))
+      .catch(error => console.log(error))
+    }
+  }
+
+    )
+    .catch(error => callback(error));
+})
+.catch(error => console.log(error))
+
+};
+
+User.remoteMethod('rejeitaRegisto',
+{
+  accepts: [
+    { arg: 'req', type: 'object', http: { source: 'req' } },
+    { arg: 'data', type: 'any', required: false, http: { source: 'body' } },
+  ],
+  returns: { arg: 'accessToken', type: 'object', root: true },
+  http: {verb: 'post'},
+}
+
+);
 
 
 };

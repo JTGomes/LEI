@@ -5,9 +5,13 @@ import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGro
 
 
 class ModalUserInfo extends Component {
+  constructor(props){
+      super(props);
+  }
 
   render() {
     let user = this.props.treinador?'Treinador':'Atleta';
+    if(this.props.user){
     return (
       <Modal isOpen={this.props.modalUserInfo} toggle={this.props.toggle} >
         <ModalHeader toggle={this.props.toggle}>{'Dados do '+user}</ModalHeader>
@@ -18,37 +22,28 @@ class ModalUserInfo extends Component {
             </Media>
             <Media body className="ml-5 mt-4">
               <span className="d-block lead">
-                Joao Tiago Rocha Gomes
+                {this.props.user.user.nome}
               </span>
-              <small className="d-block">João Gomes</small>
+              {!this.props.treinador && <small className="d-block">{this.props.user.nome_competicao}</small>}
             </Media>
           </Media>
           <Table responsive>
             <tbody>
               <tr>
                 <td>Data de Nascimento:</td>
-                <td>02/02/1996</td>
+                <td>{this.props.user.dataNascimento}</td>
               </tr>
               <tr>
                 <td>Email:</td>
-                <td>joaogomes@gmail.com</td>
+                <td>{this.props.user.user.email}</td>
               </tr>
               <tr>
                 <td>Telemóvel</td>
-                <td>918529637</td>
+                <td>{this.props.user.telemovel}</td>
               </tr>
               <tr>
                 <td>Morada</td>
-                <td>Braga</td>
-              </tr>
-              <tr>
-                <td>Redes Sociais</td>
-                <td>
-                  <ListGroup>
-                    <ListGroupItem><a href="https://facebook.com/" target={"_blank"}>facebook.com/jgomes</a></ListGroupItem>
-                    <ListGroupItem><a href="https://twitter.com/" target={"_blank"}>twitter.com/jgomes</a></ListGroupItem>
-                  </ListGroup>
-                </td>
+                <td>{this.props.user.morada}</td>
               </tr>
             </tbody>
           </Table>
@@ -62,6 +57,7 @@ class ModalUserInfo extends Component {
         </Modal>
 
     );
+    }else{ return null}
   }
 }
 

@@ -58,11 +58,26 @@ class Atleta extends Component {
   }
 
   acceptUser(){
-    //completar para aceitar o atleta
+    axios.put('http://localhost:3000/api/Users/validar',
+      {userId : this.state.uid,
+        isIsento: this.state.isento}
+      , {headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response =>{
+            this.props.remover(this.state.uid);
+            this.toggle();
+          })
+      .catch(error => console.log(error))
   }
 
   rejectUser(){
-    //completar para rejeitar o atleta
+    axios.post('http://localhost:3000/api/Users/rejeitaRegisto',
+    {userId: this.state.uid},
+    {headers:{'Authorization' : 'Bearer ' + this.props.token}}
+  ).then(response => {
+        this.props.remover(this.state.uid);
+        this.toggle();
+      })
+    .catch(error => console.log(error))
   }
 
   getRow(obj,elem){

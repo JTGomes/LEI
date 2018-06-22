@@ -64,7 +64,14 @@ class Treinador extends Component {
   }
 
   rejectUser(){
-    //completar para rejeitar o treinador
+    axios.post('http://localhost:3000/api/Users/rejeitaRegisto',
+    {userId: this.state.uid},
+    {headers:{'Authorization' : 'Bearer ' + this.props.token}}
+  ).then(response => {
+        this.props.remover(this.state.uid);
+        this.toggle();
+      })
+    .catch(error => console.log(error))
   }
 
   getRow(obj,elem){
