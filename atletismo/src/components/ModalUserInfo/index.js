@@ -12,7 +12,6 @@ class ModalUserInfo extends Component {
   }
 
   render() {
-    console.log(this.props);
     let user = this.props.treinador?'Treinador':'Atleta';
     if(this.props.user){
     return (

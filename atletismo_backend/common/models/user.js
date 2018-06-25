@@ -43,7 +43,6 @@ module.exports = function(User) {
 
 
  User.validar = function (req, data, callback) {
-  /*
    const payload = decodeToken(req.headers.authorization);
 
    if (!payload) {
@@ -53,7 +52,6 @@ module.exports = function(User) {
    if( !payload.userRole === 'Diretor'){
      return callback(new Error('Precisa de ser diretor para efetuar esta operação'));
    }
-  */
    User.findById(data.userId)
      .then(user => {
          const  mailOptions = {
@@ -238,11 +236,11 @@ module.exports = function(User) {
   );
 
   User.getUsersNaoValidos = function(req, data, callback){
-    // const payload = decodeToken(req.headers.authorization);
-    //
-    // if (!payload) {
-    //   return callback(new Error('Authentication is required'));
-    // }
+    const payload = decodeToken(req.headers.authorization);
+
+    if (!payload) {
+      return callback(new Error('Authentication is required'));
+    }
 
     let atletasJSON = [];
     let treinadoresJson=[];
@@ -291,11 +289,11 @@ module.exports = function(User) {
 );
 
 User.rejeitaRegisto = function(req, data, callback){
-  // const payload = decodeToken(req.headers.authorization);
-  //
-  // if (!payload) {
-  //   return callback(new Error('Authentication is required'));
-  // }
+  const payload = decodeToken(req.headers.authorization);
+
+  if (!payload) {
+    return callback(new Error('Authentication is required'));
+  }
 
   User.destroyById(data.userId)
   .then(count => {

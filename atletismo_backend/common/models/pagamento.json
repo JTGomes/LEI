@@ -1,0 +1,30 @@
+{
+  "name": "Pagamento",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "data": {
+      "type": "string",
+      "required": false
+    },
+    "quantia": {
+      "type": "number",
+      "required": false
+    },
+    "mes": {
+      "type": "string",
+      "required": true
+    },
+    "ano": {
+      "type": "number",
+      "required" : true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -67,16 +67,16 @@ remove(id){
 
   getNotificacoes(elem,id,title,data,mensagem){
     return(
-    <Link to="" key={elem} className="list-group-item list-group-item-action flex-column align-items-start todo-item">
+    <div key={elem} className="list-group-item list-group-item-action flex-column align-items-start todo-item">
       <div className="d-flex w-100 justify-content-between">
         <h6 className="mb-1">{title}</h6>
         <small>{data}</small>
       </div>
       <div className="d-flex w-100 justify-content-between">
         <p className="mb-1"><small>{mensagem}</small></p>
-        <span className="remove" onClick={() => this.remove(id)}>✖</span>
+        <span className="remove" onClick={(event) => {event.preventDefault; this.remove(id)}}>✖</span>
       </div>
-    </Link>);
+    </div>);
   }
 
 

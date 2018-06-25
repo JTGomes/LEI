@@ -48,5 +48,13 @@
   "notificacao": {
     "dataSource": "atletismo",
     "public": true
+  },
+  "Pagamento": {
+    "dataSource": "atletismo",
+    "public": true
+  },
+  "Ano": {
+    "dataSource": "atletismo",
+    "public": true
   }
 }

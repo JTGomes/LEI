@@ -113,12 +113,16 @@
       "model": "redes",
       "foreignKey": "atleta"
     },
-     "evento": {
-        "type": "hasMany",
-        "model": "evento",
-        "foreignKey": "atleta"
-      }
-
+    "evento": {
+      "type": "hasMany",
+      "model": "evento",
+      "foreignKey": "atleta"
+    },
+    "pagamento":{
+      "type": "hasMany",
+      "model": "Pagamento",
+      "foreignKey": "atleta"
+    }
   },
   "acls": [],
   "methods": {}

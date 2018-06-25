@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import {Modal, ModalBody, ModalFooter, ModalHeader, Button, Alert, Collapse, Card, CardBody,Form,FormGroup, Label, Input} from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 import Select from 'react-select';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import 'react-select/dist/react-select.css';
-
-const data = [{mes:9, dataPagamento: '02/09/2017', quantia: 10},
-              {mes:10, dataPagamento:'03/10/2017', quantia: 10},
-              {mes:11, dataPagamento:'06/11/2017', quantia: 10},
-              {mes:12, dataPagamento:'02/12/2017', quantia: 10},
-              ]
 
 
 class ModalPagamento extends Component {
@@ -16,16 +12,31 @@ class ModalPagamento extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state={
-      meses:[
-        {id:1,mes:'janeiro'},{id:2,mes:'fevereiro'},{id:3,mes:'março'},
-        {id:4,mes:'abril'},{id:5,mes:'maio'},{id:6,mes:'junho'},
-        {id:7,mes:'julho'},{id:9,mes:'setembro'},{id:10,mes:'outubro'},
-        {id:11,mes:'novembro'},{id:12,mes:'dezembro'},
-      ],
+      meses:[],
       collapse: false,
       value: [],
       quantia: '',
+      data: []
     }
+  }
+
+
+  componentDidMount(){
+    axios.post('http://localhost:3000/api/Pagamentos/getPagamentos',
+               { userId: this.props.user }
+            ,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    .then(response => {
+        let meses=[{value: 'janeiro', label: 'janeiro'}, {value: 'fevereiro', label: 'fevereiro'},
+                  {value: 'março', label: 'março'},{value: 'abril', label: 'abril'} ,{value: 'maio', label:'maio'},
+                  {value: 'junho',label: 'junho'}, {value: 'julho', label: 'julho'}, {value: 'setembro', label: 'setembro' },
+                  {value: 'outubro', label: 'outubro'},{value: 'novembro', label: 'novembro'}, {value: 'dezembro', label: 'dezembro'}];
+                  meses = meses.filter(pair => !response.data.some(e => e.mes === pair.label  ) )
+        this.setState({
+          data: response.data,
+          meses: meses
+        })
+    })
+    .catch(error => console.log(error))
   }
 
   toggle() {
@@ -37,37 +48,33 @@ class ModalPagamento extends Component {
   }
 
 
-  getMes(mes){
-    return this.state.meses.find((obj)=>obj.id===mes).mes;
-  }
 
-  showPagamentosEfetuados(data){
-    return  data.map( (pagamento,elem) =>
+
+  showPagamentosEfetuados(){
+    return  this.state.data.map( (pagamento,elem) =>
     <div key={elem} className="col-6">
-      <p className="mb-0"><small><Check />{this.getMes(pagamento.mes)}</small></p>
-      <p className="mt-0 mb-0"><small>{"Pago a "+pagamento.dataPagamento}</small></p>
+      <p className="mb-0"><small><Check />{pagamento.mes}</small></p>
+      <p className="mt-0 mb-0"><small>{"Pago a "+pagamento.data}</small></p>
       <p className="mt-0"><small>{"Quantia "+pagamento.quantia+" €"}</small></p>
     </div>
   );
 }
 
-
-getOptions(){
-  return  this.state.meses.map((obj,elem) =>
-  data.find((el)=> obj.id === el.id ) ? null :
-  {value:obj,label:obj.mes}
-);
+EfetuaPagamento(){
+  if(this.state.value.length === 0){
+    return
+  }
+  axios.post('http://localhost:3000/api/Pagamentos/EfetuarPagamento',
+    {quantia: this.state.quantia,
+    userId: this.props.user,
+    meses: this.state.value.map(e => e.label)}
+    ,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+  .then(resp => this.props.toggle() )
+  .catch(error => console.log(error))
 }
 
-showPagamento(data){
-  if(data.length===11){
-    return(
-      <div className="col-12">
-        <Alert color="success">
-          Todas as mensalidades foram pagas.
-        </Alert>
-      </div>);
-    }
+
+showPagamento(){
     const { value } = this.state;
     return(
       <Select
@@ -77,7 +84,7 @@ showPagamento(data){
         placeholder="Selecione os meses para pagamento"
         removeSelected={true}
         value={value}
-        options={this.getOptions()}
+        options={this.state.meses}
         />);
 
       }
@@ -90,7 +97,7 @@ showPagamento(data){
           <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} >
             <ModalHeader toggle={this.props.toggle}>Pagamentos</ModalHeader>
             <ModalBody>
-              {this.showPagamento(data)}
+              {this.showPagamento(this.state.data)}
               <Form className="mt-4">
                 <FormGroup>
                     <Label for="exampleNumber">Quantia mensal</Label>
@@ -104,7 +111,7 @@ showPagamento(data){
                 <Card>
                   <CardBody>
                     <div className="row">
-                      {this.showPagamentosEfetuados(data)}
+                      {this.showPagamentosEfetuados()}
                     </div>
                   </CardBody>
                 </Card>
@@ -112,7 +119,7 @@ showPagamento(data){
 
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={()=>this.setEquipamento()}><Check />{' '}Validar</Button>{' '}
+              <Button color="success" onClick={()=>this.EfetuaPagamento()}><Check />{' '}Validar</Button>{' '}
                 <Button color="secondary" onClick={this.props.toggle}>Cancelar</Button>
               </ModalFooter>
             </Modal>
@@ -120,7 +127,12 @@ showPagamento(data){
         }
       }
 
+      function mapStateToProps(state){
+        return {
+          token: state.token
+        };
+      }
 
 
 
-      export default ModalPagamento;
+      export default connect(mapStateToProps)(ModalPagamento);
