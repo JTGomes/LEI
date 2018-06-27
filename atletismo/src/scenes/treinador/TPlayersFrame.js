@@ -3,7 +3,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import SendNotificationModal from '../../components/SendNotificationAll/SendNotification.js'
+import SendTrainingPlan from '../../components/SendNotificationAll/SendNotification'
+import SendNotification from '../../components/SendNotification/index'
 import { Button } from 'reactstrap';
 import checkboxHOC from "react-table/lib/hoc/selectTable";
 import './css/TPlayersFrame.css';
@@ -22,14 +23,16 @@ class TPlayersFrame extends React.Component {
       }],
       selection: [],
       selectAll: false,
-      modalState:false
+      modalTP:false,
+      modalN: false
     }
 
     this.toggleAll = this.toggleAll.bind(this);
     this.toggleSelection = this.toggleSelection.bind(this);
     this.isSelected = this.isSelected.bind(this);
     this.getTrProps = this.getTrProps.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggleTP = this.toggleTP.bind(this);
+    this.toggleN = this.toggleN.bind(this);
   }
 
   createColumns(){
@@ -121,10 +124,17 @@ class TPlayersFrame extends React.Component {
     return this.state.selection.includes(key);
   }
 
-  toggle(){
+  toggleTP(){
     if(this.state.selection)
     this.setState({
-      modalState: !this.state.modalState
+      modalTP: !this.state.modalTP
+    })
+  }
+
+  toggleN(){
+    if(this.state.selection)
+    this.setState({
+      modalN: !this.state.modalN
     })
   }
 
@@ -174,7 +184,8 @@ class TPlayersFrame extends React.Component {
           <div className={'coach-players-button-left'}><Button onClick={() => console.log(this.state.meusAtletas.map((d) =>this.state.selection.indexOf(d.id)) )} >Envia Email</Button></div>
           <div className={'coach-players-button-right'}><Button onClick={() => console.log(this.state.meusAtletas.map((d) =>this.toggle()) )} >Envia Plano de Treino</Button></div>
         </div>
-        <SendNotificationModal isOpen={this.state.modalState} toggle={this.toggle} to={this.state.meusAtletas.filter( (atleta) => this.state.selection.indexOf(atleta.id) !== -1).map(a => a.nome_competicao)} />
+        <SendTrainingPlan isOpen={this.state.modalTP} toggle={this.toggleTP} to={this.state.meusAtletas.filter( (atleta) => this.state.selection.indexOf(atleta._id) !== -1).map(a => a.name)} />
+        <SendNotification isOpen={this.state.modalN} toggle={this.toggleN} user={'1'} />
         <div>
           <h1>Confirmação pendente</h1>
           <ul id="listAconfirmar">

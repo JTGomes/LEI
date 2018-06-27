@@ -26,17 +26,25 @@ class Exames extends Component {
 
   componentDidMount() {
 
-    let config = {
-      headers: {'Authorization' : 'Bearer ' + this.props.token},
-    }
-
-    axios.get(`http://localhost:3000/api/Atleta?filter[where][exameFalta]=false`, config)
+    axios.get('http://localhost:3000/api/Atleta/getExamesMedicosFalta',
+            {  headers: {'Authorization' : 'Bearer ' + this.props.token}})
         .then(response => {
           this.setState({
             info: response.data,
           })
         })
         .catch(error => console.log(error))
+  }
+
+
+  validaExame(id){
+    axios.post('http://localhost:3000/api/Atleta/validaExame',
+      {id: id},
+      {  headers: {'Authorization' : 'Bearer ' + this.props.token}}
+    )
+    .then(response => this.setState(prevState =>
+        ({ info: prevState.info.filter(atleta => atleta.id !== id) })))
+    .catch(error => console.log(error))
   }
 
   toggle(){
@@ -86,7 +94,7 @@ class Exames extends Component {
     return (<tr key={elem}>
              <td onClick={()=>this.initModalUser(obj)} style={{cursor:'pointer'}}>{obj.nome_competicao}</td>
              <td >{obj.dataNascimento}</td>
-             <td ><Button color="success"><Check />{' '}Validar</Button></td>
+             <td ><Button color="success" onClick={()=> this.validaExame(obj.id)}><Check />{' '}Validar</Button></td>
              <td><a target='_blank' href={obj.exameMedico}><Button color="secondary"><PDF />{' '}ver exame</Button></a></td>
             <td><Button color="primary" onClick={()=> this.initModalNotification(obj.userId,obj.nome_competicao)}><Send />{' '}Nova Notificação</Button></td>
          </tr>);
@@ -122,8 +130,8 @@ class Exames extends Component {
           <Alert color="success">
             Não há exames médicos em falta
           </Alert>}
-          <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.info} />
-          {this.state.userId && <SendNotification toggle={this.toggleS} name={this.state.name} user={this.state.userId} isOpen={this.state.modalNotification}/>
+          <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
+          {this.state.userId && <SendNotification toggle={this.toggleS} name={this.state.name} userId={this.state.userId} isOpen={this.state.modalNotification}/>
           }
         </div>
     );

@@ -42,7 +42,7 @@
       "type": "boolean",
       "required": true
     },
-    "dataContrato":{
+    "dataContrato": {
       "type": "string",
       "required": false
     },
@@ -63,15 +63,15 @@
       "foreignKey": "userId"
     },
     "evento": {
-       "type": "hasMany",
-       "model": "evento",
-       "foreignKey": "atleta"
-     },
-     "atletas": {
-       "type" : "hasMany",
-       "model": "Atleta",
-       "foreignKey" : "treinadorId"
-     }
+      "type": "hasMany",
+      "model": "evento",
+      "foreignKey": "atleta"
+    },
+    "atletas": {
+      "type": "hasMany",
+      "model": "Atleta",
+      "foreignKey": "treinadorId"
+    }
   },
   "acls": [],
   "methods": {}

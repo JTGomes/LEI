@@ -1,0 +1,29 @@
+.table-top {
+	display: inline-block;
+	margin-top: -20px;
+	font-family: Raleway, sans-serif;
+	/*font-size: 15px;*/
+	text-align: left;
+}
+
+.table-top p {
+	margin-bottom: 0px;
+}
+
+.table-top a {
+	font-size: 13px;
+}
+
+.table-top-left {
+	float: left;
+}
+
+.table-top-right {
+	float: left;
+	margin-left: 15px;
+}
+
+.coach-selection-until {
+	float: left;
+	margin-left: 5px;
+}

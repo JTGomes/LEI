@@ -14,6 +14,7 @@ class Treinador extends Component {
       accept: false,
       modalUserInfo: false,
       uid: undefined,
+      user: undefined,
       input: '',
     };
 
@@ -38,8 +39,9 @@ class Treinador extends Component {
     this.setState({
       modal: true,
       accept : aceitar,
-      uid: userid,
+      uid: userid.user.id,
       isento: false,
+      user: userid
     });
   }
 
@@ -52,7 +54,6 @@ class Treinador extends Component {
 
 
   acceptUser(){
-    //completar para aceitar o treinador
     axios.put('http://localhost:3000/api/Users/validar',{userId : this.state.uid },
               {headers:{'Authorization' : 'Bearer ' + this.props.token}}
             )
@@ -65,7 +66,7 @@ class Treinador extends Component {
 
   rejectUser(){
     axios.post('http://localhost:3000/api/Users/rejeitaRegisto',
-    {userId: this.state.uid},
+    {userId: this.state.uid,role: this.state.user.user.role, id: this.state.user.id},
     {headers:{'Authorization' : 'Bearer ' + this.props.token}}
   ).then(response => {
         this.props.remover(this.state.uid);
@@ -76,12 +77,12 @@ class Treinador extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj.id)}}>{obj.nome}</td>
+        <td style={{cursor:'pointer'}} onClick={()=>{this.initModalUser(obj)}}>{obj.user.nome}</td>
         <td>
-          <Button color="success" onClick={()=>{this.initModal(obj.id,true)}}>
+          <Button color="success" onClick={()=>{this.initModal(obj,true)}}>
             <Check />
           </Button>{'  '}
-          <Button color="danger" onClick={()=>{this.initModal(obj.id,false)}}>
+          <Button color="danger" onClick={()=>{this.initModal(obj,false)}}>
             <Close />
           </Button>
         </td>
@@ -138,7 +139,7 @@ class Treinador extends Component {
               <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
             </ModalFooter>
           </Modal>
-          <ModalUserInfo toggle={this.toggleM} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} treinador={true}/>
+          {this.state.modalUserInfo && <ModalUserInfo toggle={this.toggleM} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} treinador={true}/>}
         </div>
 
     );

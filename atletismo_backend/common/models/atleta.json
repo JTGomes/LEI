@@ -122,8 +122,12 @@
       "type": "hasMany",
       "model": "equipamento",
       "foreignKey": "atleta"
+    },
+    "pagamento":{
+      "type": "hasMany",
+      "model": "Pagamento",
+      "foreignKey": "atleta"
     }
-
   },
   "acls": [],
   "methods": {}

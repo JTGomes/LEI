@@ -2,6 +2,8 @@ import React from 'react';
 import 'react-table/react-table.css'
 import Table from "./TResultsTable.js";
 
+import './css/TResultsFrame.css';
+
 class TResultsFrame extends React.Component {
 
   constructor(props){
@@ -88,10 +90,11 @@ class TResultsFrame extends React.Component {
 
   render(){
     return (
-      <div>
+      <div className="container-fluid">
         <div className="table-top">
           <div className="table-top-left">
-            <h5> Intervalo de Tempo </h5>
+            <p> Intervalo de Tempo </p>
+            <a>Desde </a>
             <select
               id="desdeselect"
               name="Desde"
@@ -105,10 +108,10 @@ class TResultsFrame extends React.Component {
                 }
               }
             >
-              <option id="desde" value="Desde" key="Desde"> Desde </option>
+              <option id="desde" value="Desde" key="Desde">-</option>
               {this.renderDateSelectDesde()}
             </select>
-            <h5> - </h5>
+            <a> Até </a>
             <select
               id="ateselect"
               name="Até"
@@ -122,12 +125,12 @@ class TResultsFrame extends React.Component {
                 }
               }
             >
-              <option id="ate" value="Ate" > Até </option>
+              <option id="ate" value="Ate" >-</option>
               {this.renderDateSelectAte()}
             </select>
           </div>
           <div className="table-top-right">
-            <h5> Atleta </h5>
+            <p> Atleta </p>
             <select
               id="atletasselect"
               name=""
@@ -146,7 +149,7 @@ class TResultsFrame extends React.Component {
             </select>
           </div>
           <div className="table-top-right">
-            <h5> Modalidade </h5>
+            <p> Modalidade </p>
               <select
                 id="modalidadeSelect"
                 defaultValue="-"
@@ -170,4 +173,4 @@ class TResultsFrame extends React.Component {
   }
 }
 
-export default TResultsFrame
+export default TResultsFrame;
