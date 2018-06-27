@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mail = require('../mail/index.js');
 
-
 module.exports = function(User) {
   User.validatesUniquenessOf('email');
 
@@ -320,6 +319,7 @@ User.remoteMethod('rejeitaRegisto',
 }
 
 );
+
 
 
 };

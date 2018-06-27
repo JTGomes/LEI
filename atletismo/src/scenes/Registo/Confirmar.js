@@ -5,7 +5,7 @@ import './css/confirmar.css'
 class Confirmar extends React.Component {
 
     splitAndGetLast(s){
-        let l = this.props.data[2].cc.split('/');
+        let l = s.split('[/\\]');
         return l[l.length-1];
     }
 

@@ -21,7 +21,7 @@ class DocumentosT extends React.Component {
             foto: "none",
             cc: "none",
             am: "none",
-            socio: '',
+            socio: 'nao',
             nsocio: '',
             ntreinador: '',
             ipdj: '',
@@ -52,6 +52,7 @@ class DocumentosT extends React.Component {
         console.log(files);
         const formData = Object.assign(this.state.fileData,new FormData());
         console.log(formData);
+
         if (files.length > 0){
             // One or more files selected, process the file upload
             // loop through all the selected files
@@ -62,13 +63,10 @@ class DocumentosT extends React.Component {
             }
         }
         this.setState({
+            [event.target.name]: files.length > 0 ? files[0].name : 'none',
             fileData: formData
         });
         console.log(formData);
-        fetch('http://localhost:4500/api/ativos/uploads/',{
-            method: 'POST',
-            body: formData
-        }).then( answer => console.log(answer));
 
     };
 
@@ -94,7 +92,7 @@ class DocumentosT extends React.Component {
         <input
           name="foto"
           type="file"
-          onChange={e => {this.onFileChange(e);this.onChange(e)}}
+          onChange={e => {this.onFileChange(e)}}
         /><br/>
       </label><br/>
       Cartão do Cidadão<br/>
@@ -102,7 +100,7 @@ class DocumentosT extends React.Component {
         <input
           name="cc"
           type="file"
-          onChange={e => {this.onFileChange(e);this.onChange(e)}}
+          onChange={e => {this.onFileChange(e)}}
         /><br/>
       </label><br/>
       Atestado Médico<br/>
@@ -110,7 +108,7 @@ class DocumentosT extends React.Component {
         <input
           name="am"
           type="file"
-          onChange={e => {this.onFileChange(e);this.onChange(e)}}
+          onChange={e => {this.onFileChange(e)}}
         /><br/>
       </label><br/>
       Sócio do SC Braga<br/>

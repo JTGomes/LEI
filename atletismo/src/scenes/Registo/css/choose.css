@@ -1,12 +1,31 @@
-body {
+/*body {
     background: url(../images/ATL.png);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-attachment: fixed;
     background-size: cover;
-    /*overflow: hidden;*/
+    overflow: hidden;
     z-index: -10;
+}*/
+body{
+    height:100%;
 }
+
+.root{
+    height:100%;
+}
+.background{
+    background: url(../images/ATL.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+    z-index: -10;
+    height:100%;
+}
+
+
 
 .sair {
     background-color: #D14444;
