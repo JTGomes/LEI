@@ -70,8 +70,8 @@ initModalPagamento(userID){
 
   deleteUser() {
 
-    
-    
+
+
   }
 
   componentDidMount() {
@@ -80,10 +80,8 @@ initModalPagamento(userID){
     if(this.props.param) {
       url = this.props.param;
     }
-    console.log(this.props.uid);
     axios.get(`http://localhost:3000/api/Atleta?filter[where][id]=${this.props.uid}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
       .then(response => {
-        console.log(response.data[0].userId);
         this.setState({
           atletaIDuser: response.data[0].userId
         })

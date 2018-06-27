@@ -35,7 +35,7 @@ module.exports = function(Atleta) {
   );
 
    Atleta.updateDados = function (req, data, callback) {
-  
+
 
     Atleta.findById(data.id)
       .then(atleta => atleta.updateAttributes({
@@ -55,7 +55,7 @@ module.exports = function(Atleta) {
   Atleta.remoteMethod(
     'updateDados',
     {
-      accepts: [     
+      accepts: [
         { arg: 'req', type: 'object', http: { source: 'req' } },
         { arg: 'data', type: 'any', required: false, http: { source: 'body' } }
         ],
@@ -170,4 +170,35 @@ Atleta.remoteMethod('getPagamentosFalta',
  http: {verb: 'get'},
 }
 );
+
+
+Atleta.darPermissao = function (req, data, callback) {
+
+
+ Atleta.findById(data.id)
+   .then(atleta => atleta.updateAttributes({
+    ativo: true
+   }))
+   .then(atletaV => Atleta.app.models.User.findById(atletaV.userId)
+            .then(user => user.updateAttributes({validado: true}) )
+   )
+   .then(response => callback(null, "OK"))
+   .catch(error => callback(error))
+ ;
+};
+
+Atleta.remoteMethod(
+ 'darPermissao',
+ {
+   accepts: [
+     { arg: 'req', type: 'object', http: { source: 'req' } },
+     { arg: 'data', type: 'any', required: false, http: { source: 'body' } }
+     ],
+   returns: {arg: 'accessToken', type: 'object', root: true},
+   http: {verb: 'put'},
+ }
+);
+
+
+
 };
