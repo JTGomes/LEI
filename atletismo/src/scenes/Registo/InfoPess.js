@@ -11,8 +11,8 @@ class InfoPess extends React.Component {
             password: props.data.password,
             data: props.data.data,
             nacionalidade: props.data.nacionalidade,
-            cc: props.data.cc,
-            con: props.data.con,
+            nccidadao: props.data.nccidadao,
+            nif: props.data.nif,
             gender: props.data.gender,
             escalao: props.data.escalao,
         }
@@ -21,23 +21,21 @@ class InfoPess extends React.Component {
         password: '',
         data: '',
         nacionalidade: '',
-        cc: '',
-        con: '',
+        nccidadao: '',
+        nif: '',
         gender: '',
-        escalao: '',
-    }
+        escalao: 'benjamina',
+    };
   }
 
   onChange=(e) => {
     this.setState({
         [e.target.name]: e.target.value,
     });
-    console.log(this.state.nome);
-  }
+  };
 
   onSubmit(e){
     this.props.onNext(1,this.state);
-    console.log("Passo 1");
   }
 
   render () {
@@ -45,7 +43,7 @@ class InfoPess extends React.Component {
       <div className="imagem">
 
         <div className="conteudo">
-          <ul className="progressbar">
+          <ul className="container-fluid progressbar">
             <li><label className="texto">Informações Pessoais</label></li>
             <li>Contactos</li>
             <li>Documentos</li>
@@ -98,47 +96,47 @@ class InfoPess extends React.Component {
             <p>
             Nacionalidade<br/>
             <input
-              name="nac"
+              name="nacionalidade"
               type="text"
               placeholder="Nacionalidade"
               onChange={e => this.onChange(e)}
-              value={this.state.nac}
+              value={this.state.nacionalidade}
               style={{minWidth: '200px'}}
             />
             </p>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número CC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número de Contribuinte<br/>
             <input
-              name="cc"
+              name="nccidadao"
               type="text"
               placeholder="Número do CC"
               onChange={e => this.onChange(e)}
-              value={this.state.cc}
+              value={this.state.nccidadao}
               style={{minWidth: '200px'}}
             />&nbsp;
             <input
-              name="con"
+              name="nif"
               type="text"
               placeholder="Número de Contribuinte"
               onChange={e => this.onChange(e)}
-              value={this.state.con}
+              value={this.state.nif}
               style={{minWidth: '200px'}}
             />
             <br/><br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Género&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escalão<br/>
             <input
-              name="genero"
+              name="gender"
               type="radio"
               onChange={e => this.onChange(e)}
-              value={this.state.gender}
+              value={"feminino"}
             /> Feminino&nbsp;&nbsp;
             <input
-              name="genero"
+              name="gender"
               type="radio"
               onChange={e => this.onChange(e)}
-              value={this.state.gender}
+              value={"masculino"}
             /> Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <select name="escalao"
-                    value={this.state.value}
+                    defaultValue={ this.state.escalao ? this.state.escalao: "benjamina"}
                     onChange={e => this.onChange(e)}
             >
               <option value="benjamima">Benjamim A</option>

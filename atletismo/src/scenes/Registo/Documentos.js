@@ -8,16 +8,16 @@ class Documentos extends React.Component {
     super(props);
     if(props.data){
         this.state = {
-            foto: props.data.foto,
-            cc: props.data.cc,
-            am: props.data.am,
+            foto: 'none',
+            cc: 'none',
+            am: 'none',
             socio: props.data.socio,
             nsocio: props.data.nsocio,
         }
     }else this.state = {
-        foto: '',
-        cc: '',
-        am: '',
+        foto: 'none',
+        cc: 'none',
+        am: 'none',
         socio: '',
         nsocio: '',
     }
@@ -28,14 +28,39 @@ class Documentos extends React.Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-    }
+    };
 
     onSubmit = (e) => {
         const response = this.props.mutate({
             variables: this.state,
         });
         console.log(response);
-    }
+    };
+
+    onFileChange(event){
+        const target = event.target;
+        const files  = target.files;
+        console.log(files);
+        const formData = Object.assign(this.state.fileData,new FormData());
+        console.log(formData);
+        if (files.length > 0){
+            // One or more files selected, process the file upload
+            // loop through all the selected files
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                // add the files to formData object for the data payload
+                formData.set(target.name, file, file.name);
+            }
+        }
+        this.setState({
+            fileData: formData
+        });
+        console.log(formData);
+        fetch('http://localhost:4500/api/ativos/uploads/',{
+            method: 'POST',
+            body: formData
+        }).then( answer => console.log(answer));
+    };
 
   render () {
     return (
@@ -60,7 +85,6 @@ class Documentos extends React.Component {
           name="foto"
           type="file"
           onChange={e => this.onChange(e)}
-          value={this.state.foto}
         /><br/>
       </label><br/>
       Cartão do Cidadão<br/>
@@ -69,7 +93,6 @@ class Documentos extends React.Component {
           name="cc"
           type="file"
           onChange={e => this.onChange(e)}
-          value={this.state.cc}
         /><br/>
       </label><br/>
       Atestado Médico<br/>
@@ -78,28 +101,27 @@ class Documentos extends React.Component {
           name="am"
           type="file"
           onChange={e => this.onChange(e)}
-          value={this.state.am}
         /><br/>
       </label><br/>
       Sócio do SC Braga<br/>
         <input
-          name="opcao"
+          name="socio"
           type="radio"
           onChange={e => this.onChange(e)}
-          value={this.state.socio}
+          value={"sim"}
         />Sim&nbsp;
         <input
-          name="opcao"
+          name="socio"
           type="radio"
           onChange={e => this.onChange(e)}
-          value={this.state.socio}
+          value={"nao"}
         />Não<br/><br/>
       Número de Sócio<br/>
         <input
-          name="numero"
+          name="nsocio"
           type="text"
           placeholder="Número"
-          onChange={e => this.onChange(e)}
+          onChange={e => {if(this.state.socio === 'sim') this.onChange(e);}}
           value={this.state.nsocio}
           style={{minWidth: '200px'}}
         /><br/><br/>

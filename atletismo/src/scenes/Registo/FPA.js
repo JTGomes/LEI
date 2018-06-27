@@ -1,13 +1,14 @@
 import React from 'react';
-//import { Link, WrappedLink } from 'react-router-dom'
+import { Link, WrappedLink } from 'react-router-dom'
 import './css/fpa.css'
+//import { withRouter } from 'react-router-dom'
 
 class FPA extends React.Component {
   render () {
     return (
       <div>
 
-      	<div className="container">
+      	<div className="container-fluid container">
 		<ul className="progressbar">
 			<li className="active">Informações Pessoais</li>
 			<li className="active">Contactos</li>
@@ -22,8 +23,11 @@ class FPA extends React.Component {
 
       <div id="buttons">
       <form>
-        <button id="anterior" onClick={(e) => this.props.onNext()}>
-          Sim
+
+        <button id="anterior"  onClick={(e) => this.props.onNext()}>
+            <Link to={"/h"}>
+                Sim
+            </Link>
         </button>
           <a className={"button"} id="seguinte" href={"https://lince.fpatletismo.pt/publico/registo.aspx"} target={"_blank"} onClick={(e) => this.props.onNext()}>
               Fazer Registo

@@ -10,7 +10,6 @@ class ContactosT extends React.Component {
       this.state = {
           email: props.data.email,
           telemovel: props.data.telemovel,
-          redes: props.data.redes,
           morada: props.data.morada,
           postal: props.data.postal,
           localidade: props.data.localidade,
@@ -19,7 +18,6 @@ class ContactosT extends React.Component {
         this.state = {
             email: '',
             telemovel: '',
-            redes: [{ url: '' }],
             morada: '',
             postal: '',
             localidade: '',
@@ -27,40 +25,33 @@ class ContactosT extends React.Component {
   }
 
 
-  handleRedesChange = (idx) => (evt) => {
-    const newRedes = this.state.redes.map((redes, sidx) => {
-      if (idx !== sidx) return redes;
-      return { ...redes, name: evt.target.value };
-    });
 
-    this.setState({ redes: newRedes });
-  }
 
-  handleSubmit = (evt) => {
+   handleSubmit = (evt) => {
     const { name, redes } = this.state;
     alert(`Incorporated: ${name} with ${redes.length} redes`);
-  }
+  };
 
   handleAddRedes = () => {
     this.setState({ redes: this.state.redes.concat([{ url: '' }]) });
-  }
+  };
 
   handleRemoveRedes = (idx) => () => {
     this.setState({ redes: this.state.redes.filter((s, sidx) => idx !== sidx) });
-  }
+  };
 
   onChange=(e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
-    }
+    };
 
     onSubmit = (e) => {
         const response = this.props.mutate({
             variables: this.state,
         });
         console.log(response);
-    }
+    };
 
   render () {
     return (
@@ -98,21 +89,6 @@ class ContactosT extends React.Component {
           value={this.state.telemovel}
           style={{minWidth: '200px'}}
         /><br/><br/>
-        Redes Sociais&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" id="adiciona" onClick={this.handleAddRedes} style={{ color:'white'}} className="small"><strong>+</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;
-        {this.state.redes.map((rede, idx) => (
-          <div className="rede" key={idx}>
-            <input
-              type="text"
-              name="redes"
-              placeholder={"Facebook/Instagram/Twitter"}
-              value={rede.url}
-              onChange={this.handleRedesChange(idx)}
-              style={{minWidth: '200px'}}
-            />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" id="remove" onClick={this.handleRemoveRedes(idx)} className="small"><strong style={{ color:'white'}}>-</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </div>
-        ))}<br/>
         Morada<br/>
         <input
           name="morada"

@@ -17,12 +17,12 @@ import {userActions} from '../actions/userActions'
 
 class App extends Component {
   constructor(props){
-    super(props)
-    this.checkAuth()
+    super(props);
+    this.checkAuth();
   }
 
   checkAuth(){
-    const token = sessionStorage.getItem('jwtToken')
+    const token = sessionStorage.getItem('jwtToken');
     if(token){
       this.props.dispatch(userActions.login_action(token));
     }
@@ -34,13 +34,13 @@ class App extends Component {
   getUserPage(){
     switch (this.props.userRole) {
       case 'Diretor':
-        return <Route  path={routes.HOME} component={AppDiretor} />
+        return <Route  path={routes.HOME} component={AppDiretor} />;
       case 'Atleta':
-        return <Route  path={routes.HOME} component={AppAtleta} />
+        return <Route  path={routes.HOME} component={AppAtleta} />;
       case 'Treinador':
-        return <Route  path={routes.HOME} component={AppTreinador} />
+        return <Route  path={routes.HOME} component={AppTreinador} />;
       default:
-        return <Route exact path={routes.HOME} component={Login} />
+        return <Route exact path={routes.HOME} component={Login} />;
     }
   }
 
@@ -53,6 +53,7 @@ class App extends Component {
             <Route  path='/treinador/:id' component={Diretor(AppTreinadorID)} />
             <Route  path='/atleta/:id' component={Treinador(AppAtletaID)} />
             <Route  exact path={routes.REGISTAR} component={Registo} />
+              <Route  path={"/diretor/"} component={AppDiretor} />
             {UserPage}
             <Route  component={ErrorPage} />
           </Switch>

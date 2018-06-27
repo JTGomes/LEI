@@ -52,14 +52,12 @@ class ConfirmarT extends React.Component {
       </div>
 
       <div id="buttons" className="col-12">
-      <form>
-        <button id="anterior" formAction="file:documentos.html" onClick={(e) => this.props.onPrev(4,{})}>
+        <button id="anterior" onClick={(e) => this.props.onPrev(4,{})}>
           Anterior
         </button>
-        <button id="seguinte" formAction="file:lince.html" onClick={(e) => this.props.onNext(4,{})}>
+        <button id="seguinte"  onClick={(e) => this.props.onNext(4,{})}>
           Confirmar Registo
         </button>
-      </form>
       </div>
       </div>
       </div>

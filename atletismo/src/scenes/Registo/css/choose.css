@@ -1,0 +1,39 @@
+body {
+    background: url(../images/ATL.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-attachment: fixed;
+    background-size: cover;
+    /*overflow: hidden;*/
+    z-index: -10;
+}
+
+.sair {
+    background-color: #D14444;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    padding: 16px 32px;
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    opacity: 0.6;
+}
+
+.sair {
+    cursor: pointer;
+    display: inline-block !important;
+    position: relative;
+    transition: 0.5s;
+}
+
+.sair:hover{
+    opacity: 1;
+}
+
+.sair:hover:after {
+    opacity: 1;
+    left: -50px;
+}

@@ -8,7 +8,7 @@ const Authorization = (allowedRoles) =>
   class WithAuthorization extends React.Component {
 
     render() {
-      const { userRole } = this.props
+      const { userRole } = this.props;
       if (allowedRoles.includes(userRole)) {
         return <WrappedComponent {...this.props} />
       } else {
@@ -25,6 +25,6 @@ const Authorization = (allowedRoles) =>
 
   return connect(mapStateToProps)(WithAuthorization)
 
-}
+};
 
 export default Authorization;
