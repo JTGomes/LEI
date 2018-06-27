@@ -35,7 +35,7 @@ class SendNotification extends React.Component {
       assunto: this.state.assunto
     }
     console.log(this.props.user);
-    axios.post(`http://localhost:3000/api/Users/${this.props.userId}/notificacoes`, pars, config)
+    axios.post(`http://localhost:3000/api/Users/${this.props.user}/notificacoes`, pars, config)
         .then(response => {
           this.props.toggle();
           })

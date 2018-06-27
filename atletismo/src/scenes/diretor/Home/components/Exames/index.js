@@ -59,7 +59,7 @@ class Exames extends Component {
   }
 
 
-  initModalNotification(userID,name,){
+  initModalNotification(userID,name){
     this.setState({
         modalNotification: true,
         name: name,
@@ -84,7 +84,7 @@ class Exames extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-             <td onClick={()=>this.initModalUser(obj.info)} style={{cursor:'pointer'}}>{obj.nome_competicao}</td>
+             <td onClick={()=>this.initModalUser(obj)} style={{cursor:'pointer'}}>{obj.nome_competicao}</td>
              <td >{obj.dataNascimento}</td>
              <td ><Button color="success"><Check />{' '}Validar</Button></td>
              <td><a target='_blank' href={obj.exameMedico}><Button color="secondary"><PDF />{' '}ver exame</Button></a></td>
@@ -123,7 +123,7 @@ class Exames extends Component {
             Não há exames médicos em falta
           </Alert>}
           <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.info} />
-          {this.state.userId && <SendNotification toggle={this.toggleS} name={this.state.name} userId={this.state.userId} isOpen={this.state.modalNotification}/>
+          {this.state.userId && <SendNotification toggle={this.toggleS} name={this.state.name} user={this.state.userId} isOpen={this.state.modalNotification}/>
           }
         </div>
     );

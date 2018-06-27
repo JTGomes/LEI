@@ -46,7 +46,7 @@ initModalNotification(userID,name){
           </DropdownToggle>
           <DropdownMenu >
             <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalNotification()}><SendIcon style={{color:'#296ddb'}}/>{'  '}Enviar Notificação</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser()}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Página</DropdownItem>
+            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser()}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Acesso</DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <SendNotification toggle={this.toggleS} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalNotification}/>

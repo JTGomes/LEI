@@ -35,10 +35,10 @@ class AppTreinador extends Component {
         <NavBar sidebarLinks={this.state.sidebarLinks} />
         <div className="content-wrapper">
           <Switch>
-            <Route exact path={`/treinador/${params.id}`} component={TPersonalDataFrame}/>
-            <Route exact path={`/treinador/${params.id}/gestaoAtletas`} component={TPlayersFrame}/>
-            <Route exact path={`/treinador/${params.id}/resultados`} component={TResultsFrame}/>
-            <Route exact path={`/treinador/${params.id}/calendario`} component={TRCalenderFrame}/>
+            <Route exact path={`/treinador/${params.id}`} component={() => <TPersonalDataFrame param={params.id}/>} />
+            <Route exact path={`/treinador/${params.id}/gestaoAtletas`} component={() => <TPlayersFrame param={params.id}/>} />
+            <Route exact path={`/treinador/${params.id}/resultados`} component={() => <TResultsFrame param={params.id}/>} />
+            <Route exact path={`/treinador/${params.id}/calendario`} component={() => <TRCalenderFrame param={params.id}/>} />
           </Switch>
         </div>
       </div>

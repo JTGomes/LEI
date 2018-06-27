@@ -17,8 +17,12 @@ class About extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      atletaIDuser: undefined,
       info: [],
       infoUser: [],
+      face: undefined,
+      twitter: undefined,
+      insta: undefined,
       modalDataEdit: false,
       modalDocs: false,
       modalPhoto: false,
@@ -34,23 +38,34 @@ class About extends React.Component {
     this.toggleDEq = this.toggleDEq.bind(this);
   }
 
-  componentDidMount(){
-
+  getAtletaId(){
     let url = this.props.userId;
-
-
     if(this.props.param) {
       url = this.props.param;
     }
 
-    axios.get(`http://localhost:3000/api/Atleta/${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    return axios.get(`http://localhost:3000/api/Atleta?filter[where][userId]=${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+          return response.data[0].id;
+      })
+      .catch(error => console.log(error))
+  }
+
+  componentDidMount(){
+    let url = this.props.userId;
+    if(this.props.param) {
+      url = this.props.param;
+    }
+    this.getAtletaId().then(data => {
+    axios.get(`http://localhost:3000/api/Atleta/${data}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
         .then(response => {
           this.setState({
+            atletaIDuser: data,
             info: response.data,
           })
         })
         .catch(error => console.log(error))
-
+    });
     axios.get(`http://localhost:3000/api/Users/${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
     .then(response => {
       this.setState({
@@ -58,6 +73,23 @@ class About extends React.Component {
       })
     })
     .catch(error => console.log(error))
+
+    this.getAtletaId().then(data => {
+    axios.get(`http://localhost:3000/api/Atleta/${data}/redes`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    .then(response => {
+      console.log(response.data.length);
+      response.data.map(link => {
+        if(/.*facebook/.test(link.link))
+          this.renderFaceb(link.link);
+        if(/.*twitter/.test(link.link)) 
+          this.renderTwit(link.link);
+        if(/.*instagram/.test(link.link)) 
+          this.renderInsta(link.link);
+      });
+    })
+    .catch(error => console.log(error))
+    });
+
   }
 
   toggleDE(){
@@ -84,9 +116,10 @@ class About extends React.Component {
     }));
   }
 
-  initModalDados(){
+  initModalDados(id){
     this.setState({
       modalDataEdit: true,
+      atletaIDuser: id
     })
   }
 
@@ -103,38 +136,22 @@ class About extends React.Component {
   }
 
   //a ser modificado para incluir pagina do atleta nos links
-  renderFaceb() {
-    return(
-      <div className="social">
-        <p href="https://www.facebook.com" target="_blank"><FaFacebookOfficial /></p>
-      </div>
-    );
+  renderFaceb(url) {
+    this.setState({
+      face: <a href={url} target="_blank"><FaFacebookOfficial /></a>,
+    });
   }
-  renderTwit() {
-    return(
-      <div className="social">
-        <p href="https://www.twitter.com" target="_blank"><FaTwitterSquare /></p>
-      </div>
-    );
+
+  renderTwit(url) {
+    this.setState({
+      twitter: <a href={url} target="_blank"><FaTwitterSquare /></a>,
+    });
   }
-  renderInsta() {
-    return(
-      <div className="social">
-        <p href="https://www.instagram.com" target="_blank"><FaInstagram /></p>
-      </div>
-    );
-  }
-  //para fazer render dos botões das redes sociais
-  renderSocial() {
-    if(!this.state.info.socialN) {
-      return(
-        <p>Sem Redes Sociais associadas!</p>
-      );
-    }
-    //verifica se objeto tem dada rede social como elemento
-    if(this.state.info.socialN.hasOwnProperty('facebook')) this.renderFaceb();
-    if(this.state.info.socialN.hasOwnProperty('twitter')) this.renderTwit();
-    if(this.state.info.socialN.hasOwnProperty('instagram')) this.renderInsta();
+
+  renderInsta(url) {
+    this.setState({
+      insta: <a href={url} target="_blank"><FaInstagram /></a>,
+    });
   }
 
   render() {
@@ -168,7 +185,7 @@ class About extends React.Component {
           <div className="col">
             <p><a class="info">Data de Nascimento:</a> {this.state.info.dataNascimento}</p>
             <p><a class="info">Tipo de Documento:</a> {this.state.info.tipoDocumento}</p>
-            <p><a class="info">Localidade:</a> {this.state.info.morada}</p>
+            <p><a class="info">Localidade:</a> {this.state.info.localidade}</p>
           </div>
         </div>
         <div className="section">
@@ -176,7 +193,7 @@ class About extends React.Component {
           <hr />
           <div className="col">
             <p><a class="info">Tipo de Filiação:</a> {this.state.info.encarregado}</p>
-            <p><a class="info">Contrato até:</a> {this.state.info.encarregado}</p>
+            <p><a class="info">Contrato até:</a></p>
             <p><a class="info">Escalão:</a> {this.state.info.escalao}</p>
             <p><a class="info">Subsídio:</a> {this.state.info.subsidio}</p>
           </div>
@@ -185,7 +202,7 @@ class About extends React.Component {
           </div>
         </div>
         <div className="section">
-          <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs()} style={{cursor:'pointer'}}/></p>
+          <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs(this.state.info.id)} style={{cursor:'pointer'}}/></p>
           <hr />
           <div className="col">
             <p><a class="info">Cartão de Cidadão:</a> {this.state.info.cartaoCidadao}</p>
@@ -196,9 +213,13 @@ class About extends React.Component {
         <div className="section">
           <p className="Title">Redes Sociais</p>
           <hr />
-          {this.renderSocial()}
+          <div className="social">
+            {this.state.face}
+            {this.state.twitter}
+            {this.state.insta}
+          </div>
         </div>
-        <ModalEditInfo toggle={this.toggleDE} modalDataEdit={this.state.modalDataEdit} />
+        <ModalEditInfo toggle={this.toggleDE} modalDataEdit={this.state.modalDataEdit} user={this.props.userId} />
         <ModalEditDocs toggle={this.toggleD} modalDocs={this.state.modalDocs} />
         <ModalPhoto toggle={this.toggleP} modalPhoto={this.state.modalPhoto} />
       </div>
