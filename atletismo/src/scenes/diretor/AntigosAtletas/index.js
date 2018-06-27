@@ -29,7 +29,7 @@ class AntigosAtletas extends Component {
           acessor: 'id',
           Cell: row => (
             <div className="text-center">
-             <Button color="success"><Check /></Button>
+             <Button color="success" onClick={() => this.validaAtleta(row.original.id) } ><Check /></Button>
             </div>
           )
         }
@@ -42,8 +42,8 @@ class AntigosAtletas extends Component {
     let config = {
       headers: {'Authorization' : 'Bearer ' + this.props.token},
     }
-    
-    axios.get(`http://localhost:3000/api/Atleta?filter[where][ativo]=true`, config)
+
+    axios.get(`http://localhost:3000/api/Atleta?filter[where][ativo]=false`, config)
         .then(response => {
           this.setState({
             data: response.data,
@@ -79,6 +79,23 @@ class AntigosAtletas extends Component {
          return data.filter( data_row => data_row.nome_competicao.toUpperCase().indexOf(text) !== -1);
      }
 
+
+validaAtleta(id){
+  axios.put('http://localhost:3000/api/Atleta/darPermissao',
+  {id: id}
+  ,{
+    headers: {'Authorization' : 'Bearer ' + this.props.token},
+  })
+  .then(res => this.remover(id) )
+  .catch(error => console.log(error))
+}
+
+remover(id){
+  this.setState(prevState => ({
+    Treinadores: prevState.data.filter(user => user.id !== id)
+  }));
+}
+
   render() {
 
     return (
@@ -96,7 +113,7 @@ class AntigosAtletas extends Component {
         defaultPageSize={10}
         className="-striped -highlight"
       />
-      <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
+    <ModalUserInfo toggle={this.toggleMU} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
       </div>
 
     );

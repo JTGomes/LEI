@@ -38,7 +38,7 @@ var jobAniversarios = new CronJob('00 01 00 * * *', function() {
   'Europe/Lisbon'/* Time zone of this job. */
 );
 /* |      00 01 00 8 9-7 *   |   */
-var jobPagamentos = new CronJob('00 09 11 * 9,10,11,0,1,2,3,4,5,6,7 *', function() {
+var jobPagamentos = new CronJob('00 00 02 8 9,10,11,0,1,2,3,4,5,6,7 *', function() {
 	var today = getDate();
 	var mesPagamento = new Date().getMonth()-1;
 	if(mesPagamento===-1){

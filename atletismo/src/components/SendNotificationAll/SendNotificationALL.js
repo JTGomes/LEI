@@ -47,7 +47,7 @@ class SendNotificationALL extends React.Component {
                     <ModalBody>
                         <FormGroup>
                             <Label for="name">Para</Label>
-                            <Input type={"textarea"} rows={"3"} required readonly={"readonly"}>{this.getUsers()}</Input>
+                            <Input type={"textarea"} rows={"3"} required value={this.getUsers()} readOnly={"readonly"}></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label for="assunto">Assunto</Label>

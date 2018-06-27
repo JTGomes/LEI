@@ -127,7 +127,6 @@ module.exports = function(User) {
 
 
   User.signupAtleta = function (credentials, callback) {
-    console.log(credentials);
     if (!credentials.email || !credentials.password) {
       return callback(new Error('Credentials are invalid'));
     }

@@ -19,7 +19,7 @@ class AppTreinador extends Component {
     super(props);
     this.state={
       sidebarLinks: [
-        { link: routes.TREINADOR, icon: <User className="icon" />, text: 'Dados Treinador'},
+        { link: '/', icon: <User className="icon" />, text: 'Dados Treinador'},
         { link: routes.TATLETA, icon: <RunIcon className="icon" />, text: 'Meus Atletas'},
         { link: routes.TRESULTADOS, icon: <Provas className="icon" />, text: 'Resultados'},
         { link: routes.TCALENDARIO, icon: <Calendar className="icon"/>, text: 'Calendário'},
@@ -34,7 +34,7 @@ class AppTreinador extends Component {
         <NavBar sidebarLinks={this.state.sidebarLinks} />
         <div className="content-wrapper">
           <Switch>
-            <Route exact path={routes.TREINADOR} component={TPersonalDataFrame}/>
+            <Route exact path='/' component={TPersonalDataFrame}/>
             <Route exact path={routes.TATLETA} component={TPlayersFrame}/>
             <Route exact path={routes.TRESULTADOS} component={TResultsFrame}/>
             <Route exact path={routes.TCALENDARIO} component={TRCalenderFrame}/>

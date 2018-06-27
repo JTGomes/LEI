@@ -46,7 +46,7 @@ class ModalUserInfo extends Component {
           </Table>
         </ModalBody>
         <ModalFooter>
-            <Link to="/atleta">
+            <Link to={this.props.treinador? `/treinador/${this.props.user.user.id}` : `/atleta/${this.props.user.user.id}` }>
             <Button color="primary" >{'Página do '+user }</Button>
             </Link>
             <Button color="secondary" onClick={this.props.toggle}>Sair</Button>

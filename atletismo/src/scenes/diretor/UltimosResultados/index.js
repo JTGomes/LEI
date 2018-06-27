@@ -17,7 +17,8 @@ class UltimosResultados extends React.Component {
       cols: [
         {
               Header: 'Nome',
-              accessor: 'nome_competicao',
+              id:'nome_competicao',
+              accessor: b => b.user.nome_competicao,
               filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
                 return this.state.data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);},
               filterAll: true
@@ -71,9 +72,9 @@ class UltimosResultados extends React.Component {
 
   componentDidMount(){
 
-    axios.get(`http://localhost:3000/api/Atleta/ultimosResultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    axios.get(`http://localhost:3000/api/resultados/getUltimosResultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
         .then(response => {
-          
+
           this.setState({
             data: response.data,
           })
