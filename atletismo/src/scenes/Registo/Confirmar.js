@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom'
 import './css/confirmar.css'
 
 class Confirmar extends React.Component {
+
+    splitAndGetLast(s){
+        let l = this.props.data[2].cc.split('/');
+        return l[l.length-1];
+    }
+
   render () {
     return (
       <div className="imagem">
@@ -21,39 +27,38 @@ class Confirmar extends React.Component {
 <div className="row justify-content-center">
       <div id="registo" className="col-12">
         <h2><Link to='/InfoPess'>DADOS PESSOAIS</Link></h2>
-        Nome: <label id="max">Exemplo</label><br/><br/>
-        Data de Nascimento: <label id="max">01-01-2018</label><br/><br/>
-        Nacionalidade: <label id="max">Portuguesa</label><br/><br/>
-        Número do CC: <label id="max">11111111</label><br/><br/>
-        Género: <label id="max">Feminino</label><br/><br/>
+        Nome: <label id="max">{ this.props.data[0].nome}</label><br/><br/>
+        Data de Nascimento: <label id="max">{ this.props.data[0].data}</label><br/><br/>
+        Nacionalidade: <label id="max">{ this.props.data[0].nacionalidade}</label><br/><br/>
+        Número do CC: <label id="max">{ this.props.data[0].nccidadao}</label><br/><br/>
+        Género: <label id="max">{ this.props.data[0].gender}</label><br/><br/>
+        Escalão: <label id="max">{ this.props.data[0].escalao}</label><br/><br/>
       </div>
 
       <div id="contactos" className="col-12">
         <h2><Link to='/Contactos'>CONTACTOS</Link></h2>
-        Email: <label id="max">exemplo@gmail.com</label><br/><br/>
-        Telemóvel: <label id="max">919 999 999</label><br/><br/>
-        Redes Sociais: <label id="max">facebook.com/exemplo</label><br/><br/>
-        Morada: <label id="max">Rua Exemplo, 999</label><br/><br/>
-        Código Postal: <label id="max">9999-999</label> Localidade: <label id="max">Exemplo</label>
+        Email: <label id="max">{ this.props.data[1].email}</label><br/><br/>
+        Telemóvel: <label id="max">{ this.props.data[1].telemovel}</label><br/><br/>
+        Redes Sociais: <label id="max">{ this.props.data[1].redes.map( s => s.uri)}</label><br/><br/>
+        Morada: <label id="max">{ this.props.data[1].morada}</label><br/><br/>
+        Código Postal: <label id="max">{ this.props.data[1].postal}</label> Localidade: <label id="max">{ this.props.data[1].localidade}</label>
       </div>
 
       <div id="documentos" className="col-12">
         <h2><Link to='/Documentos'>DOCUMENTOS</Link></h2>
-        Foto: <label id="max">FOTO.jpeg</label><br/><br/>
-        Cartão do Cidadão: <label id="max">CC.pdf</label><br/><br/>
-        Atestado Médico: <label id="max">AM.pdf</label><br/><br/>
-        Número de Sócio do SC Braga: <label id="max">999999999</label><br/><br/><br/><br/><br/>
+        Foto: <label id="max">{  this.splitAndGetLast(this.props.data[2].foto) }</label><br/><br/>
+        Cartão do Cidadão: <label id="max">{  this.splitAndGetLast(this.props.data[2].cc) }</label><br/><br/>
+        Atestado Médico: <label id="max">{  this.splitAndGetLast(this.props.data[2].am) }</label><br/><br/>
+        Número de Sócio do SC Braga: <label id="max">{ this.props.data[2].nsocio}</label><br/><br/><br/><br/><br/>
       </div>
 
       <div id="buttons" className="col-12">
-      <form>
-        <button id="anterior" formaction="file:documentos.html" onClick={(e) => this.props.onPrev(4,{})}>
+        <button id="anterior"  onClick={(e) => this.props.onPrev(4,{})}>
           Anterior
         </button>
-        <button id="seguinte" formaction="file:lince.html" onClick={(e) => this.props.onNext(4,{})}>
+        <button id="seguinte"  onClick={(e) => this.props.onNext(4,{})}>
           Confirmar Registo
         </button>
-      </form>
       </div>
       </div>
     </div>

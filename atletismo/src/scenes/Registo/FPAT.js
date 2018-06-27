@@ -7,7 +7,7 @@ class FPAT extends React.Component {
     return (
       <div>
 
-      	<div className="container">
+      	<div className="container-fluid container">
 		<ul className="progressbar">
 			<li className="active">Informações Pessoais</li>
 			<li className="active">Contactos</li>

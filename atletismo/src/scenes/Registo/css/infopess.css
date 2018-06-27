@@ -1,12 +1,3 @@
-.imagem {
-	background: url(../images/ATL.png);
-  background-repeat: no-repeat;
-  background-position: 0px 0px;
-  background-attachment: fixed;
-
-  overflow: hidden;
-  z-index: -10;
-}
 
 .conteudo {
 
@@ -49,7 +40,6 @@
 	content: '';
 	position: absolute;
 	width: 100%;
-	height: 1px;
 	background-color: #ddd;
 	top: 12px;
 	left: -50%;
