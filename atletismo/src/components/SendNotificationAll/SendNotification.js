@@ -14,11 +14,6 @@ class SendNotification extends React.Component {
     }
   }
 
-  /*onSubmit = (event) =>{
-    console.log(event);
-    //event.preventDefault();
-  }*/
-
   render() {
     return(
       <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} >

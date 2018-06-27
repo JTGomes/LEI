@@ -16,6 +16,8 @@ class Results extends React.Component {
     super(props);
     this.state = {
       modalAddResults: false,
+      user: undefined,
+      atletaID: undefined,
       data: [],
       col: [{
         Header: 'Prova',
@@ -72,25 +74,40 @@ class Results extends React.Component {
     })
   }
 
-  initModalAddResult(){
+  initModalAddResult(id){
     this.setState({
       modalAddResults: true,
+      user: id
     })
   }
 
-  componentDidMount(){
+  getAtletaId(){
     let url = this.props.userId;
     if(this.props.param) {
       url = this.props.param;
     }
 
-    axios.get(`http://localhost:3000/api/Atleta/${url}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+    return axios.get(`http://localhost:3000/api/Atleta?filter[where][userId]=${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
       .then(response => {
-        this.setState({
-          data: response.data,
-        })
+          return response.data[0].id;
       })
       .catch(error => console.log(error))
+  }
+
+
+  componentDidMount() {
+    this.getAtletaId().then(data => {
+      this.setState({
+        atletaID: data
+      });
+      axios.get(`http://localhost:3000/api/Atleta/${data}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+        .then(response => {
+          this.setState({
+            data: response.data
+          })
+        })
+        .catch(error => console.log(error))
+    });
   }
 
   render() {
@@ -105,7 +122,7 @@ class Results extends React.Component {
           columns={this.state.col}
           defaultPageSize={10}
         />
-        <ModalAddResults modalAddResults={this.state.modalAddResults} toggle={this.toggleAR}/>
+        <ModalAddResults modalAddResults={this.state.modalAddResults} toggle={this.toggleAR} user={this.state.atletaID}/>
       </div>
     );
   }

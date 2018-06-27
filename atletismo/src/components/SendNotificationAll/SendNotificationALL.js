@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Modal,ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
 import Send from 'react-icons/lib/fa/paper-plane';
-
-
+import axios from 'axios';
+import {connect} from 'react-redux';
 /**
  *  props:
  *  isOpen (booleano) => When to open
@@ -26,7 +26,16 @@ class SendNotificationALL extends React.Component {
 
     onSubmit = (event) =>{
         event.preventDefault();
-        
+        const enviarPara = this.props.to.map(user => user.id)
+        axios.post('http://localhost:3000/api/notificacaos/SendNotificationAll',
+        {users: enviarPara,
+          assunto: this.state.assunto,
+          mensagem: this.state.mensagem
+        },
+        {headers: {'Authorization' : 'Bearer ' + this.props.token}}
+        )
+        .then(res => this.props.toggle())
+        .catch(error => {console.log(error); this.props.toggle()})
 
     }
 
@@ -70,4 +79,11 @@ class SendNotificationALL extends React.Component {
 }
 
 
-export default SendNotificationALL
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(SendNotificationALL)

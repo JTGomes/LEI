@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ModalUserInfo from '../../../../../components/ModalUserInfo';
 import {Button, Table, Alert, Form, FormGroup, Input } from 'reactstrap';
 import ModalPagamento from '../../../../../components/ModalPagamento';
+import axios from 'axios';
+import {connect} from 'react-redux';
 
 const data=[{nome:'João Luís Costa',uid:'uid',mes: ['janeiro','fevereiro','março'],},
             {nome:'Alfredo Lopes da Silva',uid:'uid',mes: ['fevereiro','março'],}]
@@ -12,9 +14,11 @@ class Pagamentos extends Component {
     this.state = {
       modalUserInfo: false,
       uid: undefined,
+      atletaid: undefined,
       modalPagamento: false,
       meses: undefined,
       input: '',
+      data: []
     }
     this.toggle = this.toggle.bind(this);
     this.toggleP = this.toggleP.bind(this);
@@ -33,7 +37,13 @@ class Pagamentos extends Component {
     })
   }
 
-
+componentDidMount(){
+  axios.get('http://localhost:3000/api/Atleta/getPagamentosFalta',{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+  .then(response => {
+    this.setState({data: response.data})
+  })
+  .catch(error => console.log(error))
+}
 
   initModalUser(userID){
     this.setState({
@@ -42,11 +52,10 @@ class Pagamentos extends Component {
     })
   }
 
-  initModalPagamento(userID, meses){
+  initModalPagamento(userID){
     this.setState({
       modalPagamento: true,
-      uid: userID,
-      meses: meses,
+      atletaid: userID
     })
   }
 
@@ -56,7 +65,7 @@ class Pagamentos extends Component {
             return data;
           }
           const text = this.state.input.toUpperCase();
-          return data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);
+          return data.filter( data_row => data_row.user.nome.toUpperCase().indexOf(text) !== -1);
    }
 
    handleInputSubmit(event) {
@@ -67,16 +76,16 @@ class Pagamentos extends Component {
 
   getRow(obj,elem){
     return (<tr key={elem}>
-             <td onClick={()=>this.initModalUser(obj.uid)} style={{cursor:'pointer'}}>{obj.nome}</td>
-             <td className="text-center">{obj.mes.length}</td>
-             <td className="text-center"><Button color="danger" onClick={()=>this.initModalPagamento(obj.uid,obj.mes)}>Pago</Button></td>
+             <td onClick={()=>this.initModalUser(obj)} style={{cursor:'pointer'}}>{obj.user.nome}</td>
+             <td className="text-center">{obj.pagamento.map(pag => pag.mes).join(", ")}</td>
+             <td className="text-center"><Button color="danger" onClick={()=>this.initModalPagamento(obj.id)}>Pago</Button></td>
            </tr>);
   }
 
   render() {
     return (
       <div className="mt-3" >
-      {data.length>0?
+      {this.state.data.length>0?
         <div>
           <div className="row">
             <Form className="col-lg-3">
@@ -94,7 +103,7 @@ class Pagamentos extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.filter_data_byName(data).map( (obj,elem) => this.getRow(obj,elem))}
+              {this.filter_data_byName(this.state.data).map( (obj,elem) => this.getRow(obj,elem))}
             </tbody>
           </Table>
         </div>
@@ -103,7 +112,7 @@ class Pagamentos extends Component {
           Não há pagamentos pendentes
         </Alert>
       }
-      <ModalPagamento isOpen={this.state.modalPagamento}  user={this.state.uid} meses={this.state.meses} toggle={this.toggleP}/>
+      {this.state.modalPagamento && <ModalPagamento isOpen={this.state.modalPagamento}  user={this.state.atletaid} toggle={this.toggleP}/>}
       <ModalUserInfo toggle={this.toggle} modalUserInfo={this.state.modalUserInfo} user={this.state.uid} />
       </div>
     );
@@ -111,4 +120,13 @@ class Pagamentos extends Component {
 
 }
 
-export default Pagamentos;
+
+
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(Pagamentos);

@@ -1,13 +1,13 @@
 {
-  "name": "equipamento",
+  "name": "Ano",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "nome": {
-      "type": "string",
+    "ano": {
+      "type": "number",
       "required": true
     }
   },

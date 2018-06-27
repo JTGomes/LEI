@@ -16,7 +16,6 @@ moment.locale('pt');
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 //evento passado pode ser por props...
-
 class Calendar extends React.Component {
     constructor(props){
     super(props);
@@ -26,36 +25,59 @@ class Calendar extends React.Component {
     }
   }
 
-  componentDidMount(){
-
+  getAtletaId(){
     let url = this.props.userId;
-
-
     if(this.props.param) {
       url = this.props.param;
     }
 
-    axios.get(`http://localhost:3000/api/eventos?filter[where][atleta]=${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
-        .then(response => {
-          this.setState({
-            info: response.data
-          })
-        })
-        .catch(error => console.log(error))
+    return axios.get(`http://localhost:3000/api/Atleta?filter[where][userId]=${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+          return response.data[0].id;
+      })
+      .catch(error => console.log(error))
   }
 
-  render() {
+  constroiCalendario() {
+    let url = this.props.userId;
 
+    if(this.props.param) {
+      url = this.props.param;
+    }
+    return this.getAtletaId().then(data => {
+      return axios.get(`http://localhost:3000/api/eventos?filter[where][atleta]=${data}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+          .then(response => {
+              return response.data
+          })
+          .catch(error => console.log(error))
+        });
+  }
+
+  componentDidMount() {
+    this.constroiCalendario().then(data => {
+      for(let i = 0; i < data.length; i++) {
+
+        var event = {
+          start: new Date(data[i].ano, (data[i].mes) - 1, data[i].dia),
+          end: new Date(data[i].ano, (data[i].mes) - 1, data[i].dia),
+          title: data[i].evento
+        };
+        console.log(event);
+        this.setState({
+
+          eventos: this.state.eventos.concat(event)
+
+        });
+        console.log(this.state.eventos);
+      }
+    });
+  }
+  
+  render() {
     return(
       <div className="calendar container-fluid">
         <BigCalendar
-        events={[
-          {
-            start: new Date(2018, 5, 23),
-            end: new Date(2018, 5, 23),
-            title: this.state.info.evento,
-          }
-        ]}
+        events={this.state.eventos}
         defaultDate={new Date()}
         defaultView="month"
         style={{ height: "90vh" }}

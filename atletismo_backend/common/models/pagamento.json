@@ -1,30 +1,26 @@
 {
-  "name": "evento",
+  "name": "Pagamento",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "evento": {
+    "data": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "dia": {
+    "quantia": {
       "type": "number",
-      "required": true
+      "required": false
     },
     "mes": {
-      "type": "number",
+      "type": "string",
       "required": true
     },
     "ano": {
       "type": "number",
-      "required": true
-    },
-    "duracao": {
-      "type": "string",
-      "required": true
+      "required" : true
     }
   },
   "validations": [],

@@ -11,7 +11,7 @@ class TResultsTable extends React.Component {
             data={this.props.data}
             columns={[
               {
-                Header: "Atleto",
+                Header: "Atleta",
                 accessor: "nome"
               },
               {
