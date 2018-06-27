@@ -17,10 +17,7 @@ class TPlayersFrame extends React.Component {
     super(props);
     this.state = {
       meusAtletas: [],
-      aConfirmar: [{
-        id: 235,
-        nome: "Patricia Mbengani Bravo Mamona"
-      }],
+      aConfirmar: [],
       selection: [],
       selectAll: false,
       modalTP:false,

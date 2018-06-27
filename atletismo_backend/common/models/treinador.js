@@ -34,4 +34,32 @@ module.exports = function(Treinador) {
  }
 
  );
+
+    Treinador.updateDados = function (req, data, callback) {
+  
+
+    Treinador.findById(data.id)
+      .then(treinador => treinador.updateAttributes({
+        morada: data.morada,
+        telemovel: data.telemovel,
+        codPostal: data.codPostal,
+        localidade: data.localidade
+      }))
+      .then(response => callback(null, "OK"))
+      .catch(error => callback(error))
+    ;
+  };
+
+  Treinador.remoteMethod(
+    'updateDados',
+    {
+      accepts: [     
+        { arg: 'req', type: 'object', http: { source: 'req' } },
+        { arg: 'data', type: 'any', required: false, http: { source: 'body' } }
+        ],
+      returns: {arg: 'accessToken', type: 'object', root: true},
+      http: {verb: 'put'},
+    }
+  );
+
 };
