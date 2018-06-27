@@ -20,8 +20,8 @@ class AppAtleta extends Component {
     this.state={
       sidebarLinks: [
         { link: `/atleta/${this.props.match.params.id}`, icon: <User className="icon" />, text: 'Dados Atleta'},
-        { link: `/atleta/${this.props.match.params.id}/results`, icon: <Performance className="icon" />, text: 'Dados Desempenho'},
-        { link: `/atleta/${this.props.match.params.id}/stats`, icon: <Provas className="icon" />, text: 'Resultado de Provas'},
+        { link: `/atleta/${this.props.match.params.id}/stats`, icon: <Performance className="icon" />, text: 'Dados Desempenho'},
+        { link: `/atleta/${this.props.match.params.id}/results`, icon: <Provas className="icon" />, text: 'Resultado de Provas'},
         { link: `/atleta/${this.props.match.params.id}/photos`, icon: <Foto className="icon"/>, text: 'Galeria'},
         { link: `/atleta/${this.props.match.params.id}/calendar`, icon: <Calendar className="icon"/>, text: 'Calendário'}
       ],

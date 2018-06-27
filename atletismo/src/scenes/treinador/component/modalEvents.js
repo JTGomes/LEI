@@ -88,7 +88,7 @@ class ModalEvents extends React.Component {
         </ModalBody>
         
         <ModalFooter>
-          <Button color="success" type="submit"><FaCheck />{' '}Submeter</Button>
+          <Button color="success" type="submit" onClick={this.props.toggle}><FaCheck />{' '}Submeter</Button>
         </ModalFooter>
         </Form>
       </Modal>

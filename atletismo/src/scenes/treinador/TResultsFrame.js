@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import 'react-table/react-table.css'
 import Table from "./TResultsTable.js";
 
@@ -9,34 +11,40 @@ class TResultsFrame extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data : [{
-        nome:"Patricia",
-        nomeCompeticao:"Jogos Olimpicos",
-        ano:"2008",
-        modalidade:"100m",
-        posicao:"1º lugar",
-        album:"AtletaAlbum/GAFASA"
-      },{
-        nome:"Patricia",
-        nomeCompeticao:"Jogos Olimpicos",
-        ano:"2004",
-        modalidade:"100m",
-        posicao:"1º lugar",
-        album:"AtletaAlbum/GAFASA"
-      },
-      {
-        nome:"Carlos",
-        nomeCompeticao:"Corrida do coração",
-        ano:"1999",
-        modalidade:"2Km",
-        posicao:"20º lugar",
-        album:"AtletaAlbum/GAFASA"
-      }],
+      meusAtletas: [],
+      data : [],
       anoDesde: "Desde",
       anoAte:"Até",
       nomeSelecionado:"-",
       modalidadeSelecionada:"-"
     }
+  }
+
+  getTreinadorId () {
+
+    let url = this.props.userId;
+    if(this.props.param) {
+      url = this.props.param;
+    }
+
+    return axios.get(`http://localhost:3000/api/Treinadors?filter[where][userId]=${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+        return response.data[0].id;
+      })
+      .catch(error => console.log(error))
+  }
+
+  componentWillMount() {
+    this.getTreinadorId().then(data => {
+      axios.get(`http://localhost:3000/api/Treinadors/${data}/atletas`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+        this.setState({
+          meusAtletas: response.data
+        })
+        console.log(this.state.meusAtletas)
+      })
+    })
+    .catch(error => console.log(error))
   }
 
   renderDateSelectDesde(){
@@ -75,10 +83,10 @@ class TResultsFrame extends React.Component {
     );
   }
 
-  filter(data){
-    let d = data;
+  filter(meusAtletas){
+    let d = meusAtletas;
     if( this.state.nomeSelecionado !== "-")
-        d = data.filter((a) => a.nome === this.state.nomeSelecionado);
+        d = meusAtletas.filter((a) => a.nome_competicao === this.state.nomeSelecionado);
     if( this.state.modalidadeSelecionada !== "-")
         d = d.filter( (a) => a.modalidade === this.state.modalidadeSelecionada);
     if( this.state.anoAte !== "Até")
@@ -167,10 +175,18 @@ class TResultsFrame extends React.Component {
               </select>
             </div>
           </div>
-        <Table data={this.filter(this.state.data)}/>
+        <Table data={this.filter(this.state.meusAtletas)}/>
       </div>
     );
   }
 }
 
-export default TResultsFrame;
+function mapStateToProps(state){
+  return {
+    userId: state.user,
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(TResultsFrame);
