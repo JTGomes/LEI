@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGroup, ListGroupItem} from 'reactstrap';
 
@@ -8,7 +6,7 @@ import {Table,Media, Modal, ModalHeader, ModalBody, ModalFooter, Button, ListGro
 
 class ModalUserInfo extends Component {
   constructor(props){
-    super(props);
+      super(props);
   }
 
   render() {
@@ -24,9 +22,7 @@ class ModalUserInfo extends Component {
             </Media>
             <Media body className="ml-5 mt-4">
               <span className="d-block lead">
-                {this.props.user.user.nome}
               </span>
-              {!this.props.treinador && <small className="d-block">{this.props.user.nome_competicao}</small>}
             </Media>
           </Media>
           <Table responsive>
@@ -37,7 +33,6 @@ class ModalUserInfo extends Component {
               </tr>
               <tr>
                 <td>Email:</td>
-                <td>{this.props.user.user.email}</td>
               </tr>
               <tr>
                 <td>Telemóvel</td>

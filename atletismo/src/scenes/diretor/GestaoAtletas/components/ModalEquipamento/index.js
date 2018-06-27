@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {Modal, ModalBody, ModalFooter, ModalHeader, Button, Alert, Collapse, Card, CardBody} from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 
-const data = [{id:1, dataAdquirido: '02/09/2017'},
-              {id:4, dataAdquirido:'25/09/2017'},
-              {id:3, dataAdquirido:'16/09/2017'},
-              {id:7, dataAdquirido:'12/09/2017'},
+const data = [{id:1},
+              {id:4},
+              {id:3},
+              {id:7},
               ]
 
 
@@ -55,7 +55,6 @@ class ModalEquipamento extends Component {
     return  data.map( (equip,elem) =>
       <div key={elem} className="col-6">
         <p className="mb-0"><small><Check />{this.state.equipamento[equip.id]}</small></p>
-        <p className="mt-0"><small>{"Entregue a "+equip.dataAdquirido}</small></p>
       </div>
     );
   }

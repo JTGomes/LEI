@@ -10,7 +10,19 @@
       "type": "string",
       "required": true
     },
-    "data": {
+    "dia": {
+      "type": "number",
+      "required": true
+    },
+    "mes": {
+      "type": "number",
+      "required": true
+    },
+    "ano": {
+      "type": "number",
+      "required": true
+    },
+    "duracao": {
       "type": "string",
       "required": true
     }

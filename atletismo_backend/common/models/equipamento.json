@@ -12,12 +12,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "equipamentos": {
-      "type": "hasAndBelongsToMany",
-      "model": "Atleta"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

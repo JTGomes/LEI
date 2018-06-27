@@ -67,7 +67,7 @@ class Exames extends Component {
   }
 
 
-  initModalNotification(userID,name,){
+  initModalNotification(userID,name){
     this.setState({
         modalNotification: true,
         name: name,

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Cog from 'react-icons/lib/fa/cog';
 import SendIcon from 'react-icons/lib/fa/paper-plane';
@@ -12,7 +14,9 @@ import ModalPagamento from '../../../../../components/ModalPagamento';
 class OptionMenu extends Component {
  constructor(props) {
   super(props);
-
+  this.state = {
+    atletaIDuser: undefined
+  }
   this.toggle = this.toggle.bind(this);
   this.toggleS = this.toggleS.bind(this);
   this.toggleE = this.toggleE.bind(this);
@@ -64,6 +68,30 @@ initModalPagamento(userID){
   })
 }
 
+  deleteUser() {
+
+    
+    
+  }
+
+  componentDidMount() {
+
+    let url = this.props.userId;
+    if(this.props.param) {
+      url = this.props.param;
+    }
+    console.log(this.props.uid);
+    axios.get(`http://localhost:3000/api/Atleta?filter[where][id]=${this.props.uid}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+        console.log(response.data[0].userId);
+        this.setState({
+          atletaIDuser: response.data[0].userId
+        })
+      })
+      .catch(error => console.log(error))
+
+  }
+
   render() {
     return (
       <div>
@@ -80,7 +108,7 @@ initModalPagamento(userID){
         </Dropdown>
         <ModalPagamento toggle={this.toggleP} user={this.props.uid}  isOpen={this.state.modalPagamento}/>
         <ModalEquipamento toggle={this.toggleE} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalEquipamento}/>
-        <SendNotification toggle={this.toggleS} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalNotification}/>
+        <SendNotification toggle={this.toggleS} user={this.state.atletaIDuser} name={this.props.nome} isOpen={this.state.modalNotification}/>
       </div>
     );
   }

@@ -113,9 +113,14 @@
       "model": "redes",
       "foreignKey": "atleta"
     },
-    "evento": {
+   "evento": {
       "type": "hasMany",
       "model": "evento",
+      "foreignKey": "atleta"
+    },
+    "equipamento": {
+      "type": "hasMany",
+      "model": "equipamento",
       "foreignKey": "atleta"
     },
     "pagamento":{
