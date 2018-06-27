@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import BigCalendar from 'react-big-calendar';
 import { Button } from 'reactstrap';
 import ModalEvents from './component/modalEvents';
@@ -21,7 +23,8 @@ class TRCalenderFrame extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      modalEvents: false
+      modalEvents: false,
+      atletasTreinados: [],
     }
     this.toggleE = this.toggleE.bind(this);
   }
@@ -30,6 +33,37 @@ class TRCalenderFrame extends React.Component {
     this.setState({
       modalEvents: !this.state.modalEvents
     })
+  }
+
+  getTreinadorId () {
+
+    let url = this.props.userId;
+    if(this.props.param) {
+      url = this.props.param;
+    }
+
+    return axios.get(`http://localhost:3000/api/Treinadors?filter[where][userId]=${url}`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+        return response.data[0].id;
+      })
+      .catch(error => console.log(error))
+  }
+
+  componentWillMount() {
+    this.getTreinadorId().then(data => {
+
+      axios.get(`http://localhost:3000/api/Treinadors/${data}/atletas`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
+      .then(response => {
+        for(let i = 0; i < response.data.length; i++) {
+
+          this.setState({
+            atletasTreinados: this.state.atletasTreinados.concat(response.data[i].id)
+          })
+        }
+      })
+      .catch(error => console.log(error))
+    });
+
   }
 
   render() {
@@ -48,10 +82,18 @@ class TRCalenderFrame extends React.Component {
           style={{ height: "80vh" }}
         />
         <Button onClick={this.toggleE}>Adicionar Evento</Button>
-        <ModalEvents modalEvents={this.state.modalEvents} toggle={this.toggleE}/>
+        <ModalEvents modalEvents={this.state.modalEvents} toggle={this.toggleE} atletas={this.state.atletasTreinados} />
       </div>
     );
   }
 }
 
-export default TRCalenderFrame;
+function mapStateToProps(state){
+  return {
+    userId: state.user,
+    token: state.token
+  };
+}
+
+
+export default connect(mapStateToProps)(TRCalenderFrame);
