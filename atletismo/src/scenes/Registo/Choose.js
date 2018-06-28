@@ -112,7 +112,6 @@ class Choose extends React.Component {
                     email: dados['email'],
                     password: dados['password'],
                     nome: dados['nome'],
-                    nome_competicao: "Gomes",
                     nrdocumento: dados['nccidadao'],
                     tipoDocumento: "cartao de cidadao",
                     dataNascimento: dados['data'],

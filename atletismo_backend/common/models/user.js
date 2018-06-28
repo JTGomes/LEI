@@ -136,7 +136,6 @@ module.exports = function(User) {
       .then(user => {
         User.app.models.Atleta.create({
           ativo: true,
-          nome_competicao: credentials.nome_competicao,
           telemovel: credentials.telemovel,
           nrdocumento: credentials.nrdocumento,
           tipoDocumento: credentials.tipoDocumento,

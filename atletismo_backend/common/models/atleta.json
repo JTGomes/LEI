@@ -12,7 +12,7 @@
     },
     "nome_competicao": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "isIsento": {
       "type": "boolean",
