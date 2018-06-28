@@ -163,6 +163,7 @@ class Choose extends React.Component {
                     foto: dados['foto'],
                     nccidadao: dados['nccidadao']
                 }).then(ans => console.log('Enviado'));
+                // Fetch depois de receber a resposta para enviar o identificador do utilizador
                 fetch('http://localhost:4500/api/User/uploads/',{
                     method: 'POST',
                     body: dados['fileData']

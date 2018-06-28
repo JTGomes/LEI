@@ -8,17 +8,17 @@ class Documentos extends React.Component {
     super(props);
     if(props.data){
         this.state = {
-            foto: 'none',
-            cc: 'none',
-            am: 'none',
+            foto: props.data.foto,
+            cc: props.data.cc,
+            am: props.data.am,
             socio: props.data.socio,
             nsocio: props.data.nsocio,
             fileData: props.fileData ? props.fileData : new FormData()
         }
     }else this.state = {
-        foto: 'none',
-        cc: 'none',
-        am: 'none',
+        foto: "none",
+        cc: "none",
+        am: "none",
         socio: 'nao',
         nsocio: '',
         fileData: new FormData()
@@ -84,7 +84,7 @@ class Documentos extends React.Component {
         <input
           name="foto"
           type="file"
-          onChange={e => {this.onFileChange(e);this.onChange(e)}}
+          onChange={e => {this.onFileChange(e);}}
         /><br/>
       </label><br/>
       Cartão do Cidadão<br/>
@@ -92,7 +92,7 @@ class Documentos extends React.Component {
         <input
           name="cc"
           type="file"
-          onChange={e => {this.onFileChange(e);this.onChange(e)}}
+          onChange={e => {this.onFileChange(e);}}
         /><br/>
       </label><br/>
       Atestado Médico<br/>
@@ -100,7 +100,7 @@ class Documentos extends React.Component {
         <input
           name="am"
           type="file"
-          onChange={e => {this.onFileChange(e);this.onChange(e)}}
+          onChange={e => {this.onFileChange(e);}}
         /><br/>
       </label><br/>
       Sócio do SC Braga<br/>
