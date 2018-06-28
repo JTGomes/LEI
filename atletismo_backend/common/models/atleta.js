@@ -199,6 +199,31 @@ Atleta.remoteMethod(
  }
 );
 
+Atleta.removerPermissao = function (req, data, callback) {
 
+
+ Atleta.findById(data.id)
+   .then(atleta => atleta.updateAttributes({
+    ativo: false
+   }))
+   .then(atletaV => Atleta.app.models.User.findById(atletaV.userId)
+            .then(user => user.updateAttributes({validado: false}) )
+   )
+   .then(response => callback(null, "OK"))
+   .catch(error => callback(error))
+ ;
+};
+
+Atleta.remoteMethod(
+ 'removerPermissao',
+ {
+   accepts: [
+     { arg: 'req', type: 'object', http: { source: 'req' } },
+     { arg: 'data', type: 'any', required: false, http: { source: 'body' } }
+     ],
+   returns: {arg: 'accessToken', type: 'object', root: true},
+   http: {verb: 'put'},
+ }
+);
 
 };

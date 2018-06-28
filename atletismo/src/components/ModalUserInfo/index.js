@@ -8,13 +8,19 @@ class ModalUserInfo extends Component {
   constructor(props){
       super(props);
   }
+  
+  getEmail() {
+    var email = this.props.user.user.email;
+    return email;
+  }
 
   render() {
+    console.log(this.props.user);
     let user = this.props.treinador?'Treinador':'Atleta';
     if(this.props.user){
     return (
       <Modal isOpen={this.props.modalUserInfo} toggle={this.props.toggle} >
-        <ModalHeader toggle={this.props.toggle}>{'Dados do '+user}</ModalHeader>
+        <ModalHeader toggle={this.props.toggle}>{'Dados de '+ this.props.user.user.nome}</ModalHeader>
         <ModalBody >
           <Media >
             <Media left>
@@ -33,6 +39,7 @@ class ModalUserInfo extends Component {
               </tr>
               <tr>
                 <td>Email:</td>
+                <td>{this.getEmail()}</td>
               </tr>
               <tr>
                 <td>Telemóvel</td>

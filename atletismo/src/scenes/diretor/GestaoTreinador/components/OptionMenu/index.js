@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Cog from 'react-icons/lib/fa/cog';
 import SendIcon from 'react-icons/lib/fa/paper-plane';
@@ -35,7 +37,18 @@ initModalNotification(userID,name){
       modalNotification: true,
   })
 }
+  
+  deleteUser(id) {
 
+    axios.put('http://localhost:3000/api/Treinadors/removerPermissao',
+    {id: id}
+    ,{
+      headers: {'Authorization' : 'Bearer ' + this.props.token},
+    })
+    .then(res => this.remover(id) )
+    .catch(error => console.log(error))
+
+  }
 
   render() {
     return (
@@ -46,7 +59,7 @@ initModalNotification(userID,name){
           </DropdownToggle>
           <DropdownMenu >
             <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalNotification()}><SendIcon style={{color:'#296ddb'}}/>{'  '}Enviar Notificação</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser()}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Acesso</DropdownItem>
+            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser(this.props.uid)}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Acesso</DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <SendNotification toggle={this.toggleS} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalNotification}/>
