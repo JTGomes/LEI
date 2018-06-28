@@ -26,7 +26,7 @@
       "type": "string",
       "required": true
     },
-    "codPostal": {
+    "codigoPostal": {
       "type": "string",
       "required": true
     },

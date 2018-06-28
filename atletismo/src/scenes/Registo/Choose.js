@@ -106,7 +106,7 @@ class Choose extends React.Component {
             if( !dados['email'] || !dados['password'] || !dados['nome'] || !dados['nccidadao'] || !dados['data'] || !dados['escalao']
                 || !dados['cc'] || !dados['am'] || !dados['foto'] ||  !dados['nif'] || !dados['morada'] || !dados['localidade'] || !dados['gender']
                 || !dados['nacionalidade'] || !dados['postal'] || !dados['telemovel']   ) {
-                alert("Faz o favor de inserir todos os dados pedidos.");
+                alert("Insira todos os dados pedidos!");
             }else {
                 error = axios.post('http://localhost:3000/api/Users/signupAtleta', {
                     email: dados['email'],
@@ -141,7 +141,7 @@ class Choose extends React.Component {
             if( !dados['email'] || !dados['password'] || !dados['nome'] || !dados['nccidadao'] || !dados['data'] || !dados['ipdj']
                 || !dados['cc'] || !dados['am'] || !dados['foto'] ||  !dados['nif'] || !dados['morada'] || !dados['localidade'] || !dados['gender']
                 || !dados['nacionalidade'] || !dados['postal'] || !dados['telemovel'] || ! dados['ntreinador']  ) {
-                alert("Faz o favor de inserir todos os dados pedidos.");
+                alert("Insira todos os dados pedidos!");
             }else {
                 error = axios.post('http://localhost:3000/api/Users/signupTreinador', {
                     nif: dados['nif'],
@@ -181,17 +181,18 @@ class Choose extends React.Component {
   renderChoice(){
     return (
       <section className="intro" id='intro'>
-        <div className="row">
-          <div className="col-lg-6 col-sm-12 left">
-            <button className="botaotreinadores" onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
-              <p>REGISTO DE TREINADORES</p>
-            </button>
-          </div>
-          <div className="col-lg-6 col-sm-12 right">
-              <button className="botaoatletas" onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
-                <p>REGISTO DE ATLETAS</p>
-              </button>
-          </div>
+        <div className="choice-buttons">
+          <button className="botaotreinadores" onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
+            <p>REGISTO DE TREINADORES</p>
+          </button>
+          <button className="botaoatletas" onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
+            <p>REGISTO DE ATLETAS</p>
+          </button>
+        </div>
+        <div className="sair-button">
+          <button className={"sair"} onClick={e => this.onEnd()}>
+              Sair
+          </button>
         </div>
       </section>
     )
@@ -246,9 +247,6 @@ class Choose extends React.Component {
     return (
       <div className={"background"}>
         {this.renderSwitch(this.state.passo)}
-          <button className={"sair"} onClick={e => this.onEnd()}>
-              Sair
-          </button>
       </div>
     );
   }
