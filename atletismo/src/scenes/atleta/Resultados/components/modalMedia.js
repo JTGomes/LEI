@@ -5,11 +5,13 @@ import { Modal, ModalHeader, ModalBody, Form, FormText, FormGroup, Label, Input,
 class ModalMedia extends React.Component {
   state = {
     isPhoto: true,
+    data: new FormData()
   }
 
   isPhotos() {
     this.setState({
       isPhoto: true,
+      data:  new FormData()
     })
   }
 
@@ -19,12 +21,35 @@ class ModalMedia extends React.Component {
     })
   }
 
+  onChange(e){
+    const files = e.target.files;
+    console.log(e.target.files);
+    let file;
+    if( files.length > 0)
+      file = files[0];
+
+    if(file) {
+        this.state.data.set(file.name, files[0], files[0].name);
+        console.log(this.state.data);
+    }
+  }
+
+  onSubmit(e){
+    if(this.state.isPhoto) {
+        fetch('http://localhost:4500/api/User/uploads/', {
+            method: 'POST',
+            body: this.state.data
+        }).then(answer => console.log(answer));
+    }
+      this.props.toggle();
+  }
+
   renderInput() {
     if(this.state.isPhoto) {
       return(
         <FormGroup>
           <Label for="fileform"></Label>
-          <Input type="file" name="file" id="fileform" />
+          <Input type="file" name="file" id="fileform" onChange={e => this.onChange(e)}/>
           <FormText color="muted">
             Insira a sua fotografia da prova em que participou.
           </FormText>
@@ -56,7 +81,7 @@ class ModalMedia extends React.Component {
             </FormGroup>
             {this.renderInput()}
           </Form>
-          <Button color="success"><FaCheck />&nbsp;Submeter</Button>
+          <Button color="success" onClick={e => this.onSubmit(e)}><FaCheck />&nbsp;Submeter</Button>
         </ModalBody>
       </Modal>
     );

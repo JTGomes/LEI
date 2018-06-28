@@ -105,7 +105,7 @@ class Choose extends React.Component {
         if( this.state.caminho === 'atleta') {
             if( !dados['email'] || !dados['password'] || !dados['nome'] || !dados['nccidadao'] || !dados['data'] || !dados['escalao']
                 || !dados['cc'] || !dados['am'] || !dados['foto'] ||  !dados['nif'] || !dados['morada'] || !dados['localidade'] || !dados['gender']
-                || !dados['nacionalidade'] || !dados['postal'] || !dados['telemovel'] || !dados['socio'] || !dados['nsocio']  ) {
+                || !dados['nacionalidade'] || !dados['postal'] || !dados['telemovel']   ) {
                 alert("Faz o favor de inserir todos os dados pedidos.");
             }else {
                 error = axios.post('http://localhost:3000/api/Users/signupAtleta', {
@@ -131,13 +131,17 @@ class Choose extends React.Component {
                     nsocio: dados['nsocio'],
                     redes: JSON.stringify(dados['redes'])
                 }).then(ans => console.log('Enviado'));
+                fetch('http://localhost:4500/api/User/uploads/',{
+                    method: 'POST',
+                    body: dados['fileData']
+                }).then( answer => console.log(answer));
             }
 
         }
         else if( this.state.caminho === 'treinador'){
             if( !dados['email'] || !dados['password'] || !dados['nome'] || !dados['nccidadao'] || !dados['data'] || !dados['ipdj']
                 || !dados['cc'] || !dados['am'] || !dados['foto'] ||  !dados['nif'] || !dados['morada'] || !dados['localidade'] || !dados['gender']
-                || !dados['nacionalidade'] || !dados['postal'] || !dados['telemovel'] || ! dados['nsocio'] || ! dados['ntreinador']  ) {
+                || !dados['nacionalidade'] || !dados['postal'] || !dados['telemovel'] || ! dados['ntreinador']  ) {
                 alert("Faz o favor de inserir todos os dados pedidos.");
             }else {
                 error = axios.post('http://localhost:3000/api/Users/signupTreinador', {
@@ -159,6 +163,10 @@ class Choose extends React.Component {
                     foto: dados['foto'],
                     nccidadao: dados['nccidadao']
                 }).then(ans => console.log('Enviado'));
+                fetch('http://localhost:4500/api/User/uploads/',{
+                    method: 'POST',
+                    body: dados['fileData']
+                }).then( answer => console.log(answer));
             }
         }
         return error;

@@ -1,4 +1,12 @@
-
+.imagem {
+  background: url(../images/ATL.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-attachment: fixed;
+  background-size: cover;
+  /*overflow: hidden;*/
+  z-index: -10;
+}
 .conteudo {
 
   height: 100%;
