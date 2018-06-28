@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import {Modal, ModalBody, ModalFooter, ModalHeader, Button, Alert, Collapse, Card, CardBody} from 'reactstrap';
 import Check from 'react-icons/lib/fa/check';
 
@@ -14,12 +16,14 @@ class ModalEquipamento extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state={
-      equipamento:['Fato de treino','Sweatshirt','Polo',
-                   'Lycras (calções e calças)','Impermeável',
-                   'Mochila','Calções passeio','T-shirt',
-                   'Sapatilhas', 'Kispo', 'Camisola de Competição'
+      equipamento:['Fato de Treino','Sapatilhas','Mochila',
+                   'Camisola de Competição','Pólo',
+                   'Calções de Passeio','Kispo','Sweatshirt',
+                   'Lycras', 'Impermeável', 'T-Shirt'
                  ],
       collapse: false,
+      adicionar: [],
+      tem: []
     }
   }
 
@@ -29,6 +33,39 @@ class ModalEquipamento extends Component {
 
   setEquipamento(){
 
+    let config = {
+      headers: {'Authorization' : 'Bearer ' + this.props.token},
+    }
+    
+    for(let i = 0; i < this.state.adicionar.length; i++) {
+      const pars = {
+        nome: this.state.adicionar[i]
+      }
+      axios.post(`http://localhost:3000/api/Atleta/${this.props.idatleta}/equipamento`, pars, config)
+    .then(response => {
+      })
+    .catch(error => console.log(error))
+
+    }
+
+  }
+
+  onChange(e) {
+    // current array of options
+    const options = this.state.adicionar
+    let index
+
+    // check if the check box is checked or unchecked
+    if (e.target.checked) {
+      // add the numerical value of the checkbox to options array
+      options.push(e.target.name)
+    } else {
+      // or remove the value from the unchecked checkbox from the array
+      index = options.indexOf(e.target.name)
+      options.splice(index, 1)
+    }
+    // update the state with the new array of options
+    this.setState({ adicionar: options })
   }
 
   showEquipamento(data){
@@ -40,44 +77,62 @@ class ModalEquipamento extends Component {
           </Alert>
         </div>);
     }
-    return  this.state.equipamento.map( (equip,elem) =>
-      data.find((obj)=> obj.id === elem)? null :
+    return this.state.equipamento.map( (equip, elem) =>
+      this.state.tem.find((obj)=> equip === (obj.nome) )? null :
       <div key={elem} className="col-6">
         <div className="custom-control custom-checkbox ">
-          <input type="checkbox" className="custom-control-input" id={"customCheck"+elem}/>
+          <input type="checkbox" name={equip} className="custom-control-input" id={"customCheck"+elem} onChange={this.onChange.bind(this)} />
           <label className="custom-control-label" htmlFor={"customCheck"+elem}>{equip}</label>
         </div>
       </div>
     );
   }
 
+  componentWillMount() {
+    axios.get(`http://localhost:3000/api/Atleta/${this.props.idatleta}/equipamento`,{headers: {'Authorization' : 'Bearer ' + this.props.token}})
+    .then(response => {
+      /*for(let i = 0; i < response.data.length; i++) {
+        console.log("SOU->" + response.data[i].nome);
+        this.setState({
+          tem: this.state.tem.concat(response.data[i].nome)
+        })
+      }*/
+      this.setState({
+        tem: response.data
+      });
+
+
+      })
+    .catch(error => console.log(error))
+  }
+
   showEquipamentoAdquirido(data){
     return  data.map( (equip,elem) =>
       <div key={elem} className="col-6">
-        <p className="mb-0"><small><Check />{this.state.equipamento[equip.id]}</small></p>
+        <p className="mb-0"><small><Check />{equip.nome}</small></p>
       </div>
     );
-  }
+}
+
 
   render() {
-
     return (
       <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} >
         <ModalHeader toggle={this.props.toggle}>Selecione o equipamento entregue</ModalHeader>
         <ModalBody>
           <form>
             <div className="row">
-            {this.showEquipamento(data)}
+            {this.showEquipamento(this.state.tem)}
             </div>
           </form>
           <div className="row mt-2 pl-2">
               <Button outline color="primary" onClick={this.toggle} size="sm" >Ver equipamento entregue</Button>
           </div>
-          <Collapse isOpen={this.state.collapse}>
+          <Collapse isOpen={this.state.collapse} >
             <Card>
               <CardBody>
                 <div className="row">
-                  {this.showEquipamentoAdquirido(data)}
+                  {this.showEquipamentoAdquirido(this.state.tem)}
                 </div>
               </CardBody>
             </Card>
@@ -85,7 +140,7 @@ class ModalEquipamento extends Component {
 
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={()=>this.setEquipamento()}><Check />{' '}Validar</Button>{' '}
+          <Button color="success" onClick={()=>{this.setEquipamento(), this.props.toggle()}}><Check />{' '}Validar</Button>{' '}
             <Button color="secondary" onClick={this.props.toggle}>Cancelar</Button>
           </ModalFooter>
         </Modal>
@@ -95,5 +150,11 @@ class ModalEquipamento extends Component {
 
 
 
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
 
-export default ModalEquipamento;
+
+export default connect(mapStateToProps)(ModalEquipamento);

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import FaCheck from 'react-icons/lib/fa/check';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, FormText, Label, Input, Button } from 'reactstrap';
 
 class ModalEditInfo extends React.Component {
   constructor(props){
@@ -44,7 +44,7 @@ class ModalEditInfo extends React.Component {
     let config = {
       headers: {'Authorization' : 'Bearer ' + this.props.token},
     }
-    console.log("SOU ESTE->" + this.props.user);
+    //console.log("SOU ESTE->" + this.props.user);
     this.getAtletaId().then(data => {
     const pars = {
       id: data,
@@ -111,16 +111,23 @@ class ModalEditInfo extends React.Component {
         <Form onSubmit={this.onSubmit}>
         <ModalBody>
             <FormGroup>
+              <Label for="name_competition">Nome de Competição</Label>
+              <Input type="text" name="nome" id="name_competition" />
+              <FormText>Adicione o nome de competição que pretende que apareça nos seus resultados</FormText>
+            </FormGroup>
+            <FormGroup>
               <Label for="addressform">Morada</Label>
-              <Input type="address" name="address" id="addressform" placeholder="Avenida Falsa, 123" onChange={event => this.setState({
+              <Input type="address" name="address" id="addressform" onChange={event => this.setState({
                   'morada': event.target.value
                 })}/>
+              <FormText>Ex: Rua dos Atletas, 425, 3º Dto.</FormText>
             </FormGroup>
             <FormGroup>
               <Label for="phoneform">Nº Telemóvel</Label>
-              <Input name="phone" id="phoneform" placeholder="939393939" onChange={event => this.setState({
+              <Input name="phone" id="phoneform" onChange={event => this.setState({
                   'telemovel': event.target.value
                 })}/>
+              <FormText>Ex: 939393939</FormText>
             </FormGroup>
             <FormGroup>
               <Label for="documentform">Tipo de Documento</Label>
@@ -133,15 +140,17 @@ class ModalEditInfo extends React.Component {
             </FormGroup>
             <FormGroup>
               <Label for="postalform">Código Postal</Label>
-              <Input name="address" id="postalform" placeholder="1111-111" onChange={event => this.setState({
+              <Input name="address" id="postalform" onChange={event => this.setState({
                   'codigopostal': event.target.value
                 })}/>
+              <FormText>Ex: 4758-165</FormText>
             </FormGroup>
             <FormGroup>
               <Label for="locationform">Localidade</Label>
-              <Input name="location" id="locationform" placeholder="Braga" onChange={event => this.setState({
+              <Input name="location" id="locationform" onChange={event => this.setState({
                   'localidade': event.target.value
                 })}/>
+              <FormText>Ex: Braga, Guimarães, ...</FormText>
             </FormGroup>
             <FormGroup check inline>
               <Label check>

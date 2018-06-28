@@ -65,15 +65,6 @@ class Documentos extends React.Component {
   render () {
     return (
       <div className="imagem">
-        <div className="conteudo">
-          <ul className="progressbar">
-            <li className="active">Informações Pessoais</li>
-            <li className="active">Contactos</li>
-            <li><label className="texto">Documentos</label></li>
-            <li>Confirmar Registo</li>
-            <li>Registo FPA</li>
-          </ul>
-        </div>
 
     <div id="formulario">
       <h1>Documentos</h1>

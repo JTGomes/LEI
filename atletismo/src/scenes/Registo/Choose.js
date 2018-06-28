@@ -112,7 +112,6 @@ class Choose extends React.Component {
                     email: dados['email'],
                     password: dados['password'],
                     nome: dados['nome'],
-                    nome_competicao: "Gomes",
                     nrdocumento: dados['nccidadao'],
                     tipoDocumento: "cartao de cidadao",
                     dataNascimento: dados['data'],
@@ -185,13 +184,13 @@ class Choose extends React.Component {
       <section className="intro" id='intro'>
         <div className="row">
           <div className="col-lg-6 col-sm-12 left">
-            <button onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
-              <p>TREINADORES</p>
+            <button className="botaotreinadores" onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
+              <p>REGISTO DE TREINADORES</p>
             </button>
           </div>
           <div className="col-lg-6 col-sm-12 right">
-              <button onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
-                <p>ATLETAS</p>
+              <button className="botaoatletas" onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
+                <p>REGISTO DE ATLETAS</p>
               </button>
           </div>
         </div>

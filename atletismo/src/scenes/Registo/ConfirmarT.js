@@ -6,15 +6,6 @@ class ConfirmarT extends React.Component {
   render () {
     return (
       <div className="imagem">
-      <div className="conteudo">
-        <ul className="progressbar">
-          <li className="active">Informações Pessoais</li>
-          <li className="active">Contactos</li>
-          <li className="active">Documentos</li>
-          <li><label className="texto">Confirmar Registo</label></li>
-          <li>Registo FPA</li>
-        </ul>
-      </div>
 
       <h1 className="text-center">Confirmação do Registo</h1>
       <h3 className="text-center">Confirme todos os campos inseridos</h3>

@@ -59,6 +59,7 @@ class AntigosAtletas extends Component {
  }
 
  initModalUser(userID){
+  console.log("CHEGUEI");
    this.setState({
      modalUserInfo: true,
      uid: userID,
@@ -92,7 +93,7 @@ validaAtleta(id){
 
 remover(id){
   this.setState(prevState => ({
-    Treinadores: prevState.data.filter(user => user.id !== id)
+    data: prevState.data.filter(user => user.id !== id)
   }));
 }
 

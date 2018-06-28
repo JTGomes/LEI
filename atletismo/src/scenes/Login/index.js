@@ -34,7 +34,7 @@ constructor(props){
 
   render () {
     return (
-          <div className="login"><br/><br/><br/><br/><br/><br/><br/><br/>
+          <div className="login"><br/><br/><br/><br/><br/>
           <h2 className="login-header">PLATAFORMA DE ATLETISMO DO SC BRAGA</h2>
 
           <form className="login-container">
@@ -76,7 +76,6 @@ constructor(props){
 
             <Link to={routes.REGISTAR} className="d-block small mt-3" style={{color:'#d14444'}}>Registar Conta</Link>
           <br/>
-            <a className="d-block small">Esqueceu-se da Password?</a>
           </div>
           </div>
     );

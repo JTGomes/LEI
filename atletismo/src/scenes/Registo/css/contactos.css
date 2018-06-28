@@ -207,3 +207,15 @@
   opacity: 1;
   right: 10px;
 }
+
+div.rede {
+  margin-left: 5%;
+}
+
+#adiciona {
+  margin-left: 1%;
+}
+
+#remove {
+  margin-left: 1%;
+}
