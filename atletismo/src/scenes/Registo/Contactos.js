@@ -65,15 +65,6 @@ class Contactos extends React.Component {
   render () {
     return (
       <div className="imagem">
-      <div className="conteudo">
-        <ul className="progressbar">
-          <li className="active">Informações Pessoais</li>
-          <li><label className="texto">Contactos</label></li>
-          <li>Documentos</li>
-          <li>Confirmar Registo</li>
-          <li>Registo FPA</li>
-        </ul>
-      </div>
 
       <div id="formulario">
         <h1>Contactos</h1>
@@ -98,7 +89,7 @@ class Contactos extends React.Component {
           value={this.state.telemovel}
           style={{minWidth: '200px'}}
         /><br/><br/>
-        Redes Sociais&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Redes Sociais
         <button type="button" id="adiciona" onClick={this.handleAddRedes} style={{ color:'white'}} className="small"><strong>+</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;
         {this.state.redes.map((rede, idx) => (
           <div className="rede" key={idx}>
@@ -109,7 +100,7 @@ class Contactos extends React.Component {
               value={rede.url}
               onChange={this.handleRedesChange(idx)}
               style={{minWidth: '200px'}}
-            />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            />
             <button type="button" id="remove" onClick={this.handleRemoveRedes(idx)} className="small"><strong style={{ color:'white'}}>-</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </div>
         ))}<br/>
@@ -121,8 +112,8 @@ class Contactos extends React.Component {
           onChange={e => this.onChange(e)}
           value={this.state.morada}
           style={{minWidth: '200px'}}
-        /><br/><br/>
-        Código Postal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Localidade<br/>
+        /><br/>
+        Código Postal<br/>
         <input
           name="postal"
           type="text"
@@ -130,8 +121,8 @@ class Contactos extends React.Component {
           onChange={e => this.onChange(e)}
           value={this.state.postal}
           style={{minWidth: '200px'}}
-        />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        /><br/>
+        Localidade<br/>
         <input
           name="localidade"
           type="text"

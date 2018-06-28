@@ -19,37 +19,22 @@ class UltimosResultados extends React.Component {
               Header: 'Nome',
               id:'nome_competicao',
               accessor: b => b.user.nome_competicao,
-              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-                return this.state.data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);},
-              filterAll: true
             },{
               Header: 'Prova',
-              accessor: 'nome',
-              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-                return this.state.data.filter( data_row => data_row.prova.toUpperCase().indexOf(text) !== -1);},
-              filterAll: true
+              accessor: 'nome'
             }
             ,{
               Header: 'Tipo',
               accessor: 'tipo'
             },{
               Header: 'Disciplina',
-              accessor: 'disciplina',
-              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-                return this.state.data.filter( data_row => data_row.modalidade.toUpperCase().indexOf(text) !== -1);},
-              filterAll: true
+              accessor: 'disciplina'
             },{
               Header: 'Data',
-              accessor: 'data',
-              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-                return this.state.data.filter( data_row => data_row.dia.toUpperCase().indexOf(text) > -1);},
-              filterAll: true
+              accessor: 'data'
             },{
               Header: 'Local',
-              accessor: 'local',
-              filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
-                return this.state.data.filter( data_row => data_row.local.toUpperCase().indexOf(text) !== -1);},
-              filterAll: true
+              accessor: 'local'
             },{
               Header: 'Resultado(s)',
               accessor: 'resultado'
@@ -78,6 +63,7 @@ class UltimosResultados extends React.Component {
           this.setState({
             data: response.data,
           })
+          console.log(this.state.data);
         })
         .catch(error => console.log(error))
   }

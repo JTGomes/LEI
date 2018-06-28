@@ -56,15 +56,6 @@ class ContactosT extends React.Component {
   render () {
     return (
       <div className="imagem">
-      <div className="conteudo">
-        <ul className="progressbar">
-          <li className="active">Informações Pessoais</li>
-          <li><label className="texto">Contactos</label></li>
-          <li>Documentos</li>
-          <li>Confirmar Registo</li>
-          <li>Registo FPA</li>
-        </ul>
-      </div>
 
       <div id="formulario">
         <h1>Contactos</h1>
@@ -98,7 +89,7 @@ class ContactosT extends React.Component {
           value={this.state.morada}
           style={{minWidth: '200px'}}
         /><br/><br/>
-        Código Postal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Localidade<br/>
+        Código Postal<br/>
         <input
           name="postal"
           type="text"
@@ -108,7 +99,8 @@ class ContactosT extends React.Component {
           value={this.state.postal}
           style={{minWidth: '200px'}}
         />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br/><br/>
+        Localidade<br/>
         <input
           name="localidade"
           type="text"

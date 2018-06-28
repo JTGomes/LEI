@@ -42,16 +42,6 @@ class InfoPessT extends React.Component {
     return (
       <div className="imagem">
 
-        <div className="container-fluid conteudo">
-          <ul className="progressbar">
-            <li><label className="texto">Informações Pessoais</label></li>
-            <li>Contactos</li>
-            <li>Documentos</li>
-            <li>Confirmar Registo</li>
-            <li>Registo FPA</li>
-          </ul>
-        </div>
-
         <div id="formulario" >
           <h1>REGISTO DE TREINADORES</h1>
           <h3>Faça aqui o seu registo e torne-se treinador no SC Braga</h3>
@@ -107,7 +97,8 @@ class InfoPessT extends React.Component {
               style={{minWidth: '200px'}}
             />
             </p>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número CC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número de Contribuinte<br/>
+            <p>
+            Número CC<br/>
             <input
               name="nccidadao"
               type="text"
@@ -115,7 +106,10 @@ class InfoPessT extends React.Component {
               onChange={e => this.onChange(e)}
               value={this.state.nccidadao}
               style={{minWidth: '200px'}}
-            />&nbsp;
+            />
+            </p>
+            <p>
+            Número de Contribuinte<br/>
             <input
               name="nif"
               type="text"
@@ -124,20 +118,20 @@ class InfoPessT extends React.Component {
               value={this.state.nif}
               style={{minWidth: '200px'}}
             />
-            <br/><br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Género&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+            </p>
+            Género<br/>
             <input
               name="gender"
               type="radio"
               onChange={e => this.onChange(e)}
               value={"feminino"}
-            /> Feminino&nbsp;&nbsp;
+            /> Feminino{' '}
             <input
               name="gender"
               type="radio"
               onChange={e => this.onChange(e)}
               value={"masculino"}
-            /> Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            /> Masculino
         </form>
           <form>
             <button id="seguinte" onClick={(e) =>this.onSubmit(e)}>

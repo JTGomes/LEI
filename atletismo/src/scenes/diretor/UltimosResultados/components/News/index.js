@@ -43,9 +43,9 @@ class News extends Component {
   getText(){
     return `${this.state.titulo}
 
-    ${this.rand(this.state.inicio)} ${this.rand(this.state.clube)} ${this.rand(this.state.termos)} ${this.rand(this.state.week)} ${this.rand(this.state.ligacao)} ${this.rand(this.state.maissucesso)} ${this.rand(this.state.df)} ${this.props.component.original.prova}
-    ${this.rand(this.state.feminino)} ${this.props.component.original.nome} ${this.rand(this.state.termos)} ${this.rand(this.state.marca)} ${this.props.component.original.resultado} ${this.rand(this.state.resultado)} ${this.props.component.original.classificacao} ${this.props.component.original.local} ${this.rand(this.state.esp)} ${this.props.component.original.especialidade} ${this.rand(this.state.escalao)} ${"ESCALÃO"}
-    ${this.rand(this.state.masculino)} ${this.props.component.original.nome} ${this.rand(this.state.termos)} ${this.rand(this.state.marca)} ${this.props.component.original.resultado} ${this.rand(this.state.resultado)} ${this.props.component.original.classificacao} lugar ${this.rand(this.state.esp)} ${this.props.component.original.especialidade} ${this.rand(this.state.escalao)} ${"ESCALÃO"}
+    ${this.rand(this.state.inicio)} ${this.rand(this.state.clube)} ${this.rand(this.state.termos)} ${this.rand(this.state.week)} ${this.rand(this.state.ligacao)} ${this.rand(this.state.maissucesso)} ${this.rand(this.state.df)} ${this.props.component.original.nome}
+    ${this.rand(this.state.feminino)} ${this.props.component.original.nome_competicao} ${this.rand(this.state.termos)} ${this.rand(this.state.marca)} ${this.props.component.original.resultado} ${this.rand(this.state.resultado)} ${this.props.component.original.classificacao} ${this.props.component.original.local} ${this.rand(this.state.esp)} ${this.props.component.original.tipo} ${this.rand(this.state.escalao)} ${"ESCALÃO"}
+    ${this.rand(this.state.masculino)} ${this.props.component.original.nome_competicao} ${this.rand(this.state.termos)} ${this.rand(this.state.marca)} ${this.props.component.original.resultado} ${this.rand(this.state.resultado)} ${this.props.component.original.classificacao} lugar ${this.rand(this.state.esp)} ${this.props.component.original.tipo} ${this.rand(this.state.escalao)} ${"ESCALÃO"}
     ${this.rand(this.state.sucesso)}
               `;
   }
