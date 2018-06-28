@@ -35,10 +35,10 @@ class Confirmar extends React.Component {
             </div>
             <div id="documentos" className="col-12">
               <h2><Link to='/Documentos'>DOCUMENTOS</Link></h2>
-              Foto: <label id="max">{  this.splitAndGetLast(this.props.data[2].foto) }</label><br/>
-              Cartão do Cidadão: <label id="max">{  this.splitAndGetLast(this.props.data[2].cc) }</label><br/>
-              Atestado Médico: <label id="max">{  this.splitAndGetLast(this.props.data[2].am) }</label><br/>
-              Número de Sócio do SC Braga: <label id="max">{ this.props.data[2].nsocio}</label><br/>
+              Foto: <label id="max">{  this.props.data[2].foto }</label><br/><br/>
+              Cartão do Cidadão: <label id="max">{  this.props.data[2].cc }</label><br/><br/>
+              Atestado Médico: <label id="max">{  this.props.data[2].am }</label><br/><br/>
+              Número de Sócio do SC Braga: <label id="max">{ this.props.data[2].nsocio}</label><br/><br/><br/><br/><br/>
             </div>
           </div>
           <div id="buttons" className="col-12">

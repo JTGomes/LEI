@@ -12,27 +12,27 @@ class ConfirmarT extends React.Component {
           <div className="confirm-data">
             <div id="registo" className="col-12">
               <h2><Link to='/InfoPess'>DADOS PESSOAIS</Link></h2>
-              Nome: <label id="max">Exemplo</label><br/>
-              Data de Nascimento: <label id="max">01-01-2018</label><br/>
-              Nacionalidade: <label id="max">Portuguesa</label><br/>
-              Número do CC: <label id="max">11111111</label><br/>
-              Género: <label id="max">Feminino</label><br/>
+              Nome: <label id="max">{ this.props.data[0].nome}</label><br/><br/>
+              Data de Nascimento: <label id="max">{ this.props.data[0].data}</label><br/><br/>
+              Nacionalidade: <label id="max">{ this.props.data[0].nacionalidade   }</label><br/><br/>
+              Número do CC: <label id="max">{ this.props.data[0].nccidadao}</label><br/><br/>
+              Género: <label id="max">{ this.props.data[0].gender}</label><br/><br/>
             </div>
             <div id="contactos"  className="col-12">
               <h2><Link to='/Contactos'>CONTACTOS</Link></h2>
-              Email: <label id="max">exemplo@gmail.com</label><br/>
-              Telemóvel: <label id="max">919 999 999</label><br/>
-              Redes Sociais: <label id="max">facebook.com/exemplo</label><br/>
-              Morada: <label id="max">Rua Exemplo, 999</label><br/>
-              Código Postal: <label id="max">9999-999</label> Localidade: <label id="max">Exemplo</label>
+              Email: <label id="max">{ this.props.data[1].email }</label><br/><br/>
+              Telemóvel: <label id="max">{ this.props.data[1].telemovel}</label><br/><br/>
+              Morada: <label id="max">{ this.props.data[1].morada}</label><br/><br/>
+              Código Postal: <label id="max">{ this.props.data[1].postal}</label> Localidade: <label id="max">{ this.props.data[1].localidade}</label>
             </div>
             <div id="documentos"  className="col-12">
               <h2><Link to='/Documentos'>DOCUMENTOS</Link></h2>
-              Foto: <label id="max">FOTO.jpeg</label><br/>
-              Cartão do Cidadão: <label id="max">CC.pdf</label><br/>
-              Atestado Médico: <label id="max">AM.pdf</label><br/>
-              Número de Sócio do SC Braga: <label id="max">999999999</label><br/>
-              Número de Treinador da FPA: <label id="max">999999999</label><br/>
+              Foto: <label id="max">{this.props.data[2].foto }</label><br/><br/>
+              Cartão do Cidadão: <label id="max">{this.props.data[2].cc }</label><br/><br/>
+              Atestado Médico: <label id="max">{this.props.data[2].am }</label><br/><br/>
+              Número de Sócio do SC Braga: <label id="max">{this.props.data[2].nsocio }</label><br/><br/>
+              Número de Treinador da FPA: <label id="max">{this.props.data[2].ntreinador }</label><br/><br/><br/>
+              Identificador IPDJ: <label id="max">{this.props.data[2].ipdj }</label><br/><br/><br/>
             </div>
           </div>
           <div id="buttons" className="col-12">

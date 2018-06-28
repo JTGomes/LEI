@@ -8,9 +8,9 @@ class DocumentosT extends React.Component {
         super(props);
         if(props.data){
             this.state = {
-                foto: "none",
-                cc: "none",
-                am: "none",
+                foto: props.data.foto,
+                cc: props.data.cc,
+                am: props.data.am,
                 socio: props.data.socio,
                 nsocio: props.data.nsocio,
                 ntreinador: props.data.ntreinador,
@@ -62,6 +62,7 @@ class DocumentosT extends React.Component {
                 formData.set(target.name, file, file.name);
             }
         }
+        console.log(files[0]);
         this.setState({
             [event.target.name]: files.length > 0 ? files[0].name : 'none',
             fileData: formData
@@ -120,7 +121,7 @@ class DocumentosT extends React.Component {
           name="nsocio"
           type="text"
           placeholder="Número"
-          onChange={e => { if( this.state.socio === 'sim') this.onChange(e)} }
+          onChange={e => { if( this.state.socio === 'sm') this.onCihange(e)} }
           value={this.state.nsocio}
           style={{minWidth: '200px'}}
         /><br/><br/>
