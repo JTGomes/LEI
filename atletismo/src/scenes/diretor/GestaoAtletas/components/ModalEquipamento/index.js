@@ -33,6 +33,21 @@ class ModalEquipamento extends Component {
 
   setEquipamento(){
 
+    let config = {
+      headers: {'Authorization' : 'Bearer ' + this.props.token},
+    }
+    
+    for(let i = 0; i < this.state.adicionar.length; i++) {
+      const pars = {
+        nome: this.state.adicionar[i]
+      }
+      axios.post(`http://localhost:3000/api/Atleta/${this.props.idatleta}/equipamento`, pars, config)
+    .then(response => {
+      })
+    .catch(error => console.log(error))
+
+    }
+
   }
 
   onChange(e) {
@@ -43,19 +58,17 @@ class ModalEquipamento extends Component {
     // check if the check box is checked or unchecked
     if (e.target.checked) {
       // add the numerical value of the checkbox to options array
-      options.push(+e.target.name)
+      options.push(e.target.name)
     } else {
       // or remove the value from the unchecked checkbox from the array
-      index = options.indexOf(+e.target.name)
+      index = options.indexOf(e.target.name)
       options.splice(index, 1)
     }
-
     // update the state with the new array of options
     this.setState({ adicionar: options })
   }
 
   showEquipamento(data){
-    console.log("ESTE->" + data);
     if(data.length===11){
       return(
         <div className="col-12">
@@ -64,7 +77,7 @@ class ModalEquipamento extends Component {
           </Alert>
         </div>);
     }
-    return  this.state.equipamento.map( (equip, elem) =>
+    return this.state.equipamento.map( (equip, elem) =>
       this.state.tem.find((obj)=> equip === (obj.nome) )? null :
       <div key={elem} className="col-6">
         <div className="custom-control custom-checkbox ">
@@ -75,8 +88,7 @@ class ModalEquipamento extends Component {
     );
   }
 
-  componentWillMount(){
-
+  componentWillMount() {
     axios.get(`http://localhost:3000/api/Atleta/${this.props.idatleta}/equipamento`,{headers: {'Authorization' : 'Bearer ' + this.props.token}})
     .then(response => {
       /*for(let i = 0; i < response.data.length; i++) {
@@ -104,16 +116,13 @@ class ModalEquipamento extends Component {
 
 
   render() {
-    console.log(this.props.idatleta);
-    console.log(this.state.adicionar);
-    console.log(this.state.tem);
     return (
       <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} >
         <ModalHeader toggle={this.props.toggle}>Selecione o equipamento entregue</ModalHeader>
         <ModalBody>
           <form>
             <div className="row">
-            {this.showEquipamento(data)}
+            {this.showEquipamento(this.state.tem)}
             </div>
           </form>
           <div className="row mt-2 pl-2">
@@ -131,7 +140,7 @@ class ModalEquipamento extends Component {
 
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={()=>this.setEquipamento()}><Check />{' '}Validar</Button>{' '}
+          <Button color="success" onClick={()=>{this.setEquipamento(), this.props.toggle()}}><Check />{' '}Validar</Button>{' '}
             <Button color="secondary" onClick={this.props.toggle}>Cancelar</Button>
           </ModalFooter>
         </Modal>
@@ -141,5 +150,11 @@ class ModalEquipamento extends Component {
 
 
 
+function mapStateToProps(state){
+  return {
+    token: state.token
+  };
+}
 
-export default ModalEquipamento;
+
+export default connect(mapStateToProps)(ModalEquipamento);

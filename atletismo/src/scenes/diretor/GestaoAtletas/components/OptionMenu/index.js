@@ -99,7 +99,7 @@ initModalPagamento(userID){
   }
 
   render() {
-    console.log(this.state.idAtleta);
+    console.log("Vou passar isto->" + this.state.idAtleta);
     return (
       <div>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -114,7 +114,7 @@ initModalPagamento(userID){
           </DropdownMenu>
         </Dropdown>
         <ModalPagamento toggle={this.toggleP} user={this.props.uid}  isOpen={this.state.modalPagamento}/>
-        <ModalEquipamento toggle={this.toggleE} user={this.props.uid} idatleta={this.state.idAtleta} name={this.props.nome} isOpen={this.state.modalEquipamento}/>
+        {this.state.idAtleta && <ModalEquipamento toggle={this.toggleE} user={this.props.uid} idatleta={this.state.idAtleta} name={this.props.nome} isOpen={this.state.modalEquipamento}/>}
         <SendNotification toggle={this.toggleS} user={this.state.atletaIDuser} name={this.props.nome} isOpen={this.state.modalNotification}/>
       </div>
     );
@@ -123,5 +123,12 @@ initModalPagamento(userID){
 
 
 
+function mapStateToProps(state){
+  return {
+    userId: state.user,
+    token: state.token
+  };
+}
 
-export default OptionMenu;
+
+export default connect(mapStateToProps)(OptionMenu);
