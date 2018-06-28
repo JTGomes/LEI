@@ -165,7 +165,7 @@ class About extends React.Component {
             <figcaption id="profile-change" style={{cursor:'pointer'}} onClick={()=>this.initModalPhoto()}>Alterar Imagem <FaEdit /></figcaption>
           </figure>
           <div className="col">
-            <p><a class="info">Nome Completo:</a> {this.state.info.nome_competicao}</p>
+            <p><a class="info">Nome Completo:</a> {this.state.infoUser.nome}</p>
             <p><a class="info">Número de telemóvel:</a> {this.state.info.telemovel}</p>
             <p><a class="info">Nº de Documento:</a> {this.state.info.nrdocumento}</p>
             <p><a class="info">Sócio:</a> {1000}</p>

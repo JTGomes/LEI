@@ -88,13 +88,14 @@ class ModalAddResults extends React.Component {
               <Input onChange={event => this.setState({
                   'resultado': event.target.value
                 })} />
-              <FormText>Ex: 10,52s, 1024m, ...</FormText>
+              <FormText>Ex: 10.52, 9.78, ... (por defeito em segundos)</FormText>
             </FormGroup>
             <FormGroup>
               <Label for="classificacao">Classificação</Label>
               <Input onChange={event => this.setState({
                   'classificacao': event.target.value
                 })} />
+              <FormText>Ex: 1º, 2º, 3º, ...</FormText>
             </FormGroup>
         </ModalBody>
         <ModalFooter>
