@@ -33,7 +33,7 @@ module.exports = function(Resultados) {
   Resultados.getResultadosAtleta = function(req, id, callback) {
     console.log(id);
     Resultados.find({where: {atleta: id}})
-    .then(results => results.map(result => 
+    .then(results => results.map(result =>
       Resultados.app.models.Atleta.findById(result.atleta)
       .then(atleta => {var a = result.toJSON(); a.user = atleta; return a} )
     ))
@@ -52,5 +52,47 @@ module.exports = function(Resultados) {
    http: {path: '/getResultadosAtleta/:id', verb: 'get'},
   }
   );
+
+  Resultados.adicionarResultados = function(req, data, callback){
+
+    Resultados.create({
+      nome: data.nome,
+      disciplina: data.disciplina,
+      classificacao: data.classificacao,
+      data: data.data,
+      local: data.local,
+      resultado: data.resultado,
+      atleta: data.userId
+    }).then( res => {
+      Resultados.app.models.Atleta.findById(data.userId)
+      .then(atleta => {
+        Resultados.app.models.User.find({where: {role : 'Diretor'}})
+        .then(diretores => {
+          diretores.map(diretor => {
+             models.notificacao.create({
+                data: today,
+                isRead: false,
+                mensagem: "O/A atleta "+atleta.nome_competicao+" inseriu um novo resultado, relativo à competição "+data.nome,
+                assunto: "Resultado adicionado",
+                userId: diretor.id } )
+          })
+        });
+      })
+    })
+
+  };
+
+  Resultados.remoteMethod('adicionarResultados',
+  {
+    accepts: [
+      { arg: 'req', type: 'object', http: { source: 'req' } },
+      { arg: 'data', type: 'any', required: true, http: { source: 'body' } },
+    ],
+    returns: { arg: 'accessToken', type: 'object', root: true },
+    http: {verb: 'post'},
+  }
+
+  );
+
 
 };

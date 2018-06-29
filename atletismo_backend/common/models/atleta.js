@@ -226,4 +226,70 @@ Atleta.remoteMethod(
  }
 );
 
+
+Atleta.getAtletasAntigos = function(req, data, callback){
+//   const payload = decodeToken(req.headers.authorization);
+//
+//   if (!payload) {
+//     return callback(new Error('Authentication is required'));
+//   }
+Atleta.find({
+ include:{
+     relation: "user",
+     scope:{
+        where: {
+          validado: false,
+         }
+       }
+     },where:{ativo:false}
+ })
+.then(result => callback(null, result))
+.catch(error => console.log(error))
+
+};
+
+Atleta.remoteMethod('getAtletasAntigos',
+{
+ accepts: [
+   { arg: 'req', type: 'object', http: { source: 'req' } },
+   { arg: 'data', type: 'any', required: false, http: { source: 'body' } },
+ ],
+ returns: { arg: 'accessToken', type: 'object', root: true },
+ http: {verb: 'get'},
+}
+);
+
+
+
+Atleta.enviaPlano = function (req, data, callback) {
+
+
+        const  mailOptions = {
+           from: 'atletismo.scbraga.bot@gmail.com', // sender address
+           to: data.userId.email, // list of receivers
+           subject: 'Plano de treino', // Subject line
+           html: '<h1>Atletismo Braga</h1><p><strong>Segue em anexo o plano a seguir nos próximos treinos.</strong></p>',// plain text body
+           //path: '....' //completar o caminho
+         };
+         mail.sendEmail(mailOptions);
+
+    callback(null,"Ok")
+  ;
+};
+
+Atleta.remoteMethod(
+  'enviaPlano',
+  {
+    accepts: [
+      { arg: 'req', type: 'object', http: { source: 'req' } },
+      { arg: 'data', type: 'any', required: true, http: { source: 'body' } },
+    ],
+    returns: { arg: 'accessToken', type: 'object', root: true },
+    http: {verb: 'post'},
+  }
+);
+
+
+
+
 };

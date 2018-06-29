@@ -10,10 +10,6 @@
       "type": "string",
       "required": true
     },
-    "tipo": {
-      "type": "string",
-      "required": true
-    },
     "disciplina": {
       "type": "string",
       "required": true

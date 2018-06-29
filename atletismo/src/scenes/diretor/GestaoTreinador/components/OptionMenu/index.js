@@ -37,15 +37,15 @@ initModalNotification(userID,name){
       modalNotification: true,
   })
 }
-  
-  deleteUser(id) {
 
+  deleteUser(id) {
+    console.log(id)
     axios.put('http://localhost:3000/api/Treinadors/removerPermissao',
     {id: id}
     ,{
       headers: {'Authorization' : 'Bearer ' + this.props.token},
     })
-    .then(res => this.remover(id) )
+    .then(res => this.props.remover() )
     .catch(error => console.log(error))
 
   }
@@ -59,10 +59,10 @@ initModalNotification(userID,name){
           </DropdownToggle>
           <DropdownMenu >
             <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalNotification()}><SendIcon style={{color:'#296ddb'}}/>{'  '}Enviar Notificação</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser(this.props.uid)}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Acesso</DropdownItem>
+            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.deleteUser(this.props.id)}><RemoveIcon style={{color:'red'}}/>{'  '}Remover Acesso</DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <SendNotification toggle={this.toggleS} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalNotification}/>
+        {this.props.uid && <SendNotification toggle={this.toggleS} user={this.props.uid} name={this.props.nome} isOpen={this.state.modalNotification}/>}
       </div>
     );
   }

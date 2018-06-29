@@ -183,17 +183,6 @@ class TPlayersFrame extends React.Component {
         </div>
         <SendTrainingPlan isOpen={this.state.modalTP} toggle={this.toggleTP} to={this.state.meusAtletas.filter( (atleta) => this.state.selection.indexOf(atleta._id) !== -1).map(a => a.name)} />
         <SendNotification isOpen={this.state.modalN} toggle={this.toggleN} user={'1'} />
-        <div>
-          <h1>Confirmação pendente</h1>
-          <ul id="listAconfirmar">
-            {this.state.aConfirmar.map(
-              atleta => (
-                <div className="list-confirmacao-element">
-                  <li className="celement"> {atleta.nome_competicao}</li>
-                </div>
-            ))}
-          </ul>
-        </div>
       </div>
     );
   }

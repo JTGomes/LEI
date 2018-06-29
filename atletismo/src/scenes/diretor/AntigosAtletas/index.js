@@ -21,7 +21,7 @@ class AntigosAtletas extends Component {
           Header: 'Nome do Atleta',
           accessor: 'nome_competicao',
           Cell: row => (
-            <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original.uid)}>{row.original.nome_competicao}</div>
+            <div className="pl-2" style={{cursor:'pointer'}} onClick={()=>this.initModalUser(row.original)}>{row.original.nome_competicao}</div>
           )
         },
         {
@@ -43,7 +43,7 @@ class AntigosAtletas extends Component {
       headers: {'Authorization' : 'Bearer ' + this.props.token},
     }
 
-    axios.get(`http://localhost:3000/api/Atleta?filter[where][ativo]=false`, config)
+    axios.get(`http://localhost:3000/api/Atleta/getAtletasAntigos`, config)
         .then(response => {
           this.setState({
             data: response.data,
@@ -59,7 +59,6 @@ class AntigosAtletas extends Component {
  }
 
  initModalUser(userID){
-  console.log("CHEGUEI");
    this.setState({
      modalUserInfo: true,
      uid: userID,

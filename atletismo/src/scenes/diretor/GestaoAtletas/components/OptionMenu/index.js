@@ -76,7 +76,7 @@ initModalPagamento(userID){
   ,{
     headers: {'Authorization' : 'Bearer ' + this.props.token},
   })
-  .then(res => this.remover(id) )
+  .then(res => this.props.remover() )
   .catch(error => console.log(error))
 
   }

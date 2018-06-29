@@ -88,6 +88,12 @@ handleInputSubmit(event) {
   });
 }
 
+remover(id){
+  this.setState(prevState => ({
+    data: prevState.data.filter(user => user.id !== id)
+  }));
+}
+
 filter_data_byName(data){
         if(this.state.input===''){
           return data;
@@ -170,7 +176,7 @@ isSelected = key => {
            minWidth: 20,
            Cell: row => (
              <div className="text-center">
-               <OptionMenu  nome={row.original.user.nome} uid={row.original.id}/>
+               <OptionMenu  nome={row.original.user.nome} id={row.original.id} uid={row.original.user.id} remover={()=> this.remover(row.original.id)}/>
              </div>
            ),
 

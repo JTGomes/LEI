@@ -136,6 +136,7 @@ module.exports = function(User) {
       .then(user => {
         User.app.models.Atleta.create({
           ativo: true,
+          nome_competicao: credentials.nome,
           telemovel: credentials.telemovel,
           nrdocumento: credentials.nrdocumento,
           tipoDocumento: credentials.tipoDocumento,
@@ -148,7 +149,7 @@ module.exports = function(User) {
           dataNascimento: credentials.dataNascimento,
           nrSocio: credentials.nrSocio,
           escalao: credentials.escalao,
-          exameFalta: false,
+          exameFalta: true,
           cartaoCidadao: credentials.cartaoCidadao,
           exameMedico: credentials.exameMedico,
           fotoPerfil: credentials.fotoPerfil,

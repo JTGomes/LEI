@@ -95,6 +95,13 @@ filter_data_byName(data){
         return data.filter( data_row => data_row.user.nome.toUpperCase().indexOf(text) !== -1);
     }
 
+
+    remover(id){
+      this.setState(prevState => ({
+        data: prevState.data.filter(user => user.id !== id)
+      }));
+    }
+
 toggleAll = () => {
   const selectAll = this.state.selectAll ? false : true;
   const selection = [];
@@ -169,7 +176,7 @@ isSelected = key => {
            minWidth: 20,
            Cell: row => (
              <div className="text-center">
-               <OptionMenu  nome={row.original.user.nome} uid={row.original.id}/>
+               <OptionMenu  nome={row.original.user.nome} uid={row.original.id} remover={()=> this.remover(row.original.id)}/>
              </div>
            ),
 
