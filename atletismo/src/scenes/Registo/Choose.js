@@ -151,7 +151,7 @@ class Choose extends React.Component {
                     ipdj: dados['ipdj'],
                     genero: dados['gender'],
                     nacionalidade: dados['nacionalidade'],
-                    codPostal: dados['postal'],
+                    codigoPostal: dados['postal'],
                     socio: dados['nsocio'],
                     telemovel: dados['telemovel'],
                     cartaoCidadao: dados['cc'],

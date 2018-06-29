@@ -113,7 +113,7 @@ class DocumentosT extends React.Component {
         <input
           name="socio"
           type="radio"
-          onChange={e =>{ this.setState({nsocio : ''}); this.onChange(e)} }
+          onChange={e =>{ this.onChange(e)} }
           value={'nao'}
         />Não<br/>
       Número de Sócio<br/>
@@ -121,7 +121,7 @@ class DocumentosT extends React.Component {
           name="nsocio"
           type="text"
           placeholder="Número"
-          onChange={e => { if( this.state.socio === 'sm') this.onCihange(e)} }
+          onChange={e => { if( this.state.socio === 'sim') this.onChange(e)} }
           value={this.state.nsocio}
           style={{minWidth: '200px'}}
         /><br/><br/>
