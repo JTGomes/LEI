@@ -15,6 +15,7 @@ class Contactos extends React.Component {
                 morada: props.data.morada,
                 postal: props.data.postal,
                 localidade: props.data.localidade,
+                warn: false,
             }
         }else
             this.state = {
@@ -24,6 +25,7 @@ class Contactos extends React.Component {
                 morada: '',
                 postal: '',
                 localidade: '',
+                warn: false,
             }
     }
 
@@ -50,17 +52,40 @@ class Contactos extends React.Component {
   }
 
   onChange=(e) => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-    }
+    this.setState({
+        [e.target.name]: e.target.value,
+    });
+  }
 
-    onSubmit = (e) => {
-        const response = this.props.mutate({
-            variables: this.state,
-        });
-        console.log(response);
+  onChangePhone=(e) => {
+    if(e.target.value.length<10) {
+      this.setState({
+        [e.target.name]: e.target.value,
+        warn: false,
+      });
     }
+    else {
+      this.setState({
+        warn: true,
+      });
+    }
+  }
+
+  onSubmit = (e) => {
+      const response = this.props.mutate({
+          variables: this.state,
+      });
+      console.log(response);
+  }
+
+  renderSizeWarning() {
+    if(this.state.warn) {
+      return(
+        <p>ATENÇÃO: O número de telefone tem de ser de 9 dígitos!</p>
+      );
+    }
+    else return;
+  }
 
   render () {
     return (
@@ -85,10 +110,11 @@ class Contactos extends React.Component {
           name="telemovel"
           type="text"
           placeholder="Telemóvel"
-          onChange={e => this.onChange(e)}
+          onChange={e => this.onChangePhone(e)}
           value={this.state.telemovel}
           style={{minWidth: '200px'}}
         /><br/><br/>
+        {this.renderSizeWarning()}
         Redes Sociais
         <button type="button" id="adiciona" onClick={this.handleAddRedes} style={{ color:'white'}} className="small"><strong>+</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;
         {this.state.redes.map((rede, idx) => (

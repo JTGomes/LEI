@@ -20,14 +20,11 @@ class Results extends React.Component {
       atletaID: undefined,
       data: [],
       col: [{
-        Header: 'Prova',
+        Header: 'Competição',
         accessor: 'nome',
         filterMethod: (filter, rows) =>{   const text = filter.value.toUpperCase();
           return this.state.data.filter( data_row => data_row.nome.toUpperCase().indexOf(text) !== -1);},
         filterAll: true
-      },{
-        Header: 'Tipo',
-        accessor: 'tipo',
       },{
         Header: 'Disciplina',
         accessor: 'disciplina',
@@ -47,7 +44,7 @@ class Results extends React.Component {
           return this.state.data.filter( data_row => data_row.local.toUpperCase().indexOf(text) !== -1);},
         filterAll: true
       },{
-        Header: 'Resultado(s)',
+        Header: 'Marca',
         accessor: 'resultado',
       },{
         Header: 'Classificação',

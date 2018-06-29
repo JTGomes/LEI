@@ -54,7 +54,7 @@ module.exports = function(Resultados) {
   );
 
   Resultados.adicionarResultados = function(req, data, callback){
-
+    const today = getDate();
     Resultados.create({
       nome: data.nome,
       disciplina: data.disciplina,
@@ -69,10 +69,12 @@ module.exports = function(Resultados) {
         Resultados.app.models.User.find({where: {role : 'Diretor'}})
         .then(diretores => {
           diretores.map(diretor => {
-             models.notificacao.create({
+             let gen = 'A';
+             if(atleta.genero==='masculino') gen='O';
+             Resultados.app.models.notificacao.create({
                 data: today,
                 isRead: false,
-                mensagem: "O/A atleta "+atleta.nome_competicao+" inseriu um novo resultado, relativo à competição "+data.nome,
+                mensagem: gen+" atleta "+atleta.nome_competicao+" inseriu um novo resultado, relativo à competição "+data.nome,
                 assunto: "Resultado adicionado",
                 userId: diretor.id } )
           })
@@ -93,6 +95,19 @@ module.exports = function(Resultados) {
   }
 
   );
+
+  function getDate(){
+  var today = new Date();
+  var year = today.getFullYear();
+  var month = today.getMonth()+1;
+  var day = today.getDate();
+
+  if (day.toString().length == 1)
+     day = "0"+day;
+  if (month.toString().length == 1)
+      month = "0"+month;
+  return `${day}/${month}/${year}`
+}
 
 
 };
