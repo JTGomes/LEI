@@ -23,6 +23,20 @@ class ModalAddResults extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
+
+    //chama atualização da tabela
+    const data={
+      nome: this.state.nome,
+      disciplina: this.state.disciplina.label,
+      data: this.state.data,
+      local: this.state.local,
+      resultado: this.state.resultado,
+      classificacao: this.state.classificacao+'º',
+      atleta: this.props.user,
+      id: 123,
+    };
+    this.props.addEntryTable(data);
+
     let config = {
       headers: {'Authorization' : 'Bearer ' + this.props.token},
     }
@@ -42,6 +56,14 @@ class ModalAddResults extends React.Component {
         //this.props.toggle();
         })
       .catch(error => console.log(error))
+    this.setState({
+      nome:"",
+      disciplina:"",
+      local: "",
+      resultado: "",
+      classificacao: "1",
+      type: 0,
+    })
   }
 
   handleChangeDisciplina = (disciplina) => {

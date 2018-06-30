@@ -63,6 +63,7 @@ class Results extends React.Component {
       }],
     }
     this.toggleAR = this.toggleAR.bind(this);
+    this.addEntryTable = this.addEntryTable.bind(this);
   }
 
   toggleAR(){
@@ -91,6 +92,17 @@ class Results extends React.Component {
       .catch(error => console.log(error))
   }
 
+  addEntryTable(d) {
+    console.log(this.state.data);
+    var newData = [];
+    for(let i=0; i<this.state.data.length; i++)
+      newData.push(this.state.data[i]);
+    newData.push(d);
+    this.setState(
+      {data: newData}
+    );
+  }
+
 
   componentDidMount() {
     this.getAtletaId().then(data => {
@@ -99,6 +111,7 @@ class Results extends React.Component {
       });
       axios.get(`http://localhost:3000/api/Atleta/${data}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
         .then(response => {
+          console.log(response.data);
           this.setState({
             data: response.data
           })
@@ -119,7 +132,11 @@ class Results extends React.Component {
           columns={this.state.col}
           defaultPageSize={10}
         />
-        <ModalAddResults modalAddResults={this.state.modalAddResults} toggle={this.toggleAR} user={this.state.atletaID}/>
+        <ModalAddResults
+          modalAddResults={this.state.modalAddResults}
+          toggle={this.toggleAR}
+          user={this.state.atletaID}
+          addEntryTable={this.addEntryTable}/>
       </div>
     );
   }

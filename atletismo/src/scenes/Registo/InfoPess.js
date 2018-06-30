@@ -38,41 +38,44 @@ class InfoPess extends React.Component {
     this.props.onNext(1,this.state);
   }
 
+  onChangeCCNIF(e) {
+    if(e.target.value.length<10 && !isNaN(e.target.value))
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+  }
+
   render () {
     return (
       <div className="imagem">
-
-
         <div id="formulario">
           <h1>REGISTO DE ATLETAS</h1>
           <h3>Faça aqui o seu registo e torne-se atleta do SC Braga
           <form id="forms">
             <p>
-            Nome<br/>
-            <input
-              name="nome"
-              type="text"
-              placeholder="Nome"
-              onChange={e => this.onChange(e)}
-              value={this.state.nome}
-            />
+              Nome<br/>
+              <input
+                name="nome"
+                type="text"
+                placeholder="Nome"
+                onChange={e => this.onChange(e)}
+                value={this.state.nome}
+              />
             </p>
             <p>
-            Password<br/>
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={e => this.onChange(e)}
-              value={this.state.password}
-            />
+              Password<br/>
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={e => this.onChange(e)}
+                value={this.state.password}
+              />
             </p>
             <div className="row justify-content-center mb-3">
-
               <div className="col-12">
                 Data de Nascimento
               </div>
-
               <div className="row">
                 <Input type="date" name="data" id="exampleDate"
                   placeholder="data de nascimento"
@@ -81,62 +84,61 @@ class InfoPess extends React.Component {
                   onChange={e => this.onChange(e)}
                   value={this.state.data}/>
               </div>
-
             </div>
-
             <p>
-            Nacionalidade<br/>
-            <input
-              name="nacionalidade"
-              type="text"
-              placeholder="Nacionalidade"
-              onChange={e => this.onChange(e)}
-              value={this.state.nacionalidade}
-              style={{minWidth: '200px'}}
-            />
+              Nacionalidade<br/>
+              <input
+                name="nacionalidade"
+                type="text"
+                placeholder="Nacionalidade"
+                onChange={e => this.onChange(e)}
+                value={this.state.nacionalidade}
+                style={{minWidth: '200px'}}
+              />
             </p>
             <p>
-            Número CC<br/>
-            <input
-              name="nccidadao"
-              type="text"
-              placeholder="Número do CC"
-              onChange={e => this.onChange(e)}
-              value={this.state.nccidadao}
-              style={{minWidth: '200px'}}
-            />
+              Número Cartão de Cidadão/BI<br/>
+              <input
+                name="nccidadao"
+                type="text"
+                placeholder="Número do CC"
+                onChange={e => this.onChangeCCNIF(e)}
+                value={this.state.nccidadao}
+                style={{minWidth: '200px'}}
+              />
             </p>
             <p>
-            Número de Contribuinte<br/>
-            <input
-              name="nif"
-              type="text"
-              placeholder="Número de Contribuinte"
-              onChange={e => this.onChange(e)}
-              value={this.state.nif}
-              style={{minWidth: '200px'}}
-            />
+              Número de Contribuinte<br/>
+              <input
+                name="nif"
+                type="text"
+                placeholder="Número de Contribuinte"
+                onChange={e => this.onChangeCCNIF(e)}
+                value={this.state.nif}
+                style={{minWidth: '200px'}}
+              />
             </p>
             <p>
-            Género<br/>
-            <input
-              name="gender"
-              type="radio"
-              onChange={e => this.onChange(e)}
-              value={"feminino"}
-            /> Feminino{' '}
-            <input
-              name="gender"
-              type="radio"
-              onChange={e => this.onChange(e)}
-              value={"masculino"}
-            /> Masculino
+              Género<br/>
+              <input
+                name="gender"
+                type="radio"
+                onChange={e => this.onChange(e)}
+                value={"feminino"}
+              /> Feminino{' '}
+              <input
+                name="gender"
+                type="radio"
+                onChange={e => this.onChange(e)}
+                value={"masculino"}
+              /> Masculino
             </p>
             Escalão<br/>
-            <select name="escalao"
-                    defaultValue={ this.state.escalao ? this.state.escalao: "benjamina"}
-                    onChange={e => this.onChange(e)}
-            >
+            <select
+              name="escalao"
+              defaultValue={ this.state.escalao ? this.state.escalao: "benjamina"}
+              onChange={e => this.onChange(e)} 
+              >
               <option value="benjamima">Benjamim A</option>
               <option value="benjamimb">Benjamin B</option>
               <option value="infantil">Infantil</option>
@@ -147,12 +149,11 @@ class InfoPess extends React.Component {
               <option value="senior">Senior</option>
               <option value="veteranos">Veterano</option>
             </select>
-        </form>
+          </form>
           <form>
             <button id="seguinte"  onClick={(e) => this.onSubmit(e)}>
               Seguinte
             </button>
-
           </form>
           </h3>
         </div>

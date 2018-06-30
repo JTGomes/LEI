@@ -58,7 +58,7 @@ class Contactos extends React.Component {
   }
 
   onChangePhone=(e) => {
-    if(e.target.value.length<10) {
+    if(e.target.value.length<10 && !isNaN(e.target.value)) {
       this.setState({
         [e.target.name]: e.target.value,
         warn: false,
