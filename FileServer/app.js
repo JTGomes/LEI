@@ -5,16 +5,99 @@ const http = require('http');
 const app = express();
 const fs = require('fs');
 
+const jwt = require('jsonwebtoken');
 
 const multer = require('multer');
 
 const uploadDirectory = '/uploads/';
 const currentPath = __dirname;
 const uploadDirectoryPath = path.join(currentPath,uploadDirectory);
+const uploadTmpDirectoryPath = path.join(uploadDirectoryPath,'/tmp');
 
+// try to create directory of uploads, if he can't create it can't work, if it already exist
+// it does nothing i guess...
+fs.mkdir(uploadDirectoryPath,function(error){
+	if(error) console.log(error);
+});
+fs.mkdir(uploadTmpDirectoryPath,function(error){
+	if(error) console.log(error);
+});
+
+function decodeToken (authHeader) {
+     if (!authHeader) {
+       return false;
+     }
+     //bearer token required
+     const parts = authHeader.split(' ');
+
+     if (parts.length !== 2) {
+       return false;
+     }
+
+     return jwt.verify(parts[1], 'SECRET');
+   }
+
+function getToken(authHeader){
+	     const parts = authHeader.split(' ');
+	     return parts[1];
+}
+
+function getId(token){
+	return jwt.decode(token).userId;
+}
+
+function directoryExist(id){
+
+	return	fs.access(uploadDirectoryPath, fs.constants.F_OK,(error)=>{
+			console.log(`A pasta uploads ${err ? 'não existe':"existe"}`);
+			if(err) return false;
+			else true;
+		});
+}
+
+// Upload directory need to be the directory of the User
 const storage = multer.diskStorage({
+	// destination need to be dynamic depending of the user
+	// something like 
+	// 1 check if directory exist
+	//  if exist then  put in the directory
+	// if doesn't exist create directory
 	destination: function(req,file,cb){
-		cb(null, uploadDirectoryPath);
+		console.log(req.headers.authorization);
+		// se token invalido põe a o ficheiro numa pasta especial
+		let directory = '/tmp';
+		let valid = false;
+		try{
+		 valid = decodeToken(req.headers.authorization);
+		}catch(error){
+			valid = false;
+		}
+		if(!valid){
+			cb(null, uploadTmpDirectoryPath);
+			return;
+		}
+		
+		const id = getId(getToken(req.headers.authorization));
+		directory = path.join(uploadDirectoryPath,`/${id}`);
+
+		fs.readdir(directory, function(error, files){
+			if( error){
+				console.log(directory,error);
+				fs.mkdir(directory,function(error){
+							if(error) { 
+								fs.readdir(directory,function(error,files){
+									if(error){
+										console.log(error);
+										cb(null,uploadTmpDirectoryPath);
+									}else cb(null,directory);
+									
+								})
+							}
+							else cb(null, directory);
+				})
+			} 
+			else cb(null,directory)
+		});
 	},
 	filename: function(req,file,cb){
 		//console.log(file);
@@ -32,7 +115,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
   next();
 });
 
@@ -59,6 +142,8 @@ const options = {
 
 app.use(express.static(uploadDirectoryPath, options))
 
+// Get name of files in upload directory
+// 
 app.get('/uploads/',function(req,res,next){
 	console.log(uploadDirectoryPath);
 	fs.readdir(uploadDirectoryPath, function(error, files){
@@ -77,6 +162,25 @@ app.get('/uploads/file/:filename',function(req,res,next){
 
 	
 });
+
+
+app.get('/token/:id',function(req,res,next){
+	const id = req.params.id;
+	res.send( jwt.sign({ userId: id, userRole: 'Treinador' }, 'SECRET') );
+})
+
+app.get('/uploads/:id/:filename',function(req,res,next){
+	const id = req.params.id;
+	const filename = req.params.filename;
+
+	res.sendFile( path.join(uploadDirectoryPath,id,filename));
+
+	
+});
+
+app.get('uploads/path/:id/filename',function(req,res,next){
+	res.send(path.join(uploadDirectoryPath,id,filename));
+})
 
 /**
  * Get port from environment and store in Express.

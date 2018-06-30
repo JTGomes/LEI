@@ -31,7 +31,6 @@ class DocumentosT extends React.Component {
 
 
   onChange=(e) => {
-        console.log(e.target);
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -41,7 +40,6 @@ class DocumentosT extends React.Component {
         const response = this.props.mutate({
             variables: this.state,
         });
-        console.log(response);
     };
 
 
@@ -49,9 +47,7 @@ class DocumentosT extends React.Component {
     onFileChange(event){
         const target = event.target;
         const files  = target.files;
-        console.log(files);
         const formData = Object.assign(this.state.fileData,new FormData());
-        console.log(formData);
 
         if (files.length > 0){
             // One or more files selected, process the file upload
@@ -62,12 +58,10 @@ class DocumentosT extends React.Component {
                 formData.set(target.name, file, file.name);
             }
         }
-        console.log(files[0]);
         this.setState({
             [event.target.name]: files.length > 0 ? files[0].name : 'none',
             fileData: formData
         });
-        console.log(formData);
 
     };
 

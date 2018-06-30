@@ -42,7 +42,7 @@ class InfoPessT extends React.Component {
 
   onSubmit(e){
         this.props.onNext(1, this.state);
-        console.log("Passo 1");
+        //console.log("Passo 1");
   }
 
   render () {
