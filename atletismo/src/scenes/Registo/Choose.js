@@ -27,9 +27,6 @@ class Choose extends React.Component {
 
 
 
-  disapear(){
-    document.getElementById("intro").style = "display:none";
-  }
 
   // Passo presente e dados
   onNext(state,data){
@@ -129,11 +126,15 @@ class Choose extends React.Component {
                     socio: dados['socio'],
                     nsocio: dados['nsocio'],
                     redes: JSON.stringify(dados['redes'])
-                }).then(ans => console.log('Enviado'));
-                fetch('http://localhost:4500/api/User/uploads/',{
-                    method: 'POST',
-                    body: dados['fileData']
-                }).then( answer => console.log(answer));
+                }).then(res => res.data)
+                    .then( token => fetch('http://localhost:4500/api/User/uploads/',{
+                        headers:{
+                            "Authorization": "Bearer "+ token
+                        },
+                        method: 'POST',
+                        body: dados['fileData']
+                    }).then( answer => console.log(answer)))
+                ;
             }
 
         }
@@ -161,12 +162,23 @@ class Choose extends React.Component {
                     password: dados['password'],
                     foto: dados['foto'],
                     nccidadao: dados['nccidadao']
-                }).then(ans => console.log('Enviado'));
-                // Fetch depois de receber a resposta para enviar o identificador do utilizador
+                }).then(ans =>{ console.log('Enviado',ans);return ans})
+                 .then(res => res.data)
+                 .then( token => fetch('http://localhost:4500/api/User/uploads/',{
+                        headers:{
+                            "Authorization": "Bearer "+ token
+                        },
+                        method: 'POST',
+                        body: dados['fileData']
+                 }).then( answer => console.log(answer)));
+                /*Fetch depois de receber a resposta para enviar o identificador do utilizador
                 fetch('http://localhost:4500/api/User/uploads/',{
+                    headers:{
+                        "Authorization": "Bearer "+ "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJSb2xlIjoiRGlyZXRvciIsImlhdCI6MTUzMDA5NDcyNH0.7UaBySKWB7J4TD8cZ7zd_kVe4OpUkDJZwzmHrpgvCrM"
+                    },
                     method: 'POST',
                     body: dados['fileData']
-                }).then( answer => console.log(answer));
+                }).then( answer => console.log(answer));*/
             }
         }
         return error;
@@ -183,10 +195,10 @@ class Choose extends React.Component {
     return (
       <section className="intro" id='intro'>
         <div className="choice-buttons">
-          <button className="botaotreinadores" onClick={() =>{ this.disapear();this.setState({ passo:1, caminho:"treinador"});}}>
+          <button className="botaotreinadores" onClick={() =>{ this.setState({ passo:1, caminho:"treinador"});}}>
             <p>REGISTO DE TREINADORES</p>
           </button>
-          <button className="botaoatletas" onClick={() => {this.disapear();this.setState({ passo:1, caminho:"atleta"});}}>
+          <button className="botaoatletas" onClick={() => {this.setState({ passo:1, caminho:"atleta"});}}>
             <p>REGISTO DE ATLETAS</p>
           </button>
         </div>
