@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import News from './components/News';
+import DropDown from './components/dropdown';
 //import matchSorter from 'match-sorter'
 
 
@@ -16,56 +16,65 @@ class UltimosResultados extends React.Component {
       resultados: [],
       cols: [
         {
-              Header: 'Nome',
-              id:'nome_competicao',
-              accessor: b => b.user.nome_competicao,
-            },{
-              Header: 'Prova',
-              accessor: 'nome'
-            }
-            ,{
-              Header: 'Tipo',
-              accessor: 'tipo'
-            },{
-              Header: 'Disciplina',
-              accessor: 'disciplina'
-            },{
-              Header: 'Data',
-              accessor: 'data'
-            },{
-              Header: 'Local',
-              accessor: 'local'
-            },{
-              Header: 'Resultado(s)',
-              accessor: 'resultado'
-            },{
-              Header: 'Classificação',
-              accessor: 'classificacao'
-            },
-            {
-              Header: 'Gerar Notícia',
-              Cell: row => (
-              <div className="text-center">
-                  <News component={row}/>
-              </div>
-            ),
-            filterable:false,
-            }
+          Header: 'Nome',
+          id:'nome_competicao',
+          accessor: b => b.user.nome_competicao,
+        },{
+          Header: 'Competição',
+          accessor: 'nome'
+        },{
+          Header: 'Disciplina',
+          accessor: 'disciplina'
+        },{
+          Header: 'Data',
+          accessor: 'data'
+        },{
+          Header: 'Local',
+          accessor: 'local'
+        },{
+          Header: 'Marca',
+          accessor: 'resultado'
+        },{
+          Header: 'Classificação',
+          accessor: 'classificacao'
+        },
+        {
+          Header: 'Opções',
+          Cell: row => (
+          <div className="text-center">
+            <DropDown row={row} update={this.editEntryTable} userData={row.original.user}/>
+          </div>
+        ),
+        filterable:false,
+        style:{overflow:'visible'},
+        }
       ]
     }
+    this.editEntryTable = this.editEntryTable.bind(this);
+  }
+
+  editEntryTable(d, index) {
+    //console.log("This is the data test: ");
+    //console.log(d);
+    var newData = [];
+    for(let i=0; i<this.state.data.length; i++) {
+      if(index===i) newData.push(d);
+      else newData.push(this.state.data[i]);
+    }
+    this.setState(
+      {data: newData}
+    );
   }
 
   componentDidMount(){
-
     axios.get(`http://localhost:3000/api/resultados/getUltimosResultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
-        .then(response => {
-
-          this.setState({
-            data: response.data,
-          })
-          console.log(this.state.data);
+      .then(response => {
+        this.setState({
+          data: response.data,
         })
-        .catch(error => console.log(error))
+        //console.log(this.state.data);
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
@@ -78,7 +87,6 @@ class UltimosResultados extends React.Component {
           defaultPageSize={10}
           className="-striped -highlight"
         />
-
       </div>
 
     );

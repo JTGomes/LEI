@@ -153,6 +153,17 @@ class About extends React.Component {
       insta: <a href={url} target="_blank"><FaInstagram /></a>,
     });
   }
+  //se for dirigente nao renderiza botao do equipamento
+  renderEquip() {
+    if(this.props.userRole==='Diretor')
+      return;
+    else
+      return(
+        <div className="col">
+          <DropdownEquipment dropdownOpen={this.state.dropdownOpen} toggle={this.toggleDEq} />
+        </div>
+      );
+  }
 
   render() {
     return(
@@ -197,9 +208,7 @@ class About extends React.Component {
             <p><a class="info">Escalão:</a> {this.state.info.escalao}</p>
             <p><a class="info">Subsídio:</a> {this.state.info.subsidio}</p>
           </div>
-          <div className="col">
-            <DropdownEquipment dropdownOpen={this.state.dropdownOpen} toggle={this.toggleDEq} />
-          </div>
+          {this.renderEquip()}
         </div>
         <div className="section">
           <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs(this.state.info.id)} style={{cursor:'pointer'}}/></p>
@@ -230,7 +239,8 @@ class About extends React.Component {
 function mapStateToProps(state){
   return {
     userId: state.user,
-    token: state.token
+    token: state.token,
+    userRole: state.userRole
   };
 }
 

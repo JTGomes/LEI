@@ -62,13 +62,20 @@ class dropdown extends React.Component {
     })
   }
 
+  initModalEditResults(){
+    this.setState({
+      modalEditResults: true,
+    })
+  }
+
   renderItems() {
-    console.log(this.props.userRole);
+    //console.log(this.props.userRole);
+    //console.log(this.props.rowData);
     if(this.props.userRole==='Diretor')
       return(
         <div>
         <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalMedia()}><FaCamera />&nbsp;Adicionar Media</DropdownItem>
-        <DropdownItem style={{cursor:'pointer'}} ><FaEdit />&nbsp;Editar Resultado</DropdownItem>
+        <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalEditResults()}><FaEdit />&nbsp;Editar Resultado</DropdownItem>
         </div>
       );
     else
@@ -76,6 +83,28 @@ class dropdown extends React.Component {
         <div>
         <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalMedia()}><FaCamera />&nbsp;Adicionar Media</DropdownItem>
         <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalSocial()}><FaChain style={{color:'blue'}}/>&nbsp;Partilhar</DropdownItem>
+        </div>
+      );
+  }
+
+  renderModals() {
+    if(this.props.userRole==='Diretor')
+      return(
+        <div>
+          <ModalMedia modalMedia={this.state.modalMedia} toggle={this.toggleM} />
+          <ModalEditResults
+            modalAddResults={this.state.modalEditResults}
+            toggle={this.toggleER}
+            role={this.props.userRole}
+            data={this.props.rowData}
+            update={this.props.update}/>
+        </div>
+      );
+    else
+      return(
+        <div>
+          <ModalMedia modalMedia={this.state.modalMedia} toggle={this.toggleM} />
+          <ModalSocial modalSocial={this.state.modalSocial} toggle={this.toggleS} />
         </div>
       );
   }
@@ -89,14 +118,10 @@ class dropdown extends React.Component {
             <FaCog />
           </DropdownToggle>
           <DropdownMenu>
-            {/*<DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalMedia()}><FaCamera />&nbsp;Adicionar Media</DropdownItem>
-            <DropdownItem style={{cursor:'pointer'}} onClick={()=>this.initModalSocial()}><FaChain style={{color:'blue'}}/>&nbsp;Partilhar</DropdownItem>*/}
             {this.renderItems()}
           </DropdownMenu>
         </Dropdown>
-        <ModalMedia modalMedia={this.state.modalMedia} toggle={this.toggleM} />
-        <ModalSocial modalSocial={this.state.modalSocial} toggle={this.toggleS} />
-        <ModalEditResults modalAddResults={this.state.modalEditResults} toggle={this.toggleER} />
+        {this.renderModals()}
       </div>
     );
   }

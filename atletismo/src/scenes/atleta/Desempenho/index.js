@@ -35,7 +35,25 @@ class Performance extends React.Component {
     return this.getAtletaId().then(data => {
     return axios.get(`http://localhost:3000/api/Atleta/${data}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
       .then(response => {
-          return response.data
+          //console.log("This is my console log!");
+          //console.log(response.data);
+          //remover unidades dos resultados
+          var d = []
+          for(let i=0; i<response.data.length; i++) {
+            const temp = response.data[i];
+            const elem = {
+              atleta: temp.atleta,
+              classificacao: temp.classificacao,
+              data: temp.data,
+              disciplina: temp.disciplina,
+              id: temp.id,
+              local: temp.local,
+              nome: temp.nome,
+              resultado: temp.resultado.split(" ")[0],
+          };
+          d.push(elem);
+        }
+          return d;
       })
       .catch(error => console.log(error))
     });
@@ -66,14 +84,14 @@ class Performance extends React.Component {
           }
         });
       }
-      console.log(this.state.chartData);
+      //console.log(this.state.chartData);
     });
   }
 
   //Line corresponde a um grafico de linhas. Outras opções, como um gráfico de barras estão disponíveis
   render() {
   return(
-    <div className='chart'>
+    <div className='chart container-fluid'>
       <Line
         data={this.state.chartData}
         options={{
@@ -85,7 +103,7 @@ class Performance extends React.Component {
           },
           title:{
             display: 'Tempos',
-            text: 'Registo dos Tempos de Provas',
+            text: 'Registo dos Resultados de Provas',
             fontSize:25
           }
         }}

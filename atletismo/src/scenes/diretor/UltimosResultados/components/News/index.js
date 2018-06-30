@@ -7,9 +7,7 @@ class News extends Component {
 
   constructor(props) {
     super(props);
-
-    this.toggle=this.toggle.bind(this);
-
+    //this.toggle=this.toggle.bind(this);
     this.state = {
       titulo: 'ATLETISMO SPORTING CLUBE DE BRAGA',
       inicio: ["O", "Novamente o" ,"Uma jornada notável para o", "Uma grande jornada para o"],
@@ -33,12 +31,12 @@ class News extends Component {
     };
   }
 
-  toggle(){
+  /*toggle(){
     this.setState({
       showModal: !this.state.showModal,
       value: this.getText(),
     })
-  }
+  }*/
 
   getText(){
     return `${this.state.titulo}
@@ -72,26 +70,19 @@ class News extends Component {
     this.setState({value:nvalue})
   }
 
-
+  componentDidMount() {
+    //console.log("I'm in!!");
+    this.setState({
+      value: this.getText(),
+    });
+  }
 
 
   render() {
-
-
-
     return (
       <div>
-
-        <Button
-        color="secondary"
-        size="lg"
-        onClick={this.toggle}
-        >
-        <i className="far fa-newspaper"></i>
-        </Button>
-
-        <Modal isOpen={this.state.showModal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>
+        <Modal isOpen={this.props.modalNews} toggle={this.props.toggle}>
+          <ModalHeader toggle={this.props.toggle}>
             Notícias
           </ModalHeader>
           <ModalBody>

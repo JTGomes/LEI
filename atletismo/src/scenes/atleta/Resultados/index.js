@@ -54,7 +54,7 @@ class Results extends React.Component {
         Header: 'Opções',
         Cell: row => (
           <div className="text-center">
-            <Dropdown />
+            <Dropdown rowData={row} update={this.editEntryTable} />
           </div>
         ),
         filterable:false,
@@ -64,6 +64,7 @@ class Results extends React.Component {
     }
     this.toggleAR = this.toggleAR.bind(this);
     this.addEntryTable = this.addEntryTable.bind(this);
+    this.editEntryTable = this.editEntryTable.bind(this);
   }
 
   toggleAR(){
@@ -93,11 +94,22 @@ class Results extends React.Component {
   }
 
   addEntryTable(d) {
-    console.log(this.state.data);
+    //console.log(this.state.data);
     var newData = [];
     for(let i=0; i<this.state.data.length; i++)
       newData.push(this.state.data[i]);
     newData.push(d);
+    this.setState(
+      {data: newData}
+    );
+  }
+
+  editEntryTable(d, index) {
+    var newData = [];
+    for(let i=0; i<this.state.data.length; i++) {
+      if(index===i) newData.push(d);
+      else newData.push(this.state.data[i]);
+    }
     this.setState(
       {data: newData}
     );
@@ -111,7 +123,7 @@ class Results extends React.Component {
       });
       axios.get(`http://localhost:3000/api/Atleta/${data}/resultados`,{headers:{'Authorization' : 'Bearer ' + this.props.token}})
         .then(response => {
-          console.log(response.data);
+          //console.log(response.data);
           this.setState({
             data: response.data
           })
@@ -120,23 +132,39 @@ class Results extends React.Component {
     });
   }
 
+  renderAddButton() {
+    if(this.props.userRole==='Diretor') {
+      return;
+    }
+    else
+      return(
+        <div className="results-button">
+          <Button onClick={() => this.initModalAddResult()}>Adicionar Resultado</Button>
+        </div>
+      );
+  }
+
+  renderModalAR() {
+    if(this.props.userRole==='Diretor') return;
+    else
+      return <ModalAddResults
+              modalAddResults={this.state.modalAddResults}
+              toggle={this.toggleAR}
+              user={this.state.atletaID}
+              addEntryTable={this.addEntryTable}/>
+  }
+
   render() {
     return(
       <div className="results container-fluid">
-        <div className="results-button">
-        <Button onClick={() => this.initModalAddResult()}>Adicionar Resultado</Button>
-        </div>
+        {this.renderAddButton()}
         <ReactTable
           filterable
           data={this.state.data}
           columns={this.state.col}
           defaultPageSize={10}
         />
-        <ModalAddResults
-          modalAddResults={this.state.modalAddResults}
-          toggle={this.toggleAR}
-          user={this.state.atletaID}
-          addEntryTable={this.addEntryTable}/>
+        {this.renderModalAR()}
       </div>
     );
   }
@@ -145,7 +173,8 @@ class Results extends React.Component {
 function mapStateToProps(state){
   return {
     userId: state.user,
-    token: state.token
+    token: state.token,
+    userRole: state.userRole
   };
 }
 

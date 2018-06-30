@@ -17,67 +17,133 @@ class ModalAddResults extends React.Component {
       resultado: "",
       classificacao: "1",
       user: props.userId,
-      type: 0, //0-segundos, 1-metros, 2-pontos
+      type: 0, //0-segundos, 1-metros, 2-pontos, 3-minutos, 4-horas
     }
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit = (event) => {
+  onSubmit(event) {
     event.preventDefault();
-
-    //chama atualização da tabela
-    const data={
-      nome: this.state.nome,
-      disciplina: this.state.disciplina.label,
-      data: this.state.data,
-      local: this.state.local,
-      resultado: this.state.resultado,
-      classificacao: this.state.classificacao+'º',
-      atleta: this.props.user,
-      id: 123,
-    };
-    this.props.addEntryTable(data);
-
+    //console.log("This is the user data!: "+this.props.userData);
+    const res = this.determineRes(this.state.resultado);
     let config = {
       headers: {'Authorization' : 'Bearer ' + this.props.token},
     }
+    if(this.props.role==='Diretor') {
+      const pars = {
+        nome: this.state.nome,
+        disciplina: this.state.disciplina.label,
+        data: this.state.data,
+        local: this.state.local,
+        resultado: res,
+        classificacao: this.state.classificacao+'º',
+        id: this.props.data.original.id,
+        atleta: this.props.data.original.atleta,
+        user: this.props.userData,
+      }
+      //chama atualização da tabela (dinamismo)
+      this.props.update(pars, this.props.data.index);
 
-    const pars = {
-      nome: this.state.nome,
-      disciplina: this.state.disciplina.label,
-      data: this.state.data,
-      local: this.state.local,
-      resultado: this.state.resultado,
-      classificacao: this.state.classificacao+'º',
-      userId: this.props.user
+      axios.put(`http://localhost:3000/api/resultados`, pars, config)
+        .then(response => {
+          //console.log("success");
+          })
+        .catch(error => console.log(error))
     }
-    console.log(this.props.user);
-    axios.post(`http://localhost:3000/api/resultados/adicionarResultados`, pars, config)
-      .then(response => {
-        //this.props.toggle();
-        })
-      .catch(error => console.log(error))
-    this.setState({
-      nome:"",
-      disciplina:"",
-      local: "",
-      resultado: "",
-      classificacao: "1",
-      type: 0,
-    })
+    else {
+      const pars = {
+        nome: this.state.nome,
+        disciplina: this.state.disciplina.label,
+        data: this.state.data,
+        local: this.state.local,
+        resultado: res,
+        classificacao: this.state.classificacao+'º',
+        userId: this.props.user
+      }
+      //chama atualização da tabela (dinamismo)
+      this.props.addEntryTable(pars);
+
+      //console.log(this.props.user);
+      axios.post(`http://localhost:3000/api/resultados/adicionarResultados`, pars, config)
+        .then(response => {
+          //this.props.toggle();
+          })
+        .catch(error => console.log(error))
+      this.setState({
+        nome:"",
+        disciplina:"",
+        local: "",
+        resultado: "",
+        classificacao: "1",
+        type: 0,
+      })
+    }
+  }
+
+  determineClassific(c) {
+    if(c==='100m') return {value: '1', label: '100m'};//segundos ▼
+    else if(c==='100m') return {value: '2', label: '200m'};
+    else if(c==='400m') return {value: '3', label: '400m'};
+    else if(c==='800m') return {value: '4', label: '800m'}; //minutos ▼
+    else if(c==='1500m') return {value: '5', label: '1500m'};
+    else if(c==='5000m') return {value: '6', label: '5000m'};
+    else if(c==='1000m') return {value: '7', label: '1000m'};
+    else if(c==='110m Barreiras') return {value: '8', label: '110m Barreiras'};//segundos ▼
+    else if(c==='400m Barreiras') return {value: '9', label: '400m Barreiras'};
+    else if(c==='3000m Obstáculos') return {value: '10', label: '3000m Obstáculos'};// minutos
+    else if(c==='4x100m') return {value: '11', label: '4x100m'}; //segundos
+    else if(c==='4x400m') return {value: '12', label: '4x400m'}; //minutos
+    else if(c==='Maratona') return {value: '13', label: 'Maratona'}; //horas ▼
+    else if(c==='20Km Marcha') return {value: '14', label: '20Km Marcha'};
+    else if(c==='50Km Marcha') return {value: '15', label: '50Km Marcha'};
+    else if(c==='Salto em Comprimento') return {value: '16', label: 'Salto em Comprimento'}; //metros
+    else if(c==='Triplo Salto') return {value: '17', label: 'Triplo Salto'};
+    else if(c==='Salto em Altura') return {value: '18', label: 'Salto em Altura'};
+    else if(c==='Salto à Vara') return {value: '19', label: 'Salto à Vara'};
+    else if(c==='Lançamento do Peso') return {value: '20', label: 'Lançamento do Peso'};
+    else if(c==='Lançamento do Disco') return {value: '21', label: 'Lançamento do Disco'};
+    else if(c==='Lançamento do Dardo') return {value: '22', label: 'Lançamento do Dardo'};
+    else if(c==='Lançamento do Martelo') return {value: '23', label: 'Lançamento do Martelo'};
+    else if(c==='Decatlo') return {value: '24', label: 'Decatlo'}; //pontos
+    /*Disciplinas femininas*/
+    else if(c==='100m Barreiras') return {value: '25', label: '100m Barreiras'}; //segundos
+    else if(c==='Heptatlo') return {value: '26', label: 'Heptatlo'}; //pontos
+  }
+
+  determineRes(r) {
+    if(this.state.type===0)
+      return r+' segundos';
+    else if(this.state.type===1)
+      return r+' metros';
+    else if(this.state.type===2)
+      return r+' pontos';
+    else if(this.state.type===3)
+      return r+' minutos';
+    else
+      return r+' horas';
   }
 
   handleChangeDisciplina = (disciplina) => {
     this.setState({disciplina});
     if(!disciplina) return;
-    if(disciplina.value>15 && disciplina.value<24)
+    const v = disciplina.value;
+    if(v>15 && v<24) //metros
       this.setState({
         type: 1,
       });
-    else if(disciplina.value==='24' || disciplina.value==='26')
+    else if(v==='24' || v==='26') //pontos
       this.setState({
         type: 2,
       });
-    else
+    else if(v>3 && v<8 || v==='10' || v==='12') //minutos
+      this.setState({
+        type: 3,
+      });
+    else if(v>12 && v<16) //horas
+      this.setState({
+        type: 4,
+      });
+    else //segundos
       this.setState({
         type: 0,
       });
@@ -96,25 +162,6 @@ class ModalAddResults extends React.Component {
       this.setState({
         resultado: e.target.value,
       })
-  }
-
-  componentWillMount() {
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = today.getMonth()+1;
-    var day = today.getDate();
-
-    if (day.toString().length == 1)
-      day = "0"+day;
-    if (month.toString().length == 1)
-      month = "0"+month;
-
-    const date = year+'-'+month+'-'+day;
-    //console.log(date);
-
-    this.setState({
-      data: date,
-    });
   }
 
   renderSubmitButton() {
@@ -145,20 +192,74 @@ class ModalAddResults extends React.Component {
     else if (this.state.type===1) {
       return <Label for="resultado">Marca (Metros)</Label>
     }
-    else {
+    else if (this.state.type===2) {
       return <Label for="resultado">Marca (Pontos)</Label>
+    }
+    else if (this.state.type===3) {
+      return <Label for="resultado">Marca (Minutos)</Label>
+    }
+    else {
+      return <Label for="resultado">Marca (Horas)</Label>
+    }
+  }
+
+  renderHeader() {
+    if(this.props.role==='Diretor') {
+      return <ModalHeader toggle={this.props.toggle}>{'Editar Resultado'}</ModalHeader>
+    }
+    else
+      return <ModalHeader toggle={this.props.toggle}>{'Adicionar Resultado'}</ModalHeader>
+  }
+
+  componentWillMount() {
+    //console.log(this.props.data);
+    if(this.props.role==='Diretor') {
+      const row = this.props.data.original;
+      //console.log(row);
+      const classif = row.classificacao.slice(0, -1)
+      const discip = this.determineClassific(row.disciplina);
+      var str = "10h";
+      //remover o indicar de unidade dos resultados
+      const res = row.resultado.split(" ")[0];
+      this.setState({
+        nome: row.nome,
+        disciplina: discip,
+        data: row.data,
+        local: row.local,
+        resultado: res,
+        classificacao: classif,
+      });
+      this.handleChangeDisciplina(discip);
+    }
+    else {
+      var today = new Date();
+      var year = today.getFullYear();
+      var month = today.getMonth()+1;
+      var day = today.getDate();
+
+      if (day.toString().length == 1)
+        day = "0"+day;
+      if (month.toString().length == 1)
+        month = "0"+month;
+
+      const date = year+'-'+month+'-'+day;
+      //console.log(date);
+
+      this.setState({
+        data: date,
+      });
     }
   }
 
   render() {
     return(
       <Modal isOpen={this.props.modalAddResults} toggle={this.props.toggle}>
-        <ModalHeader toggle={this.props.toggle}>{'Adicionar Resultado'}</ModalHeader>
+        {this.renderHeader()}
         <Form onSubmit={this.onSubmit}>
           <ModalBody>
             <FormGroup>
               <Label for="competicao">Competição</Label>
-              <Input onChange={event => this.setState({
+              <Input value={this.state.nome} onChange={event => this.setState({
                   'nome': event.target.value
                 })} />
               <FormText>Ex: Prova Europeia, Jogos Olímpicos, ...</FormText>
@@ -208,7 +309,7 @@ class ModalAddResults extends React.Component {
             </FormGroup>
             <FormGroup>
               <Label for="local">Local</Label>
-              <Input onChange={event => this.setState({
+              <Input value={this.state.local} onChange={event => this.setState({
                   'local': event.target.value
                 })} />
               <FormText>Ex: Braga, Porto, ...</FormText>
