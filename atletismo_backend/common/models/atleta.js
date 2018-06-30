@@ -1,5 +1,5 @@
 'use strict';
-
+const mail = require('../mail/index.js');
 module.exports = function(Atleta) {
 
    Atleta.getAtletas = function(req, data, callback){
@@ -269,9 +269,14 @@ Atleta.enviaPlano = function (req, data, callback) {
            to: data.userId.email, // list of receivers
            subject: 'Plano de treino', // Subject line
            html: '<h1>Atletismo Braga</h1><p><strong>Segue em anexo o plano a seguir nos próximos treinos.</strong></p>',// plain text body
-           //path: '....' //completar o caminho
+           attachments:{
+           	// os dois funcionam
+           	//path: 'D:\\LEI\\4º_Ano\\2ºSemestre\\Perfil Engenharia de Sistemas de Software\\Engenharia Web\\Trabalho pratico\\Test\\index.css'
+            //href: "http://www.aabraga.pt/aab/competicao/comunicados/180701%20IV%20Trail%20Senhora%20do%20Carmo.pdf"
+        }
          };
          mail.sendEmail(mailOptions);
+
 
     callback(null,"Ok")
   ;
