@@ -176,37 +176,37 @@ class About extends React.Component {
             <figcaption id="profile-change" style={{cursor:'pointer'}} onClick={()=>this.initModalPhoto()}>Alterar Imagem <FaEdit /></figcaption>
           </figure>
           <div className="col">
-            <p><a class="info">Nome Completo:</a> {this.state.infoUser.nome}</p>
-            <p><a class="info">Número de telemóvel:</a> {this.state.info.telemovel}</p>
-            <p><a class="info">Nº de Documento:</a> {this.state.info.nrdocumento}</p>
-            <p><a class="info">Sócio:</a> {1000}</p>
+            <p><a className="info">Nome Completo:</a> {this.state.infoUser.nome}</p>
+            <p><a className="info">Número de telemóvel:</a> {this.state.info.telemovel}</p>
+            <p><a className="info">Nº de Documento:</a> {this.state.info.nrdocumento}</p>
+            <p><a className="info">Sócio:</a> {1000}</p>
           </div>
           <div className="col">
-            <p><a class="info">Género:</a> {this.state.info.genero}</p>
-            <p><a class="info">Endereço de E-mail:</a> {this.state.infoUser.email}</p>
-            <p><a class="info">Morada:</a> {this.state.info.morada}</p>
-            <p><a class="info">Nº cartão de sócio:</a> {this.state.info.nrSocio}</p>
+            <p><a className="info">Género:</a> {this.state.info.genero}</p>
+            <p><a className="info">Endereço de E-mail:</a> {this.state.infoUser.email}</p>
+            <p><a className="info">Morada:</a> {this.state.info.morada}</p>
+            <p><a className="info">Nº cartão de sócio:</a> {this.state.info.nrSocio}</p>
           </div>
           <div className="col">
-            <p><a class="info">NIF:</a> {this.state.info.nif}</p>
-            <p><a class="info">Nacionalidade:</a> {this.state.info.nacionalidade}</p>
-            <p><a class="info">Código Postal:</a> {this.state.info.codigoPostal}</p>
-            <p><a class="info">Treinador(es):</a> {this.state.info.treinadorId}</p>
+            <p><a className="info">NIF:</a> {this.state.info.nif}</p>
+            <p><a className="info">Nacionalidade:</a> {this.state.info.nacionalidade}</p>
+            <p><a className="info">Código Postal:</a> {this.state.info.codigoPostal}</p>
+            <p><a className="info">Treinador(es):</a> {this.state.info.treinadorId}</p>
           </div>
           <div className="col">
-            <p><a class="info">Data de Nascimento:</a> {this.state.info.dataNascimento}</p>
-            <p><a class="info">Tipo de Documento:</a> {this.state.info.tipoDocumento}</p>
-            <p><a class="info">Localidade:</a> {this.state.info.localidade}</p>
+            <p><a className="info">Data de Nascimento:</a> {this.state.info.dataNascimento}</p>
+            <p><a className="info">Tipo de Documento:</a> {this.state.info.tipoDocumento}</p>
+            <p><a className="info">Localidade:</a> {this.state.info.localidade}</p>
           </div>
         </div>
         <div className="section">
           <p className="Title">Dados de Filiação</p>
           <hr />
           <div className="col">
-            <p><a class="info">Tipo de Filiação:</a> {this.state.info.encarregado}</p>
-            <p><a class="info">Contrato até:</a></p>
-            <p><a class="info">Escalão:</a> {this.state.info.escalao}</p>
-            <p><a class="info">Subsídio:</a> {this.state.info.subsidio}</p>
+            <p><a className="info">Tipo de Filiação:</a> {this.state.info.encarregado}</p>
+            <p><a className="info">Contrato até:</a></p>
+            <p><a className="info">Escalão:</a> {this.state.info.escalao}</p>
+            <p><a className="info">Subsídio:</a> {this.state.info.subsidio}</p>
           </div>
           {this.renderEquip()}
         </div>
@@ -214,8 +214,8 @@ class About extends React.Component {
           <p className="Title">Documentos <FaEdit onClick={()=>this.initModalDocs(this.state.info.id)} style={{cursor:'pointer'}}/></p>
           <hr />
           <div className="col">
-            <p><a class="info">Cartão de Cidadão:</a> {this.state.info.cartaoCidadao}</p>
-            <p><a class="info">Exames Médicos:</a> {this.state.info.exameMedico}</p>
+            <p><a className="info">Cartão de Cidadão:</a> {this.state.info.cartaoCidadao}</p>
+            <p><a className="info">Exames Médicos:</a> {this.state.info.exameMedico}</p>
             <p>Imprimir</p>
           </div>
         </div>

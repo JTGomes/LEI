@@ -3,6 +3,13 @@
 	margin-top: -20px;
 }
 
-.chartjs-render-monitor {
-    
+.performance-filters {
+	margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.performance-item {
+	flex-grow: 1;
 }
